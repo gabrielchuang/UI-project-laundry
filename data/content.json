@@ -1,0 +1,305 @@
+{
+    "content": [
+        {
+            "id": "sorting-mainpage",
+            "title": "Sorting your laundry",
+            "type": "menu", 
+            "description": "Sorting your laundry is a the secret to keeping your clothes fresh, clean, and drama-free. By sorting, you’ll save time, protect your favorite fits, and make everything last longer. It’s like giving your clothes VIP treatment—and your wallet (and wardrobe) will thank you.",
+            "children": [
+                {
+                    "title": "Sorting by color",
+                    "id": "sorting-color-main" 
+                },
+                {
+                    "title": "Sorting by fabric type",
+                    "id": "sorting-fabric-main" 
+                },
+                {
+                    "title": "Sorting by soil level",
+                    "id": "sorting-soil-main"
+                }
+            ]
+        }, 
+        {
+            "id": "sorting-color-main",
+            "title": "Sorting by color",
+            "type": "menu",
+            "description": "Sorting by color is the first step to keeping your clothes looking fresh and vibrant. By separating whites, darks, and colors, you’ll prevent dye transfer and keep your clothes looking their best.",
+            "children": [
+                {
+                    "title": "Sorting whites",
+                    "id": "sorting-whites"
+                },
+                {
+                    "title": "Sorting darks",
+                    "id": "sorting-darks"
+                },
+                {
+                    "title": "Sorting colors",
+                    "id": "sorting-colors"
+                },
+                {
+                    "title": "Sorting by color: quiz",
+                    "id": "sorting-color-quiz"
+                }
+            ]
+        },
+        {
+            "id": "sorting-whites",
+            "title": "Sorting whites",
+            "type": "content",
+            "description": "Sorting whites is all about keeping your light-colored clothes looking bright and fresh. By separating whites from colors, you’ll prevent dye transfer and keep your whites looking their best. Whites typically include white shirts, socks, undergarments, and white sheets. They can often be washed with pastels.",
+            "images": [
+                {
+                    "src": "images/whites.jpg",
+                    "alt": "Sorting whites"
+                }
+            ]
+        },
+        {
+            "id": "sorting-darks",
+            "title": "Sorting darks",
+            "type": "content",
+            "description": "Dark clothes include grays, blues, blacks, and other dark colors, as well as pants, jeans, and sweatshirts.",
+            "images": [
+                {
+                    "src": "images/darks.jpg",
+                    "alt": "Sorting darks"
+                }
+            ]
+        },
+        {
+            "id": "sorting-colors",
+            "title": "Sorting colors",
+            "type": "content",
+            "description": "Brightly colored clothes can be washed together. This often includes athletic wear, t-shirts, and similar.",
+            "images": [
+                {
+                    "src": "images/colors.jpg",
+                    "alt": "Sorting colors"
+                }
+            ]
+        },
+        {
+            "id": "sorting-fabric-main",
+            "title": "Sorting by fabric type",
+            "type": "menu",
+            "description": "Sorting clothes by fabric type helps protect your clothes and improves wash efficiency. ",
+            "children": [
+                {
+                    "title": "Delicates and Lightweight fabrics",
+                    "id": "sorting-delicates"
+                },
+                {
+                    "title": "Cotton and natural fabrics",
+                    "id": "sorting-cotton"
+                },
+                { 
+                    "title": "Synthetics and blends",
+                    "id": "sorting-synthetics"
+                },
+                {
+                    "title": "Heavy and bulky items",
+                    "id": "sorting-heavy"
+                },
+                {
+                    "title": "Sorting by fabric type: quiz",
+                    "id": "sorting-fabric-quiz"
+                }
+            ]
+        },
+        {
+            "id": "sorting-delicates",
+            "title": "Delicates and Lightweight fabrics",
+            "type": "content",
+            "description": "Delicate fabrics include lace, silk, and other lightweight materials. These items should be washed on a gentle cycle to prevent damage.",
+            "images": [
+                {
+                    "src": "images/delicates.jpg",
+                    "alt": "Sorting delicates"
+                }
+            ]
+        },
+        {
+            "id": "sorting-cotton",
+            "title": "Cotton and natural fabrics",
+            "type": "content",
+            "description": "Cotton and natural fabrics are durable and can be washed together. This includes items like t-shirts, jeans, and towels.",
+            "images": [
+                {
+                    "src": "images/cotton.jpg",
+                    "alt": "Sorting cotton"
+                }
+            ]
+        },
+        {
+            "id": "sorting-synthetics",
+            "title": "Synthetics and blends",
+            "type": "content",
+            "description": "Synthetic fabrics include polyester, nylon, and blends. These items can be washed together on a regular cycle.",
+            "images": [
+                {
+                    "src": "images/synthetics.jpg",
+                    "alt": "Sorting synthetics"
+                }
+            ]
+        },
+        {
+            "id": "sorting-heavy",
+            "title": "Heavy and bulky items",
+            "type": "content",
+            "description": "Heavy items, like comforters, rugs, coats, pillows, etc. should be washed separately to prevent damage to other items. These items can be washed on a heavy-duty cycle.",
+            "images": [
+                {
+                    "src": "images/blankets.jpg",
+                    "alt": "Sorting heavy items"
+                }
+            ]
+        },
+        {
+            "id": "sorting-soil-main",
+            "title": "Sorting by soil level",
+            "type": "content",
+            "description": "Sorting by soil level helps ensure that heavily soiled items are cleaned properly without damaging other clothes.",
+            "images": [
+                {
+                    "src": "images/soil.jpg",
+                    "alt": "Sorting by soil level"
+                }
+            ]
+        },
+        {
+            "id": "wash-settings-mainpage",
+            "title": "Wash settings",
+            "type": "menu",
+            "description": "Choosing the right wash settings is crucial for keeping your clothes looking their best. By selecting the appropriate cycle, temperature, and spin speed, you’ll ensure that your clothes are cleaned effectively without causing damage.",
+            "children": [
+                {
+                    "title": "Wash cycle",
+                    "id": "wash-cycle"
+                },
+                {
+                    "title": "Water temperature",
+                    "id": "water-temperature"
+                },
+                {
+                    "title": "Spin speed",
+                    "id": "spin-speed"
+                },
+                {
+                    "title": "Wash settings: quiz",
+                    "id": "wash-settings-quiz"
+                }
+            ]
+        },
+        {
+            "id": "wash-cycle",
+            "title": "Wash cycle",
+            "type": "content",
+            "description": "The wash cycle determines how your clothes are cleaned. Different cycles are designed for different types of fabrics and soil levels. For example, a gentle cycle is best for delicates, while a heavy-duty cycle is ideal for heavily soiled items. Perm press is a medium cycle that is good for most items, especially synthetics.",
+            "images": [
+                {
+                    "src": "images/wash-cycle.jpg",
+                    "alt": "Wash cycle"
+                }
+            ]
+        },
+        {
+            "id": "water-temperature",
+            "title": "Water temperature",
+            "type": "content",
+            "description": "Water temperature affects how well your clothes are cleaned. Hot water is best for whites and heavily soiled items, while cold water is gentler on colors and delicate fabrics.",
+            "images": [
+                {
+                    "src": "images/water-temperature.jpg",
+                    "alt": "Water temperature"
+                }
+            ]
+        },
+        {
+            "id": "spin-speed",
+            "title": "Spin speed",
+            "type": "content",
+            "description": "Some machines let you choose spin speed. This determines how much water is removed from your clothes after washing. A higher spin speed removes more water but can be rougher on fabrics. A lower spin speed is gentler but may leave clothes wetter.",
+            "images": [
+                {
+                    "src": "images/spin-speed.jpg",
+                    "alt": "Spin speed"
+                }
+            ]
+        },
+        {
+            "id": "reading-labels",
+            "title": "Reading labels",
+            "type": "content",
+            "description": "When in doubt, you can always consult the labels on your clothes. Labels provide important information about fabric content, care instructions, and wash settings. The symbols on the labels can be confusing, but are very sysetematic.",
+            "images": [
+                {
+                    "src": "images/labels.jpg",
+                    "alt": "Reading labels"
+                }
+            ]
+        },
+        {
+            "id": "label-wash",
+            "title": "Label symbols: Wash", 
+            "type": "content",
+            "description": "The wash symbol resembles the drum of a washing machine. The number or dots inside the tub indicates the maximum water temperature. The hand symbol indicates that the item should be hand washed.",
+            "images": [
+                {
+                    "src": "images/wash-label.jpg",
+                    "alt": "Label symbols: Wash"
+                }
+            ]
+        },
+        {
+            "id": "label-bleach",
+            "title": "Label symbols: Bleach",
+            "type": "content",
+            "description": "The triangle symbol indicates whether bleach can be used. A triangle with a cross through it means no bleach. A triangle with a 'CL' inside means only non-chlorine bleach can be used. A triangle with no cross or letters means any bleach can be used.",
+            "images": [
+                {
+                    "src": "images/bleach-label.jpg",
+                    "alt": "Label symbols: Bleach"
+                }
+            ]
+        },
+        {
+            "id": "label-dry",
+            "title": "Label symbols: Dry",
+            "type": "content",
+            "description": "The square with a circle inside indicates that the item can be tumble dried. The dots inside the circle indicate the maximum heat setting. A square with a circle and a cross through it means do not tumble dry.",
+            "images": [
+                {
+                    "src": "images/dry-label.jpg",
+                    "alt": "Label symbols: Dry"
+                }
+            ]
+        },
+        {
+            "id": "label-iron",
+            "title": "Label symbols: Iron",
+            "type": "content",
+            "description": "The iron symbol indicates whether the item can be ironed. The dots inside the iron indicate the maximum heat setting. An iron with a cross through it means do not iron.",
+            "images": [
+                {
+                    "src": "images/iron-label.jpg",
+                    "alt": "Label symbols: Iron"
+                }
+            ]
+        },
+        {
+            "id": "label-dryclean",
+            "title": "Label symbols: Dry clean",
+            "type": "content",
+            "description": "The circle symbol indicates whether the item can be dry cleaned. A circle with a cross through it means do not dry clean. A circle with a 'P' inside means any solvent can be used. A circle with a 'F' inside means only petroleum solvent can be used.",
+            "images": [
+                {
+                    "src": "images/dryclean-label.jpg",
+                    "alt": "Label symbols: Dry clean"
+                }
+            ]
+        }
+
+    ]
+}
