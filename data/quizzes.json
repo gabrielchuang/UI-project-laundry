@@ -143,6 +143,12 @@
                     "answer": "Do not dry clean"
                 }
             ]
+        },
+        {
+            "id": "big-quiz", 
+            "title": "Final quiz", 
+            "type": "quiz", 
+            "quiz-type": "IDK what we're planning to do here guys so just putting this as a placeholder for now."
         }
     ]
 }

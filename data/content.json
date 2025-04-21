@@ -177,7 +177,7 @@
             ]
         },
         {
-            "id": "sorting-soil-main",
+            "id": "sorting-soil",
             "title": "Sorting by soil level",
             "type": "content",
             "description": "Sorting by soil level helps ensure that heavily soiled items are cleaned properly without damaging other clothes.",

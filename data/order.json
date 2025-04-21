@@ -1,0 +1,36 @@
+{
+    "main": [
+        {
+            "id": "sorting-mainpage",
+            "elements": [
+                {
+                    "id": "sorting-color-main", 
+                    "elements": [
+                        "sorting-whites", "sorting-colors", "sorting-darks", "sorting-color-quiz"
+                    ]
+                }, 
+                {
+                    "id": "sorting-fabric-main", 
+                    "elements": [
+                        "sorting-delicates", "sorting-cottons", "sorting-synthetics", "sorting-heavy, sorting-fabric-quiz"
+                    ]
+                },
+                "sorting-soil-main"
+            ]
+        }, 
+        {
+            "id": "wash-settings-mainpage",
+            "elements": [
+                "wash-cycle", "water-temperature", "spin-speed"
+            ]
+        },
+        "laundry-bags", 
+        {
+            "id": "reading-labels-mainpage",
+            "elements": [
+                "reading-labels-wash", "reading-labels-dry", "reading-labels-iron", "reading-labels-bleach"
+            ]
+        },
+        "big-quiz"
+    ]
+}
