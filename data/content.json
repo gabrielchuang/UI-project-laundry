@@ -25,6 +25,9 @@
             "title": "Sorting your laundry",
             "type": "menu", 
             "description": "Sorting your laundry is a the secret to keeping your clothes fresh, clean, and drama-free. By sorting, you’ll save time, protect your favorite fits, and make everything last longer. It’s like giving your clothes VIP treatment—and your wallet (and wardrobe) will thank you.",
+            "images":[
+                "dirty-clothes.png"
+            ],
             "children": [
                 {
                     "title": "Sorting by color",
