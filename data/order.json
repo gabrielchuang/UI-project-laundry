@@ -1,36 +1,43 @@
 {
-    "main": [
+    "id": "main",
+    "elements": [
+        "outline-0",
         {
             "id": "sorting-mainpage",
             "elements": [
                 {
                     "id": "sorting-color-main", 
                     "elements": [
-                        "sorting-whites", "sorting-colors", "sorting-darks", "sorting-color-quiz"
+                        "sorting-whites", "sorting-colors", "sorting-darks", "sorting-temp-quiz"
                     ]
                 }, 
                 {
                     "id": "sorting-fabric-main", 
                     "elements": [
-                        "sorting-delicates", "sorting-cottons", "sorting-synthetics", "sorting-heavy, sorting-fabric-quiz"
+                        "sorting-delicates", "sorting-cottons", "sorting-synthetics", "sorting-heavy", "sorting-temp2-quiz"
                     ]
                 },
                 "sorting-soil-main"
             ]
         }, 
+        "outline-1",
         {
             "id": "wash-settings-mainpage",
             "elements": [
-                "wash-cycle", "water-temperature", "spin-speed"
+                "wash-cycle", "water-temperature", "spin-speed", "wash-settings-temp-quiz"
             ]
         },
+        "outline-2",
         "laundry-bags", 
+        "outline-3",
         {
             "id": "reading-labels-mainpage",
             "elements": [
-                "reading-labels-wash", "reading-labels-dry", "reading-labels-iron", "reading-labels-bleach"
+                "label-wash", "label-dry", "label-iron", "label-bleach", "label-dryclean"
             ]
         },
-        "big-quiz"
+        "outline-4",
+        "big-quiz",
+        "final"
     ]
 }

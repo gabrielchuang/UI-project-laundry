@@ -138,19 +138,19 @@
             "description": "Delicate fabrics include lace, silk, and other lightweight materials. These items should be washed on a gentle cycle to prevent damage.",
             "images": [
                 {
-                    "src": "imgs/delicates.jpg",
+                    "src": "imgs/delicates.png",
                     "alt": "Sorting delicates"
                 }
             ]
         },
         {
-            "id": "sorting-cotton",
+            "id": "sorting-cottons",
             "title": "Cotton and natural fabrics",
             "type": "content",
             "description": "Cotton and natural fabrics are durable and can be washed together. This includes items like t-shirts, jeans, and towels.",
             "images": [
                 {
-                    "src": "imgs/cottons.jpg",
+                    "src": "imgs/cottons.png",
                     "alt": "Sorting cotton"
                 }
             ]
@@ -180,7 +180,7 @@
             ]
         },
         {
-            "id": "sorting-soil",
+            "id": "sorting-soil-main",
             "title": "Sorting by soil level",
             "type": "content",
             "description": "Sorting by soil level helps ensure that heavily soiled items are cleaned properly without damaging other clothes.",
@@ -264,7 +264,7 @@
             ]
         },
         {
-            "id": "reading-labels",
+            "id": "reading-labels-mainpage",
             "title": "Reading labels",
             "type": "content",
             "description": "When in doubt, you can always consult the labels on your clothes. Labels provide important information about fabric content, care instructions, and wash settings. The symbols on the labels can be confusing, but are very sysetematic.",
@@ -334,6 +334,43 @@
                     "alt": "Label symbols: Dry clean"
                 }
             ]
+        }
+        ,
+        {
+            "id": "outline-0",
+            "title": "Outline",
+            "type": "outline",
+            "stage": 0
+        },
+        {
+            "id": "outline-1",
+            "title": "Outline",
+            "type": "outline",
+            "stage": 1
+        },
+        {
+            "id": "outline-2",
+            "title": "Outline",
+            "type": "outline",
+            "stage": 2
+        },
+        {
+            "id": "outline-3",
+            "title": "Outline",
+            "type": "outline",
+            "stage": 3
+        },
+        {
+            "id": "outline-4",
+            "title": "Outline",
+            "type": "outline",
+            "stage": 4
+        },
+        {
+            "id": "final",
+            "title": "Congratulations!",
+            "type": "content",
+            "description": "Congrats on completing!" 
         }
 
     ]

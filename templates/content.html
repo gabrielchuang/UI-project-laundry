@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }}{% endblock %}
+
+{% block content %}
+<h2>{{ page.title }}</h2>
+<p>{{ page.description }}</p>
+
+{% if page.images %}
+  {% for img in page.images %}
+    <img src="{{ url_for('static', filename=img.src) }}" alt="{{ img.alt }}" height="200">
+  {% endfor %}
+{% endif %}
+
+<br> 
+
+{% if next_id and next_type == 'page' %}
+  <a href="{{ url_for('content.render_page', page_id=next_id) }}" class="button">Next</a>
+{% elif next_id and next_type == 'quiz' %}
+  <a href="{{ url_for('quizzes.render_quiz', quiz_id=next_id) }}" class="button">Next</a>
+{% endif %}
+
+<p> {{ next_id, next_type }} </p>
+
+
+<!-- BACK BUTTON -->
+<div class="mb-5">
+  <button
+    class="btn btn-outline-secondary btn-lg font-16"
+    onclick="history.back()"
+  >
+    &larr; Back
+  </button>
+</div>
+
+{% endblock %}
