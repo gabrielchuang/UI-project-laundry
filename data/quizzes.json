@@ -1,7 +1,7 @@
 {
     "quizzes": [
         {
-            "id": "wash-settings-quiz",
+            "id": "wash-settings-quiz-1",
             "title": "Wash settings quiz",
             "type": "quiz",
             "quiz-type": "washer-panel",
@@ -31,7 +31,7 @@
                     }
                 }
             ]
-        }, 
+        },
 
         {
             "id": "sort-color-quiz", 
@@ -84,7 +84,7 @@
             "type": "quiz",
             "quiz-type": "label",
             "description": "How should you wash this item?",
-            "img":"imgs/quiz/label-quiz/1.jpg",
+            "img":"imgs/quiz/label-quiz/1.png",
             "questions": [
                 {
                     "question": "How should you machine wash this?",
