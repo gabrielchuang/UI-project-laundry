@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, abort
 import json
 import os
+=======
+from flask import Flask, render_template, Response, request, jsonify, redirect, abort
+import json
+>>>>>>> fa1c53c (ft: added lesson setup and api logic)
 
 app = Flask(__name__)
 
@@ -12,6 +17,7 @@ with open(os.path.join("data", "quizzes.json")) as f:
 def home():
     return render_template('home.html')
 
+<<<<<<< HEAD
 @app.route('/sorting')
 def sorting():
     return render_template('sorting.html')
@@ -48,6 +54,8 @@ def quiz_page(quiz_id):
     # On GET request, render the quiz without a score
     return render_template("quiz.html", quiz=quiz, score=None)
 
+=======
+>>>>>>> fa1c53c (ft: added lesson setup and api logic)
 @app.route('/lesson/<int:lesson_num>')
 def lesson(lesson_num):
     with open('data/content.json') as f:

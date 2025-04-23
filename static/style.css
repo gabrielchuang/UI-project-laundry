@@ -81,7 +81,6 @@ body {
   }
   
 
-<<<<<<< HEAD
   .option {
     cursor: pointer;
     padding: 10px;
@@ -108,7 +107,6 @@ body {
   }
 
   
-=======
   /* lessons */
   /* green banner */
   .page-header {
@@ -157,4 +155,3 @@ body {
   .flip-card:hover {
     transform: scale(1.03);
   }
->>>>>>> dc7d1bdde4d1119b3fcf213f0311e137b53b3157
