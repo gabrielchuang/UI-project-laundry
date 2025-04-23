@@ -1,46 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>5 Star Laundromat</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-    <div class="container text-center mt-5">
-        <h1 class="title">Welcome to the 5 Star Laundromat</h1>
-      
-        <div class="divider">
-          <span class="star">&#9733;</span>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>5 Star Laundromat</title>
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='style.css') }}"
+        />
+    </head>
+    <body>
+        <div class="container text-center mt-5">
+            <h1 class="title">Welcome to the 5 Star Laundromat</h1>
+
+            <div class="divider">
+                <span class="star">&#9733;</span>
+            </div>
+
+            <!-- New flex layout: step-indicator + buttons side by side -->
+            <div class="d-flex justify-content-center align-items-start gap-4">
+                <!-- Buttons on the right -->
+                <div class="d-grid gap-4 button-column">
+                    <a
+                        href="/sorting"
+                        class="btn btn-light btn-lg shadow-sm px-5"
+                        >Sorting</a
+                    >
+                    <a
+                        href="/wash-settings"
+                        class="btn btn-light btn-lg shadow-sm px-5"
+                        >Wash settings</a
+                    >
+                    <a
+                        href="/reading-labels"
+                        class="btn btn-light btn-lg shadow-sm px-5"
+                        >Reading labels</a
+                    >
+                    <a
+                        href="/quiz/label-quiz"
+                        class="btn btn-light btn-lg shadow-sm px-5"
+                        >Quiz</a
+                    >
+                </div>
+
+                <!-- Step indicator on the left -->
+                <div
+                    class="step-indicator d-flex flex-column align-items-center mt-2"
+                >
+                    <div class="circle active"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                    <div class="circle"></div>
+                </div>
+            </div>
         </div>
-      
-        <!-- New flex layout: step-indicator + buttons side by side -->
-        <div class="d-flex justify-content-center align-items-start gap-4">
 
-            <!-- Buttons on the right -->
-          <div class="d-grid gap-4 button-column">
-            <button class="btn btn-light btn-lg shadow-sm px-5" 
-              onclick="window.location.href='/lesson/1'" >Sorting</button>
-            <button class="btn btn-light btn-lg shadow-sm px-5">Wash settings</button>
-            <button class="btn btn-light btn-lg shadow-sm px-5">Reading labels</button>
-            <button class="btn btn-light btn-lg shadow-sm px-5">Quiz</button>
-          </div>
-
-          
-          <!-- Step indicator on the left -->
-          <div class="step-indicator d-flex flex-column align-items-center mt-2">
-            <div class="circle active"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-          </div>
-      
-          
-          
-        </div>
-      </div>      
-
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
 </html>
