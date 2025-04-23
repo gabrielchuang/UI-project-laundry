@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, abort
 import json
 import os
-=======
-from flask import Flask, render_template, Response, request, jsonify, redirect, abort
-import json
->>>>>>> fa1c53c (ft: added lesson setup and api logic)
 
 app = Flask(__name__)
 
@@ -17,14 +12,13 @@ with open(os.path.join("data", "quizzes.json")) as f:
 def home():
     return render_template('home.html')
 
-<<<<<<< HEAD
 @app.route('/sorting')
 def sorting():
     return render_template('sorting.html')
 
 @app.route('/wash-settings')
 def wash_settings():
-    return render_template('wash_settings.html')
+    return render_template('wash-settings.html')
 
 @app.route('/reading-labels')
 def reading_labels():
@@ -37,25 +31,28 @@ def quiz_page(quiz_id):
         return "Quiz not found", 404
 
     score = None
+    show_score = False
     if request.method == "POST":
-        # Get the first three questions
-        questions = quiz["questions"][:3]
-        correct_answers = [q["answer"] for q in questions]
-        
-        # Get user answers
-        user_answers = [request.form.get(f"q{i}") for i in range(len(questions))]
-        
-        # Calculate score
-        score = sum(u == c for u, c in zip(user_answers, correct_answers) if u is not None)
-        
-        # Render the template with the score
-        return render_template("quiz.html", quiz=quiz, score=score)
+        show_score = True
+        # Only proceed if the quiz has questions
+        if "questions" in quiz:
+            questions = quiz["questions"][:3]
+            correct_answers = [q["answer"] for q in questions]
+            user_answers = [request.form.get(f"q{i}") for i in range(len(questions))]
 
-    # On GET request, render the quiz without a score
-    return render_template("quiz.html", quiz=quiz, score=None)
+            score = 0
+            for u, c in zip(user_answers, correct_answers):
+                if u is None:
+                    continue
+                if isinstance(c, list):
+                    if u in c:
+                        score += 1
+                else:
+                    if u == c:
+                        score += 1
 
-=======
->>>>>>> fa1c53c (ft: added lesson setup and api logic)
+    return render_template("quiz.html", quiz=quiz, score=score, show_score = show_score)
+
 @app.route('/lesson/<int:lesson_num>')
 def lesson(lesson_num):
     with open('data/content.json') as f:
