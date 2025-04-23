@@ -1,6 +1,10 @@
 body {
     background-color: #f9fafb;
   }
+
+  .font-16{
+    font-size:16px;
+  }
   
   .title{
     font-size: 2.5rem;
@@ -51,7 +55,7 @@ body {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 50%;
+    left: 40%;
     width: 7px;
     background-color: #ddd;
     z-index: 0;
@@ -77,6 +81,7 @@ body {
   }
   
 
+<<<<<<< HEAD
   .option {
     cursor: pointer;
     padding: 10px;
@@ -103,3 +108,53 @@ body {
   }
 
   
+=======
+  /* lessons */
+  /* green banner */
+  .page-header {
+    background-color: #d0e7c2;
+    border: 1px solid #a0b48a;
+    border-radius: 0.5rem;
+  }
+
+  .sub-header {
+    background-color: #689f38;
+    border-radius: 0.5rem;
+  }
+  .sub-header h2 {
+    color: white;
+    margin: 0;
+    padding: 1rem;
+  }
+  /* sort buttons style */
+  .sort-btn {
+    background-color: #689f38;
+    border-color: #558b2f;
+    color: white;
+    border-radius: 0.75rem;
+    font-size: 16px;
+    padding: 1rem;
+  }
+  .sort-btn:hover{
+    border-color: #558b2f;
+  }
+  .sorting--bg-image{
+    width: 500px;
+    height: 350px;
+  }
+
+   .flip-card {
+    border: 4px solid #a5d6a7;
+    border-radius: 0.5rem;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f1f1;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .flip-card:hover {
+    transform: scale(1.03);
+  }
+>>>>>>> dc7d1bdde4d1119b3fcf213f0311e137b53b3157
