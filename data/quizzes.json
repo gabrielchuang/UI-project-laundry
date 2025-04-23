@@ -4,7 +4,7 @@
             "id": "wash-settings-quiz-1",
             "title": "Wash settings quiz",
             "type": "quiz",
-            "quiz-type": "washer-panel",
+            "quiz-type": "multiple",
             "questions": [
                 {
                     "question": "What settings would you use for a load of heavily soiled white cotton clothing?",
@@ -33,11 +33,53 @@
             ]
         },
 
+        
+        
         {
-            "id": "sort-color-quiz", 
+            "id": "sorting-temp-quiz", 
+            "title": "temp quiz",
+            "type": "quiz",
+            "quiz-type": "multiple",
+            "question": "Temporary quiz question",
+            "options": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "C"
+        },
+
+        {
+            "id": "sorting-temp2-quiz", 
+            "title": "temp quiz",
+            "type": "quiz",
+            "quiz-type": "multiple",
+            "question": "Temporary quiz question",
+            "options": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "A"
+        },
+        {
+            "id": "wash-settings-temp-quiz", 
+            "title": "temp quiz 3",
+            "type": "quiz",
+            "quiz-type": "multiple",
+            "question": "Temporary quiz question",
+            "options": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "B"
+        },
+        {
+            "id": "sorting-color-quiz", 
             "title": "Sort by color quiz",
             "type": "quiz",
-            "quiz-type": "sort",
+            "quiz-type": "multiple",
             "items": [
                 {
                     "id": "1",
@@ -82,7 +124,7 @@
             "id": "label-quiz",
             "title": "Reading labels: quiz",
             "type": "quiz",
-            "quiz-type": "label",
+            "quiz-type": "multiple",
             "description": "How should you wash this item?",
             "img":"imgs/quiz/label-quiz/1.png",
             "questions": [
@@ -148,7 +190,14 @@
             "id": "big-quiz", 
             "title": "Final quiz", 
             "type": "quiz", 
-            "quiz-type": "IDK what we're planning to do here guys so just putting this as a placeholder for now."
+            "quiz-type": "multiple",
+            "question": "Temporary quiz question",
+            "options": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "B"
         }
     ]
 }

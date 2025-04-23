@@ -109,7 +109,11 @@ body {
   }
 
   
+<<<<<<< HEAD
 >>>>>>> b976616fd13836d65daca02cdf219db9b3b6b3cb
+=======
+>>>>>>> 32edafacf6f4e902d83a8df402f68dca4c7e7870
+>>>>>>> gervais/ft-lesson-setup
   /* lessons */
   /* green banner */
   .page-header {
@@ -174,5 +178,4 @@ body {
   }
   .form-check-label {
     cursor: pointer;
->>>>>>> b976616fd13836d65daca02cdf219db9b3b6b3cb
   }
