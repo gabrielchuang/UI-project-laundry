@@ -71,3 +71,65 @@ function checkAnswers() {
       });
     }
   }
+
+$(document).ready(function () {
+    const slides = $('.slide');
+    const nextBtn = $('#next-btn');
+    const prevBtn = $('#prev-btn');
+    const dots = $('.dot');
+    const quizOptions = $('.quiz-option');
+    const feedback = $('.feedback');
+    let currentSlide = 1;
+    const totalSlides = slides.length;
+
+    function showSlide(slideNumber) {
+        slides.removeClass('active');
+        $(`#slide${slideNumber}`).addClass('active');
+
+        dots.removeClass('active');
+        $(`.dot[data-slide="${slideNumber}"]`).addClass('active');
+
+        prevBtn.prop('disabled', slideNumber === 1);
+        nextBtn.prop('disabled', slideNumber === totalSlides);
+
+        currentSlide = slideNumber;
+    }
+
+    nextBtn.on('click', function () {
+        if (currentSlide < totalSlides) {
+            showSlide(currentSlide + 1);
+        }
+    });
+
+    prevBtn.on('click', function () {
+        if (currentSlide > 1) {
+            showSlide(currentSlide - 1);
+        }
+    });
+
+    dots.on('click', function () {
+        showSlide(parseInt($(this).attr('data-slide')));
+    });
+
+    quizOptions.on('click', function () {
+        // Reset all options
+        quizOptions.removeClass('correct incorrect');
+
+        if ($(this).attr('data-correct') === 'true') {
+            $(this).addClass('correct');
+            feedback.text("Correct! You've understood the care label correctly.");
+            feedback.attr('class', 'feedback correct');
+        } else {
+            $(this).addClass('incorrect');
+            // Find the correct option and highlight it
+            $('.quiz-option[data-correct="true"]').addClass('correct');
+            feedback.text("Not quite right. Take another look at the symbols.");
+            feedback.attr('class', 'feedback incorrect');
+        }
+
+        feedback.show();
+    });
+
+    // Initialize
+    showSlide(1);
+});

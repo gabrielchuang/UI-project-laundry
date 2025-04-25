@@ -10,7 +10,7 @@ with open(os.path.join("data", "quizzes.json")) as f:
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('outline.html')
 
 @app.route('/sorting')
 def sorting():

@@ -179,3 +179,141 @@ body {
   .form-check-label {
     cursor: pointer;
   }
+
+  /*labels*/
+.container {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.header {
+  background-color: #4a7aff;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  font-size: 24px;
+}
+
+.slide {
+  display: none;
+  padding: 30px;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.slide-text {
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.slide-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 30px;
+  background-color: #f8f8f8;
+  border-top: 1px solid #eee;
+}
+
+button {
+  background-color: #4a7aff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s;
+}
+
+button:hover {
+  background-color: #3a67e0;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+  gap: 8px;
+}
+
+.dot {
+  height: 10px;
+  width: 10px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.dot.active {
+  background-color: #4a7aff;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.quiz-option {
+  background-color: #f5f5f5;
+  padding: 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.quiz-option:hover {
+  background-color: #e8e8e8;
+}
+
+.quiz-option.correct {
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.quiz-option.incorrect {
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.feedback {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 5px;
+  display: none;
+}
+
+.feedback.correct {
+  background-color: #d4edda;
+  border: 1px solid #c3e6cb;
+  color: #155724;
+}
+
+.feedback.incorrect {
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  color: #721c24;
+}

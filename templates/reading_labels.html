@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding Clothing Labels</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            Understanding Clothing Care Labels
+        </div>
+
+        <div class="slide active" id="slide1">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Introduction to Clothing Labels</h2>
+                    <p>Usually, the labels on your clothes will tell you how to wash them. Understanding these symbols can help you properly care for your garments and make them last longer.</p>
+                    <p>Let's explore the common symbols you'll find on clothing labels and what they mean.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide2">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Understanding the Symbols</h2>
+                    <p>The symbols on the labels can be confusing, but they are quite systematic! Each symbol represents a specific care instruction for your garment.</p>
+                    <p>The chart below shows the most common laundry symbols you'll encounter:</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide" id="slide3">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Washing Symbols</h2>
+                    <p>This icon represents the drum of the washing machine, with water in it. The lines underneath represent the gentleness of the cycle. The icons inside represent the temperature of the water.</p>
+                    <ul>
+                        <li>The washtub symbol indicates that the item can be machine washed</li>
+                        <li>Temperature is shown by numbers (30°, 40°, etc.) or dots</li>
+                        <li>Lines under the washtub indicate a gentle cycle is required</li>
+                        <li>A cross through the symbol means do not wash</li>
+                    </ul>
+                </div>
+                <img src="/api/placeholder/600/400" alt="Washing symbols" class="slide-image">
+            </div>
+        </div>
+
+        <div class="slide" id="slide4">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Drying Symbols</h2>
+                    <p>This square-and-circle symbol looks like a tumble dryer.</p>
+                    <ul>
+                        <li>The dots inside represent heat levels (more dots = higher heat)</li>
+                        <li>If there isn't a circle inside, it refers to drying in general (not just in a tumble dryer)</li>
+                        <li>A cross through the symbol means do not tumble dry</li>
+                    </ul>
+                </div>
+                <img src="/api/placeholder/600/400" alt="Drying symbols" class="slide-image">
+            </div>
+        </div>
+
+        <div class="slide" id="slide5">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Ironing Symbols</h2>
+                    <p>These are quite self-explanatory. Similar to wash and dry, the dots represent temperature.</p>
+                    <ul>
+                        <li>One dot means low temperature (up to 110°C)</li>
+                        <li>Two dots means medium temperature (up to 150°C)</li>
+                        <li>Three dots means high temperature (up to 200°C)</li>
+                        <li>A cross through the iron means do not iron</li>
+                    </ul>
+                </div>
+                <img src="/api/placeholder/600/400" alt="Ironing symbols" class="slide-image">
+            </div>
+        </div>
+
+        <div class="slide" id="slide6">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Bleaching Symbols</h2>
+                    <p>This is the most complex symbol set.</p>
+                    <ul>
+                        <li>The triangle symbol represents bleach</li>
+                        <li>There are two different types of bleach: with and without chlorine</li>
+                        <li>A cross through the triangle means do not bleach</li>
+                        <li>A triangle with diagonal lines means non-chlorine bleach only</li>
+                    </ul>
+                </div>
+                <img src="/api/placeholder/600/400" alt="Bleaching symbols" class="slide-image">
+            </div>
+        </div>
+
+        <div class="slide" id="slide7">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Dry Cleaning Symbols</h2>
+                    <p>A circle represents dry cleaning.</p>
+                    <ul>
+                        <li>Plain circle means the item can be dry cleaned</li>
+                        <li>Letters inside indicate which solvents can be used (A, P, F, W)</li>
+                        <li>A cross through the circle means do not dry clean</li>
+                    </ul>
+                </div>
+                <img src="/api/placeholder/600/400" alt="Dry cleaning symbols" class="slide-image">
+            </div>
+        </div>
+
+        <div class="slide" id="slide8">
+            <div class="slide-content">
+                <div class="slide-text">
+                    <h2>Test Your Knowledge</h2>
+                    <p>How should you wash this piece of clothing based on the label?</p>
+                </div>
+                <img src="/api/placeholder/600/400" alt="Quiz clothing label" class="slide-image">
+
+                <div class="quiz-options">
+                    <div class="quiz-option" data-correct="true">
+                        Machine wash cold with similar colors, use non-chlorine bleach when needed, tumble dry low, iron if needed
+                    </div>
+                    <div class="quiz-option" data-correct="false">
+                        Hand wash only with warm water, do not bleach, air dry, do not iron
+                    </div>
+                    <div class="quiz-option" data-correct="false">
+                        Dry clean only, no machine washing
+                    </div>
+                    <div class="quiz-option" data-correct="false">
+                        Machine wash hot, regular cycle, any bleach, tumble dry high
+                    </div>
+                </div>
+
+                <div class="feedback"></div>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="prev-btn">Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div class="progress">
+            <span class="dot active" data-slide="1"></span>
+            <span class="dot" data-slide="2"></span>
+            <span class="dot" data-slide="3"></span>
+            <span class="dot" data-slide="4"></span>
+            <span class="dot" data-slide="5"></span>
+            <span class="dot" data-slide="6"></span>
+            <span class="dot" data-slide="7"></span>
+            <span class="dot" data-slide="8"></span>
+        </div>
+    </div>
+    <script src="static/script.js"></script>
+
+</body>
+</html>
