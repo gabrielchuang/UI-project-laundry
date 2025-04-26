@@ -34,7 +34,7 @@
       {% for child in lesson.children %}
         <div class="col-md-3">
           <div class="flip-card"
-               onclick="location.href='{{ url_for('lesson', lesson_num=lesson_num) }}?section={{ child.id }}'">
+               onclick="location.href='{{ url_for(\'lesson\', lesson_num=lesson_num) }}?section={{ child.id }}'">
             <strong>{{ child.title }}</strong>
           </div>
         </div>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ lesson.title }}</title>
+    </head>
+    <body>
+    <div class="container">
+        <div class="header">
+            {{ lesson.title }}
+        </div>
+
+        {% for slide in content %}
+        <div class="slide {% if loop.first %}active{% endif %}" id="slide{{ loop.index }}">
+            <div class="slide-content">
+                    <div class="slide-text">
+                        <h2>{{slide.title}}</h2>
+                        <p>{{slide.description}}</p>
+                    </div>
+                    {% if slide.images %}
+                    <div class="col-md-6 text-center">
+                        <img src="{{ url_for('static', filename=slide.images[0].src) }}"
+                        alt="{{ slide.images[0].alt }}"
+                        class="rounded sorting--bg-image">
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <div class="controls">
+            <button id="prev-btn">Previous</button>
+            <button id="next-btn">Next</button>
+        </div>
+
+        <div class="progress">
+            {% for slide in content %}
+                <span class="dot" data-slide="{{ loop.index }}"></span>
+            {% endfor %}
+        </div>
+    </div>
+    
+</body>
+</html>

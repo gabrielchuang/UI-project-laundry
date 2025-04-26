@@ -3,38 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>{{ lesson_title }}</title>
+  <title>{{ menu.title }}</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="d-flex justify-content-center">
   <div class="w-75">
     <div class="page-header text-center text-dark py-4 mx-3 my-3">
-      <h1 class="m-0">{{ lesson_title }}</h1>
+      <h1 class="m-0">{{ menu.title }}</h1>
     </div>
 
     <div class="container">
       <div class="row align-items-center my-4">
         <div class="col-md-12">
-          <p>{{ lesson.description }}</p>
+          <p>{{ menu.description }}</p>
         </div>
       </div>
 
-      {% if lesson.images %}
+      {% if menu.images %}
         <div class="row justify-content-center my-4">
           <div class="col-md-6 text-center">
-            <img src="{{ url_for('static', filename='imgs/' ~ lesson.images[0]) }}"
-                 alt="{{ lesson.title }}"
+            <img src="{{ url_for('static', filename='imgs/' ~ menu.images[0]) }}"
+                 alt="{{ menu.title }}"
                  class="rounded sorting--bg-image">
           </div>
         </div>
       {% endif %}
 
       <div class="row g-3 my-4">
-        {% for child in lesson.children %}
+        {% for child in menu.children %}
           <div class="col-md-4">
             <button class="btn sort-btn w-100"
-                    onclick="location.href='{{ url_for('dynamic_lesson', lesson_id=child.id) }}'">
+                    onclick="location.href='{{ url_for('dynamic_page', page_id=child.id) }}'">
               {{ child.title }}
             </button>
           </div>

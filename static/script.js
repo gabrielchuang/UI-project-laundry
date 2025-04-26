@@ -156,40 +156,45 @@ function createSlide(slide, index) {
 }
 
 $(document).ready(function () {
-    // Create slides
-    const slidesHtml = slidesData.map((slide, index) => createSlide(slide, index)).join('');
-    $('#slides-container').html(slidesHtml);
-
-    // Create progress dots
-    const dotsHtml = slidesData.map((_, i) =>
-        `<span class="dot${i === 0 ? ' active' : ''}" data-slide="${i + 1}"></span>`
-    ).join('');
-    $('#progress-dots').html(dotsHtml);
-
-    // Initialize navigation
     let currentSlide = 0;
-    const totalSlides = slidesData.length;
+    const totalSlides = $(".slide").length;
 
     function showSlide(index) {
-        $('.slide').removeClass('active');
-        $(`#slide${index + 1}`).addClass('active');
+        $(".slide").removeClass("active");
+        $("#slide" + (index + 1)).addClass("active");
 
-        $('.dot').removeClass('active');
-        $(`.dot[data-slide="${index + 1}"]`).addClass('active');
+        $(".dot").removeClass("active");
+        $('.dot[data-slide="' + (index + 1) + '"]').addClass("active");
 
-        $('#prev-btn').prop('disabled', index === 0);
-        $('#next-btn').prop('disabled', index === totalSlides - 1);
+        $("#prev-btn").prop("disabled", index === 0);
+        $("#next-btn").prop("disabled", index === totalSlides - 1);
 
         currentSlide = index;
     }
 
     // Navigation handlers
-    $('#next-btn').click(() => currentSlide < totalSlides - 1 && showSlide(currentSlide + 1));
-    $('#prev-btn').click(() => currentSlide > 0 && showSlide(currentSlide - 1));
-    $('.dot').click(function () {
-        showSlide($(this).index());
+    $("#next-btn").click(() => {
+        if (currentSlide < totalSlides - 1) {
+            showSlide(currentSlide + 1);
+        }
     });
 
+    $("#prev-btn").click(() => {
+        if (currentSlide > 0) {
+            showSlide(currentSlide - 1);
+        }
+    });
+
+    $(".dot").click(function () {
+        const target = $(this).data("slide") - 1;
+        showSlide(target);
+    });
+
+    // Start on the first slide
+    showSlide(0);
+});
+
+/*
     // Quiz functionality
     $(document).on('click', '.quiz-option', function () {
         $('.quiz-option').removeClass('correct incorrect');
@@ -207,4 +212,4 @@ $(document).ready(function () {
                 .removeClass('correct').addClass('incorrect').show();
         }
     });
-});
+});*/
