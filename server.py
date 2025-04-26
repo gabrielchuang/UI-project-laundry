@@ -92,8 +92,18 @@ def dynamic_page(page_id):
             content=slides,
             slides=slides
         )
+    elif page["type"] == "content":
+        lesson = page
+        # For regular content and quizzes
+        slides = [lesson]
+        return render_template(
+            "lesson2.html",
+            lesson=lesson, 
+            content=slides,
+            slides=slides
+        )
     else: 
-        print(lesson["type"])
+        print(page["type"])
         correct_answers = []
 
         if lesson.get('type') == 'quiz':
