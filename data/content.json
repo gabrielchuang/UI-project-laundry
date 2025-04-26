@@ -264,6 +264,27 @@
             ]
         },
         {
+            "id": "reading-labels",
+            "title": "Reading Labels",
+            "type": "menu",
+            "description": "Understanding clothing care labels...",
+            "children": [
+                {
+                    "title": "Wash Symbols",
+                    "id": "label-wash"
+                },
+                {
+                    "title": "Bleach Symbols",
+                    "id": "label-bleach"
+                },
+                {
+                    "title": "Drying Symbols",
+                    "id": "label-dry"
+                }
+            ]
+        },
+
+        {
             "id": "reading-labels-mainpage",
             "title": "Reading labels",
             "type": "content",
@@ -277,12 +298,12 @@
         },
         {
             "id": "label-wash",
-            "title": "Label symbols: Wash", 
+            "title": "Label symbols: Wash",
             "type": "content",
             "description": "The wash symbol resembles the drum of a washing machine. The number or dots inside the tub indicates the maximum water temperature. The hand symbol indicates that the item should be hand washed. The number of lines below indicate the gentleness of the cycle.",
             "images": [
                 {
-                    "src": "imgs/wash-label.webp",
+                    "src": "imgs/wash-label.png",
                     "alt": "Label symbols: Wash"
                 }
             ]
@@ -334,8 +355,37 @@
                     "alt": "Label symbols: Dry clean"
                 }
             ]
-        }
-        ,
+        },
+        {
+            "id": "label-quiz",
+            "title": "Test Your Knowledge",
+            "type": "quiz",
+            "description": "Review this clothing label and select the correct care instructions based on the symbols shown.",
+            "images": [
+                {
+                    "src": "imgs/label-question.png",
+                    "alt": "Quiz label symbols"
+                }
+            ],
+            "options": [
+                {
+                    "text": "Machine wash cold with similar colors, use non-chlorine bleach when needed, tumble dry low, iron if needed",
+                    "correct": true
+                },
+                {
+                    "text": "Hand wash only with warm water, do not bleach, air dry, do not iron",
+                    "correct": false
+                },
+                {
+                    "text": "Dry clean only, no machine washing",
+                    "correct": false
+                },
+                {
+                    "text": "Machine wash hot, regular cycle, any bleach, tumble dry high",
+                    "correct": false
+                }
+            ]
+        },
         {
             "id": "outline-0",
             "title": "Outline",
