@@ -15,24 +15,11 @@ with open(os.path.join("data", "content.json")) as f:
 
 @app.route('/')
 def home():
-    return render_template('outline.html')
-
-@app.route('/sorting')
-def sorting():
-    return render_template('sorting.html')
-
-@app.route('/wash-settings')
-def wash_settings():
-    return render_template('wash-settings.html')
-
-@app.route('/reading-labels')
-def reading_labels():
-    assert False, "shouldn't be using this function...?"
-    return render_template('index.html', lesson=z)
-
+    return redirect(url_for('dynamic_page', page_id='mainpage'))
 
 @app.route("/quiz/<quiz_id>", methods=["GET", "POST"])
 def quiz_page(quiz_id):
+    assert False, "this isn't implemented yet to my understanding"
     quiz = next((q for q in quizzes_data if q["id"] == quiz_id), None)
     if not quiz:
         return "Quiz not found", 404
