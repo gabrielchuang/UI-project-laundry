@@ -4,12 +4,11 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ lesson.title }}</title>
-    </head>
-    <body>
+</head>
+<body>
     <div class="container">
         <div class="header">
             {{ lesson.title }}
@@ -17,20 +16,72 @@
 
         {% for slide in content %}
         <div class="slide {% if loop.first %}active{% endif %}" id="slide{{ loop.index }}">
-            <div class="slide-content">
+            {% if slide.type == 'quiz' %}
+                <!-- Special handling for quiz slides -->
+                <div class="quiz-container">
+                    <h2>{{ slide.title }}</h2>
+                    {% if slide.description %}
+                    <p>{{ slide.description }}</p>
+                    {% endif %}
+                    
+                    <form id="quiz-form" method="POST" action="{{ url_for('quiz_page', quiz_id=slide.id) }}">
+                        {% if slide.questions %}
+                            {% for question in slide.questions %}
+                            <div class="question-block">
+                                <h3>Question {{ loop.index }}</h3>
+                                <p>{{ question.question }}</p>
+                                <div class="options-container">
+                                    {% for option in question.options %}
+                                    <div class="form-check option">
+                                        <!-- Fixed: Removed loop.parent reference -->
+                                        <input type="radio" name="q{{ loop.index0 }}" 
+                                               id="q{{ loop.index0 }}-opt{{ loop.index0 }}" 
+                                               value="{{ option }}">
+                                        <label for="q{{ loop.index0 }}-opt{{ loop.index0 }}">{{ option }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        {% else %}
+                            <!-- Single question format -->
+                            <div class="question-block">
+                                <h3>Question 1</h3>
+                                <p>{{ slide.question }}</p>
+                                <div class="options-container">
+                                    {% for option in slide.options %}
+                                    <div class="form-check option">
+                                        <input type="radio" name="q0" 
+                                               id="q0-opt{{ loop.index0 }}" 
+                                               value="{{ option }}">
+                                        <label for="q0-opt{{ loop.index0 }}">{{ option }}</label>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                        <div class="quiz-actions">
+                            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+                        </div>
+                    </form>
+                </div>
+            {% else %}
+                <!-- Regular content slide -->
+                <div class="slide-content">
                     <div class="slide-text">
-                        <h2>{{slide.title}}</h2>
-                        <p>{{slide.description}}</p>
+                        <h2>{{ slide.title }}</h2>
+                        <p>{{ slide.description }}</p>
                     </div>
                     {% if slide.images %}
-                    <div class="col-md-6 text-center">
+                    <div class="slide-image">
                         <img src="{{ url_for('static', filename=slide.images[0].src) }}"
-                        alt="{{ slide.images[0].alt }}"
-                        class="rounded sorting--bg-image">
+                             alt="{{ slide.images[0].alt }}"
+                             class="img-fluid">
                     </div>
                     {% endif %}
                 </div>
-            </div>
+            {% endif %}
+        </div>
         {% endfor %}
 
         <div class="controls">
@@ -44,12 +95,12 @@
             {% endfor %}
         </div>
     </div>
-    
+
     <div class="mb-5">
         <button class="btn btn-outline-secondary btn-lg font-16"
                 onclick="history.back()">
           &larr; Back
         </button>
-      </div>
+    </div>
 </body>
 </html>

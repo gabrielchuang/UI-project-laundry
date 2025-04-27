@@ -17,93 +17,79 @@ with open(os.path.join("data", "content.json")) as f:
 def home():
     return redirect(url_for('dynamic_page', page_id='mainpage'))
 
-@app.route("/quiz/<quiz_id>", methods=["GET", "POST"])
-def quiz_page(quiz_id):
-    assert False, "this isn't implemented yet to my understanding"
-    quiz = next((q for q in quizzes_data if q["id"] == quiz_id), None)
-    if not quiz:
-        return "Quiz not found", 404
-
-    score = None
-    show_score = False
-    if request.method == "POST":
-        show_score = True
-        # Only proceed if the quiz has questions
-        if "questions" in quiz:
-            questions = quiz["questions"][:3]
-            correct_answers = [q["answer"] for q in questions]
-            user_answers = [request.form.get(f"q{i}") for i in range(len(questions))]
-
-            score = 0
-            for u, c in zip(user_answers, correct_answers):
-                if u is None:
-                    continue
-                if isinstance(c, list):
-                    if u in c:
-                        score += 1
-                else:
-                    if u == c:
-                        score += 1
-
-    return render_template("quiz.html", quiz=quiz, score=score, show_score = show_score)
-
 
 @app.route('/page/<page_id>')
 def dynamic_page(page_id):
-    with open('data/content.json') as f:
-        catalog = json.load(f)['content']
-
-    # Find the requested lesson
-    page = content_data[page_id]
+    page = content_data.get(page_id)
     if not page:
         abort(404)
 
-    print(page["type"])
+    if page['type'] == 'menu':
+        return render_template("menu.html", menu=page)
+    elif page['type'] == 'quiz':
+        return redirect(url_for('quiz_page', quiz_id=page_id))
+    else:
+        # Handle lessons/content normally
+        slides = [content_data[child['id']] for child in page.get('children', [])]
+        return render_template("lesson2.html", lesson=page, content=slides)
 
-    # If it's a menu with children, we'll render it differently
-    if page.get('type') == 'menu':
-        menu = page
-        return render_template(
-            "menu.html",  # We'll create this template
-            menu=menu
-        )
 
-    elif page["type"] == "lesson": 
-        lesson = page
-        # For regular content and quizzes
-        slides = [content_data[child["id"]] for child in lesson['children']]
-        print(slides)
-        return render_template(
-            "lesson2.html",
-            lesson=lesson, 
-            content=slides,
-            slides=slides
-        )
-    elif page["type"] == "content":
-        lesson = page
-        # For regular content and quizzes
-        slides = [lesson]
-        return render_template(
-            "lesson2.html",
-            lesson=lesson, 
-            content=slides,
-            slides=slides
-        )
-    else: 
-        print(page["type"])
-        correct_answers = []
+@app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
+def quiz_page(quiz_id):
+    # Find quiz in quizzes_data first
+    quiz = next((q for q in quizzes_data if q["id"] == quiz_id), None)
 
-        if lesson.get('type') == 'quiz':
-            correct_answers = [opt['text'] for opt in lesson['options'] if opt['correct']]
+    # If not found, check content_data
+    if not quiz:
+        quiz = content_data.get(quiz_id)
+        if not quiz or quiz['type'] != 'quiz':
+            abort(404)
 
-        print(slides, correct_answers, lesson['title'])
+    # Set default parent_id if not specified
+    if 'parent_id' not in quiz:
+        quiz['parent_id'] = 'mainpage'
 
-        return render_template(
-            "index.html",
-            content=slides,
-            correct_answers=correct_answers,
-            lesson_title=lesson['title']
-        )
+    if request.method == 'POST':
+        score = 0
+        user_answers = {}
+        total_questions = 0
+
+        # Handle both quiz structures
+        if 'questions' in quiz:
+            questions = quiz['questions']
+            total_questions = len(questions)
+            for i, question in enumerate(questions):
+                user_answer = request.form.get(f'q{i}')
+                user_answers[i] = user_answer
+                if user_answer == question['answer']:
+                    score += 1
+        else:
+            # Single question format
+            total_questions = 1
+            user_answer = request.form.get('q0')
+            user_answers[0] = user_answer
+            if user_answer == quiz['answer']:
+                score = 1
+
+        # Generate feedback
+        percentage = (score / total_questions) * 100
+        if percentage == 100:
+            feedback = "Perfect score! You've mastered this topic."
+        elif percentage >= 80:
+            feedback = "Great job! You understand most of the concepts."
+        elif percentage >= 60:
+            feedback = "Good effort! Review the incorrect answers to improve."
+        else:
+            feedback = "Keep practicing! Review the lesson and try again."
+
+        return render_template('quiz-result.html',
+                               quiz=quiz,
+                               score=score,
+                               total=total_questions,
+                               user_answers=user_answers,
+                               feedback=feedback)
+
+    return render_template('quiz.html', quiz=quiz)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5001)

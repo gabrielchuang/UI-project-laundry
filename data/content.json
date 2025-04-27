@@ -214,7 +214,7 @@
                 },
                 {
                     "title": "Wash settings: quiz",
-                    "id": "wash-settings-temp-quiz"
+                    "id": "wash-settings-quiz-1"
                 }
             ]
         },
@@ -375,36 +375,6 @@
             ]
         },
         {
-            "id": "label-quiz",
-            "title": "Test Your Knowledge",
-            "type": "quiz",
-            "description": "Review this clothing label and select the correct care instructions based on the symbols shown.",
-            "images": [
-                {
-                    "src": "imgs/label-question.png",
-                    "alt": "Quiz label symbols"
-                }
-            ],
-            "options": [
-                {
-                    "text": "Machine wash cold with similar colors, use non-chlorine bleach when needed, tumble dry low, iron if needed",
-                    "correct": true
-                },
-                {
-                    "text": "Hand wash only with warm water, do not bleach, air dry, do not iron",
-                    "correct": false
-                },
-                {
-                    "text": "Dry clean only, no machine washing",
-                    "correct": false
-                },
-                {
-                    "text": "Machine wash hot, regular cycle, any bleach, tumble dry high",
-                    "correct": false
-                }
-            ]
-        },
-        {
             "id": "outline-0",
             "title": "Outline",
             "type": "outline",
@@ -500,7 +470,7 @@
             "answer": "A"
         },
         {
-            "id": "wash-settings-temp-quiz", 
+            "id": "wash-settings-temp-quiz",
             "title": "temp quiz 3",
             "type": "quiz",
             "quiz-type": "multiple",
@@ -562,7 +532,6 @@
             "title": "Reading labels: quiz",
             "type": "quiz",
             "quiz-type": "multiple",
-            "description": "How should you wash this item?",
             "img":"imgs/quiz/label-quiz/1.png",
             "questions": [
                 {

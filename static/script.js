@@ -1,77 +1,26 @@
 function checkAnswers() {
-    console.log("checkAnswers() called");
-
-    // Debug correctAnswers
-    if (!correctAnswers) {
-        console.error("correctAnswers is not defined");
-        alert("An error occurred. Please refresh the page.");
-        return;
-    }
-    console.log("Correct answers:", correctAnswers);
-
+    console.log("Checking answers...");
     const form = document.getElementById('quiz-form');
     const questions = form.querySelectorAll('.question-block');
-    let allCorrect = true;
     let allAnswered = true;
-    let incorrectQuestions = [];
-
-    console.log(`Found ${questions.length} questions`);
 
     questions.forEach((questionBlock, index) => {
-        console.log(`Processing question ${index}`);
         const selectedOption = questionBlock.querySelector(`input[name="q${index}"]:checked`);
-        const correctAnswer = correctAnswers[index];
-        const labels = questionBlock.querySelectorAll('.form-check-label');
-
-        if (!questionBlock.classList.contains('correct')) {
-            labels.forEach(label => {
-                label.style.color = 'black';
-                label.style.backgroundColor = 'transparent';
-            });
-        }
-
-        if (selectedOption) {
-            const userAnswer = selectedOption.value;
-            const selectedLabel = questionBlock.querySelector(`label[for="${selectedOption.id}"]`);
-
-            if (userAnswer === correctAnswer) {
-                console.log(`Question ${index} is correct`);
-                selectedLabel.style.color = 'white';
-                selectedLabel.style.backgroundColor = 'green';
-                questionBlock.classList.add('correct');
-            } else {
-                console.log(`Question ${index} is incorrect`);
-                selectedLabel.style.color = 'white';
-                selectedLabel.style.backgroundColor = 'red';
-                allCorrect = false;
-                incorrectQuestions.push({index, selectedOption, selectedLabel});
-            }
-        } else {
-            console.log(`No option selected for question ${index}`);
+        if (!selectedOption) {
             allAnswered = false;
+            questionBlock.style.border = "2px solid red";
+        } else {
+            questionBlock.style.border = "none";
         }
     });
 
     if (!allAnswered) {
         alert("Please select an answer for all questions.");
-        return;
+        return false; // Prevent form submission
     }
 
-    if (allCorrect) {
-        console.log("All answers are correct!");
-        alert("Congratulations! All answers are correct!");
-    } else {
-        console.log("Some answers are incorrect:", incorrectQuestions.map(q => q.index));
-        incorrectQuestions.forEach(({index, selectedOption, selectedLabel}) => {
-            if (confirm(`Incorrect answer for question ${index + 1}. Would you like to try again?`)) {
-                selectedOption.checked = false;
-                selectedLabel.style.color = 'black';
-                selectedLabel.style.backgroundColor = 'transparent';
-            }
-        });
-    }
+    return true; // Allow form submission
 }
-
 function createSlide(slide, index) {
     const activeClass = index === 0 ? 'active' : '';
     let imageHtml = '';
@@ -156,6 +105,32 @@ function createSlide(slide, index) {
 }
 
 $(document).ready(function () {
+     // Animate progress circle on results page
+    const $progressCircle = $('.progress-circle');
+    if ($progressCircle.length) {
+        const percentage = $progressCircle.data('percentage');
+        $progressCircle.css('--percentage', percentage);
+    }
+
+    // Add interactivity to quiz options
+    $('.option').on('click', function() {
+        // Remove active class from all options in this question
+        const $questionCard = $(this).closest('.question-card');
+        $questionCard.find('.option').removeClass('active');
+
+        // Add active class to selected option
+        $(this).addClass('active');
+
+        // Check the radio input
+        $(this).find('input[type="radio"]').prop('checked', true);
+    });
+
+    // Add animation delays for question cards
+    $('.question-card, .question-review').each(function(index) {
+        $(this).css('animation-delay', index * 0.1 + 's');
+    });
+
+    // Slide navigation for lesson pages
     let currentSlide = 0;
     const totalSlides = $(".slide").length;
 
@@ -173,43 +148,42 @@ $(document).ready(function () {
     }
 
     // Navigation handlers
-    $("#next-btn").click(() => {
+    $("#next-btn").on('click', function() {
         if (currentSlide < totalSlides - 1) {
             showSlide(currentSlide + 1);
         }
     });
 
-    $("#prev-btn").click(() => {
+    $("#prev-btn").on('click', function() {
         if (currentSlide > 0) {
             showSlide(currentSlide - 1);
         }
     });
 
-    $(".dot").click(function () {
+    $(".dot").on('click', function() {
         const target = $(this).data("slide") - 1;
         showSlide(target);
     });
 
-    // Start on the first slide
-    showSlide(0);
-});
+    // Initialize first slide
+    if (totalSlides > 0) {
+        showSlide(0);
+    }
 
-/*
-    // Quiz functionality
-    $(document).on('click', '.quiz-option', function () {
-        $('.quiz-option').removeClass('correct incorrect');
+    $('.quiz-option').on('click', function() {
+        $(this).siblings('.quiz-option').removeClass('correct incorrect');
 
-        if ($(this).attr('data-correct') === 'true') {
+        if ($(this).data('correct') === 'true') {
             $(this).addClass('correct');
-            $(this).closest('.slide').find('.feedback')
+            $(this).closest('.quiz-container').find('.feedback')
                 .text("Correct!")
                 .removeClass('incorrect').addClass('correct').show();
         } else {
             $(this).addClass('incorrect');
-            $(this).closest('.slide').find('.quiz-option[data-correct="true"]').addClass('correct');
-            $(this).closest('.slide').find('.feedback')
+            $(this).closest('.quiz-container').find('.quiz-option[data-correct="true"]').addClass('correct');
+            $(this).closest('.quiz-container').find('.feedback')
                 .text("Incorrect. Try again!")
                 .removeClass('correct').addClass('incorrect').show();
         }
     });
-});*/
+});

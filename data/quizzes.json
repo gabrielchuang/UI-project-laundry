@@ -1,203 +1,140 @@
 {
-    "quizzes": [
+  "quizzes": [
+    {
+      "id": "wash-settings-quiz-1",
+      "title": "Wash settings quiz",
+      "type": "quiz",
+      "questions": [
         {
-            "id": "wash-settings-quiz-1",
-            "title": "Wash settings quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "questions": [
-                {
-                    "question": "What settings would you use for a load of heavily soiled white cotton clothing?",
-                    "answer": {
-                        "cycle": "Heavy Duty",
-                        "temperature": "Hot",
-                        "spin": "High"
-                    }
-                },
-                {
-                    "question": "What settings would you use for a load of jeans and pants?",
-                    "answer": {
-                        "cycle": ["Normal", "Heavy Duty"],
-                        "temperature": ["Cold", "Warm"],
-                        "spin": ["Medium", "High"]
-                    }
-                },
-                {
-                    "question": "What settings would you use for a load of delicate fabrics?",
-                    "answer": {
-                        "cycle": "Delicate",
-                        "temperature": "Cold",
-                        "spin": "Low"
-                    }
-                }
-            ]
-        },
-
-        
-        
-        {
-            "id": "sorting-temp-quiz", 
-            "title": "temp quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "question": "Temporary quiz question",
-            "options": [
-                "A",
-                "B",
-                "C"
-            ],
-            "answer": "C"
-        },
-
-        {
-            "id": "sorting-temp2-quiz", 
-            "title": "temp quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "question": "Temporary quiz question",
-            "options": [
-                "A",
-                "B",
-                "C"
-            ],
-            "answer": "A"
+          "question": "What settings would you use for a load of heavily soiled white cotton clothing?",
+          "options": [
+            "Heavy Duty cycle, Hot water, High spin",
+            "Normal cycle, Warm water, Medium spin",
+            "Delicate cycle, Cold water, Low spin"
+          ],
+          "answer": "Heavy Duty cycle, Hot water, High spin"
         },
         {
-            "id": "wash-settings-temp-quiz", 
-            "title": "temp quiz 3",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "question": "Temporary quiz question",
-            "options": [
-                "A",
-                "B",
-                "C"
-            ],
-            "answer": "B"
+          "question": "What settings would you use for a load of jeans and pants?",
+          "options": [
+            "Normal/Heavy Duty cycle, Cold/Warm water, Medium/High spin",
+            "Delicate cycle, Cold water, Low spin",
+            "Permanent Press cycle, Hot water, High spin"
+          ],
+          "answer": "Normal/Heavy Duty cycle, Cold/Warm water, Medium/High spin"
         },
         {
-            "id": "sorting-color-quiz", 
-            "title": "Sort by color quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "items": [
-                {
-                    "id": "1",
-                    "img": "imgs/quiz/sort-color-quiz/1.jpg"
-                },
-                {
-                    "id": "2",
-                    "img": "imgs/quiz/sort-color-quiz/2.jpg"
-                },
-                {
-                    "id": "3",
-                    "img": "imgs/quiz/sort-color-quiz/3.jpg"
-                },
-                {
-                    "id": "4",
-                    "img": "imgs/quiz/sort-color-quiz/4.webp"
-                },
-                {
-                    "id": "5",
-                    "img": "imgs/quiz/sort-color-quiz/5.webp"
-                },
-                {
-                    "id": "6",
-                    "img": "imgs/quiz/sort-color-quiz/6.jpg"
-                },
-                {
-                    "id": "7",
-                    "img": "imgs/quiz/sort-color-quiz/7.jpg"
-                },
-                {
-                    "id": "8",
-                    "img": "imgs/quiz/sort-color-quiz/8.jpg"
-                },
-                {
-                    "id": "9",
-                    "img": "imgs/quiz/sort-color-quiz/9.jpg"
-                }
-            ],
-            "answer": [[1,4], [3,5,7], [6,8], [2,9]]
-        },
-        {
-            "id": "label-quiz",
-            "title": "Reading labels: quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "description": "How should you wash this item?",
-            "img":"imgs/quiz/label-quiz/1.png",
-            "questions": [
-                {
-                    "question": "How should you machine wash this?",
-                    "options": [
-                        "Cold, gentle cycle",
-                        "Warm, gentle cycle",
-                        "Hot, gentle cycle",
-                        "Cold, normal cycle/perm press",
-                        "Warm, normal cycle/perm press",
-                        "Hot, normal cycle/perm press",
-                        "Cold, any cycle",
-                        "Warm, any cycle",
-                        "Hot, any cycle"
-                    ],
-                    "answer": "Cold, any cycle"
-                },
-                {
-                    "question": "What bleach should you use?",
-                    "options": [
-                        "No bleach",
-                        "Non-chlorine bleach",
-                        "Chlorine bleach"
-                    ],
-                    "answer": "Non-chlorine bleach"
-                },
-                {
-                    "question": "How should you dry this item?",
-                    "options": [
-                        "Tumble dry low",
-                        "Tumble dry medium",
-                        "Tumble dry high",
-                        "Line dry",
-                        "Lay flat to dry",
-                        "Do not tumble dry"
-                    ],
-                    "answer": "Tumble dry low"
-                },
-                {
-                    "question": "How should you iron this item?",
-                    "options": [
-                        "Do not iron",
-                        "Iron on low heat",
-                        "Iron on medium heat",
-                        "Iron on high heat"
-                    ],
-                    "answer": "Iron on low heat"
-                },
-                {
-                    "question": "How should you dry clean this item?",
-                    "options": [
-                        "Do not dry clean",
-                        "Dry clean with any solvent",
-                        "Dry clean with any solvent except tetrachlorethylene",
-                        "Dry clean with tetrachlorethylene only"
-                    ],
-                    "answer": "Do not dry clean"
-                }
-            ]
-        },
-        {
-            "id": "big-quiz", 
-            "title": "Final quiz", 
-            "type": "quiz", 
-            "quiz-type": "multiple",
-            "question": "Temporary quiz question",
-            "options": [
-                "A",
-                "B",
-                "C"
-            ],
-            "answer": "B"
+          "question": "What settings would you use for a load of delicate fabrics?",
+          "options": [
+            "Delicate cycle, Cold water, Low spin",
+            "Normal cycle, Warm water, Medium spin",
+            "Heavy Duty cycle, Hot water, High spin"
+          ],
+          "answer": "Delicate cycle, Cold water, Low spin"
         }
-    ]
+      ]
+    },
+    {
+      "id": "sorting-temp-quiz",
+      "title": "temp quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "question": "Temporary quiz question",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "sorting-temp2-quiz",
+      "title": "temp quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "question": "Temporary quiz question",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "A"
+    },
+    {
+      "id": "sorting-color-quiz",
+      "title": "Sort by color quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "items": [
+        {
+          "id": "1",
+          "img": "imgs/quiz/sort-color-quiz/1.jpg"
+        },
+        {
+          "id": "2",
+          "img": "imgs/quiz/sort-color-quiz/2.jpg"
+        },
+        {
+          "id": "3",
+          "img": "imgs/quiz/sort-color-quiz/3.jpg"
+        },
+        {
+          "id": "4",
+          "img": "imgs/quiz/sort-color-quiz/4.webp"
+        },
+        {
+          "id": "5",
+          "img": "imgs/quiz/sort-color-quiz/5.webp"
+        },
+        {
+          "id": "6",
+          "img": "imgs/quiz/sort-color-quiz/6.jpg"
+        },
+        {
+          "id": "7",
+          "img": "imgs/quiz/sort-color-quiz/7.jpg"
+        },
+        {
+          "id": "8",
+          "img": "imgs/quiz/sort-color-quiz/8.jpg"
+        },
+        {
+          "id": "9",
+          "img": "imgs/quiz/sort-color-quiz/9.jpg"
+        }
+      ],
+      "answer": [
+        [
+          1,
+          4
+        ],
+        [
+          3,
+          5,
+          7
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          2,
+          9
+        ]
+      ]
+    },
+    {
+      "id": "big-quiz",
+      "title": "Final quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "question": "Temporary quiz question",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "B"
+    }
+  ]
 }
