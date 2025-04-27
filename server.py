@@ -49,29 +49,40 @@ def quiz_page(quiz_id):
     if 'parent_id' not in quiz:
         quiz['parent_id'] = 'mainpage'
 
+    # Always use single-question format
+    quiz['display_mode'] = 'single_question'
+
     if request.method == 'POST':
         score = 0
         user_answers = {}
-        total_questions = 0
 
-        # Handle both quiz structures
+        # Debug information
+        print("Form data received:", request.form)
+
         if 'questions' in quiz:
-            questions = quiz['questions']
-            total_questions = len(questions)
-            for i, question in enumerate(questions):
-                user_answer = request.form.get(f'q{i}')
+            for i, question in enumerate(quiz['questions']):
+                question_key = f'q{i}'
+                user_answer = request.form.get(question_key)
                 user_answers[i] = user_answer
+
+                print(f"Question {i + 1}: User answer: '{user_answer}', Correct answer: '{question['answer']}'")
+
                 if user_answer == question['answer']:
                     score += 1
         else:
-            # Single question format
-            total_questions = 1
+            # Handle single question format
             user_answer = request.form.get('q0')
             user_answers[0] = user_answer
-            if user_answer == quiz['answer']:
+            correct_answer = quiz.get('answer')
+
+            print(f"Single question: User answer: '{user_answer}', Correct answer: '{correct_answer}'")
+
+            if user_answer == correct_answer:
                 score = 1
 
-        # Generate feedback
+        # Calculate total questions for percentage
+        total_questions = len(quiz.get('questions', [1]))  # Default to 1 for single question
+
         percentage = (score / total_questions) * 100
         if percentage == 100:
             feedback = "Perfect score! You've mastered this topic."
@@ -86,6 +97,7 @@ def quiz_page(quiz_id):
                                quiz=quiz,
                                score=score,
                                total=total_questions,
+                               percentage=percentage,
                                user_answers=user_answers,
                                feedback=feedback)
 

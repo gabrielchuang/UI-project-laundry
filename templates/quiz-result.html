@@ -6,20 +6,6 @@
     <title>Quiz Results: {{ quiz.title }}</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <style>
-        .correct-answer {
-            border-left: 4px solid #28a745;
-        }
-
-        .incorrect-answer {
-            border-left: 4px solid #dc3545;
-        }
-
-        .progress-circle {
-            width: 120px;
-            height: 120px;
-        }
-    </style>
 </head>
 <body class="bg-light">
 <div class="container py-4">
@@ -114,20 +100,21 @@
             <div class="d-flex justify-content-between mt-4">
                 <a href="{{ url_for('dynamic_page', page_id=quiz.parent_id) }}"
                    class="btn btn-outline-secondary">
-                    ← Back to Lesson
+                    <i class="bi bi-arrow-left"></i> Back to Lesson
                 </a>
                 <div>
-                    <a href="{{ url_for('quiz_page', quiz_id=quiz.id) }}"
+                    <a href="{{ url_for('quiz_page', quiz_id=quiz.id) }}?retry=true"
                        class="btn btn-outline-primary me-2">
-                        Retry Quiz
+                        <i class="bi bi-arrow-repeat"></i> Retry Quiz
                     </a>
                     <a href="{{ url_for('home') }}" class="btn btn-primary">
-                        Return to Main Menu
+                        <i class="bi bi-house"></i> Main Menu
                     </a>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>

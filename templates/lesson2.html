@@ -9,60 +9,83 @@
     <title>{{ lesson.title }}</title>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            {{ lesson.title }}
-        </div>
+<div class="container">
+    <div class="header">
+        {{ lesson.title }}
+    </div>
 
-        {% for slide in content %}
+    {% for slide in content %}
         <div class="slide {% if loop.first %}active{% endif %}" id="slide{{ loop.index }}">
             {% if slide.type == 'quiz' %}
                 <!-- Special handling for quiz slides -->
                 <div class="quiz-container">
                     <h2>{{ slide.title }}</h2>
                     {% if slide.description %}
-                    <p>{{ slide.description }}</p>
+                        <p>{{ slide.description }}</p>
                     {% endif %}
-                    
-                    <form id="quiz-form" method="POST" action="{{ url_for('quiz_page', quiz_id=slide.id) }}">
+
+                    <form id="quiz-form-{{ slide.id }}" class="embedded-quiz-form" method="POST"
+                          action="{{ url_for('quiz_page', quiz_id=slide.id) }}">
                         {% if slide.questions %}
-                            {% for question in slide.questions %}
-                            <div class="question-block">
-                                <h3>Question {{ loop.index }}</h3>
-                                <p>{{ question.question }}</p>
-                                <div class="options-container">
-                                    {% for option in question.options %}
-                                    <div class="form-check option">
-                                        <!-- Fixed: Removed loop.parent reference -->
-                                        <input type="radio" name="q{{ loop.index0 }}" 
-                                               id="q{{ loop.index0 }}-opt{{ loop.index0 }}" 
-                                               value="{{ option }}">
-                                        <label for="q{{ loop.index0 }}-opt{{ loop.index0 }}">{{ option }}</label>
-                                    </div>
-                                    {% endfor %}
-                                </div>
+                            <!-- Progress indicator for embedded quiz -->
+                            <div class="progress-indicator">
+                                <span class="current-quiz-question">1</span> of <span
+                                    class="total-quiz-questions">{{ slide.questions|length }}</span>
                             </div>
+
+                            {% for question in slide.questions %}
+                                <div class="question-container {% if loop.first %}active{% endif %}"
+                                     id="quiz-{{ slide.id }}-question-{{ loop.index0 }}">
+                                    <div class="question-card p-4 mb-4 rounded shadow-sm">
+                                        <h3>Question {{ loop.index }}</h3>
+                                        <p>{{ question.question }}</p>
+                                        <div class="options-container">
+                                            {% for option in question.options %}
+                                                <div class="form-check option py-2 px-3 mb-2 rounded">
+                                                    <input type="radio" name="q{{ loop.index0 }}"
+                                                           id="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}"
+                                                           value="{{ option }}">
+                                                    <label for="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}">{{ option }}</label>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                                        <div class="validation-message">
+                                            Please select an answer
+                                        </div>
+                                    </div>
+                                </div>
                             {% endfor %}
+
+                            <!-- Navigation controls for embedded quiz -->
+                            <div class="quiz-navigation-controls">
+                                <button type="button" class="quiz-prev-btn btn" disabled>Previous</button>
+                                <button type="button" class="quiz-next-btn btn">Next</button>
+                                <button type="submit" class="quiz-submit-btn btn" style="display:none;">Submit Quiz
+                                </button>
+                            </div>
+
                         {% else %}
                             <!-- Single question format -->
-                            <div class="question-block">
-                                <h3>Question 1</h3>
-                                <p>{{ slide.question }}</p>
-                                <div class="options-container">
-                                    {% for option in slide.options %}
-                                    <div class="form-check option">
-                                        <input type="radio" name="q0" 
-                                               id="q0-opt{{ loop.index0 }}" 
-                                               value="{{ option }}">
-                                        <label for="q0-opt{{ loop.index0 }}">{{ option }}</label>
+                            <div class="question-container active">
+                                <div class="question-card p-4 mb-4 rounded shadow-sm">
+                                    <h3>Question 1</h3>
+                                    <p>{{ slide.question }}</p>
+                                    <div class="options-container">
+                                        {% for option in slide.options %}
+                                            <div class="form-check option py-2 px-3 mb-2 rounded">
+                                                <input type="radio" name="q0"
+                                                       id="quiz-{{ slide.id }}-q0-opt{{ loop.index }}"
+                                                       value="{{ option }}">
+                                                <label for="quiz-{{ slide.id }}-q0-opt{{ loop.index }}">{{ option }}</label>
+                                            </div>
+                                        {% endfor %}
                                     </div>
-                                    {% endfor %}
+                                </div>
+                                <div class="quiz-actions">
+                                    <button type="submit" class="btn btn-primary">Submit Quiz</button>
                                 </div>
                             </div>
                         {% endif %}
-                        <div class="quiz-actions">
-                            <button type="submit" class="btn btn-primary">Submit Quiz</button>
-                        </div>
                     </form>
                 </div>
             {% else %}
@@ -73,34 +96,34 @@
                         <p>{{ slide.description }}</p>
                     </div>
                     {% if slide.images %}
-                    <div class="slide-image">
-                        <img src="{{ url_for('static', filename=slide.images[0].src) }}"
-                             alt="{{ slide.images[0].alt }}"
-                             class="img-fluid">
-                    </div>
+                        <div class="slide-image">
+                            <img src="{{ url_for('static', filename=slide.images[0].src) }}"
+                                 alt="{{ slide.images[0].alt }}"
+                                 class="img-fluid">
+                        </div>
                     {% endif %}
                 </div>
             {% endif %}
         </div>
+    {% endfor %}
+
+    <div class="controls">
+        <button id="prev-btn">Previous</button>
+        <button id="next-btn">Next</button>
+    </div>
+
+    <div class="progress">
+        {% for slide in content %}
+            <span class="dot" data-slide="{{ loop.index }}"></span>
         {% endfor %}
-
-        <div class="controls">
-            <button id="prev-btn">Previous</button>
-            <button id="next-btn">Next</button>
-        </div>
-
-        <div class="progress">
-            {% for slide in content %}
-                <span class="dot" data-slide="{{ loop.index }}"></span>
-            {% endfor %}
-        </div>
     </div>
+</div>
 
-    <div class="mb-5">
-        <button class="btn btn-outline-secondary btn-lg font-16"
-                onclick="history.back()">
-          &larr; Back
-        </button>
-    </div>
+<div class="mb-5">
+    <button class="btn btn-outline-secondary btn-lg font-16"
+            onclick="history.back()">
+        &larr; Back
+    </button>
+</div>
 </body>
 </html>

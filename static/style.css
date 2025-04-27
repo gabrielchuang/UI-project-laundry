@@ -79,10 +79,7 @@ body {
     height: 80px;
     border-radius: 12px;
   }
-  
 
-<<<<<<< HEAD
-=======
   .option {
     cursor: pointer;
     padding: 10px;
@@ -108,12 +105,7 @@ body {
     border-color: #007bff;
   }
 
-  
-<<<<<<< HEAD
->>>>>>> b976616fd13836d65daca02cdf219db9b3b6b3cb
-=======
->>>>>>> 32edafacf6f4e902d83a8df402f68dca4c7e7870
->>>>>>> gervais/ft-lesson-setup
+
   /* lessons */
   /* green banner */
   .page-header {
@@ -592,3 +584,45 @@ button:disabled {
         height: 120px;
     }
 }
+
+.question-container {
+    display: none;
+}
+
+.question-container.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.navigation-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.progress-indicator {
+    text-align: center;
+    margin: 1.5rem 0;
+    font-weight: bold;
+}
+
+.validation-message {
+    color: #dc3545;
+    margin-top: 1rem;
+    display: none;
+}
+.progress-circle {
+            width: 120px;
+            height: 120px;
+        }

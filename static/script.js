@@ -21,91 +21,137 @@ function checkAnswers() {
 
     return true; // Allow form submission
 }
-function createSlide(slide, index) {
-    const activeClass = index === 0 ? 'active' : '';
-    let imageHtml = '';
 
-    // Handle images
-    if (slide.images && slide.images.length > 0) {
-        const img = slide.images[0];
-        if (typeof img === 'string') {
-            imageHtml = `
-            <div class="col-md-6 text-center">
-              <img src="{{ url_for('static', filename='imgs/') }}${img}"
-                   alt="${slide.title}"
-                   class="rounded sorting--bg-image">
-            </div>`;
-        } else {
-            imageHtml = `
-            <div class="col-md-6 text-center">
-              <img src="{{ url_for('static', filename='') }}${img.src}"
-                   alt="${img.alt || slide.title}"
-                   class="rounded sorting--bg-image">
-            </div>`;
+$(document).ready(function () {
+    // Quiz page initialization
+    const quizId = window.location.pathname.split('/').pop();
+    const totalQuestions = parseInt($('#total-questions').text() || '0');
+    let currentQuestion = 0;
+
+    // If we're on a quiz page
+    if (totalQuestions > 0) {
+        // Initialize quiz
+        updateNavigation();
+
+        // Event handlers
+        $('#next-btn').click(goToNextQuestion);
+        $('#prev-btn').click(goToPreviousQuestion);
+    }
+
+    // Handle embedded quizzes in lesson pages
+    $('.embedded-quiz-form').each(function() {
+        const $form = $(this);
+        const $questions = $form.find('.question-container');
+        const totalEmbeddedQuestions = $questions.length;
+        let currentEmbeddedQuestion = 0;
+
+        // Set up navigation handlers for this embedded quiz
+        $form.find('.quiz-next-btn').click(function() {
+            if (validateEmbeddedQuestion($form, currentEmbeddedQuestion)) {
+                navigateEmbeddedQuestion($form, currentEmbeddedQuestion + 1);
+            }
+        });
+
+        $form.find('.quiz-prev-btn').click(function() {
+            navigateEmbeddedQuestion($form, currentEmbeddedQuestion - 1);
+        });
+
+        // Initialize navigation state
+        updateEmbeddedNavigation($form, currentEmbeddedQuestion, totalEmbeddedQuestions);
+
+        // Helper function to navigate between questions in embedded quiz
+        function navigateEmbeddedQuestion($form, index) {
+            // Validate index range
+            if (index < 0 || index >= totalEmbeddedQuestions) return;
+
+            // Hide current question
+            $form.find('.question-container.active').removeClass('active');
+
+            // Update current question
+            currentEmbeddedQuestion = index;
+
+            // Show new question
+            $form.find('.question-container').eq(currentEmbeddedQuestion).addClass('active');
+
+            // Update UI
+            updateEmbeddedNavigation($form, currentEmbeddedQuestion, totalEmbeddedQuestions);
+            $form.find('.current-quiz-question').text(currentEmbeddedQuestion + 1);
+        }
+
+        // Helper function to validate current question in embedded quiz
+        function validateEmbeddedQuestion($form, index) {
+            const $currentQuestion = $form.find('.question-container').eq(index);
+            const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
+            $currentQuestion.find('.validation-message').toggle(!isAnswered);
+            return isAnswered;
+        }
+
+        // Helper function to update navigation in embedded quiz
+        function updateEmbeddedNavigation($form, current, total) {
+            // Previous button state
+            $form.find('.quiz-prev-btn').prop('disabled', current === 0);
+
+            // Next/Submit buttons visibility
+            const isLastQuestion = current === total - 1;
+            $form.find('.quiz-next-btn').toggle(!isLastQuestion);
+            $form.find('.quiz-submit-btn').toggle(isLastQuestion);
+        }
+    });
+
+    function goToNextQuestion() {
+        if (validateCurrentQuestion()) {
+            navigateToQuestion(currentQuestion + 1);
         }
     }
 
-    // Handle quiz type
-    if (slide.type === "quiz") {
-        const options = slide.options.map(opt =>
-            `<div class="quiz-option" data-correct="${opt.correct}">${opt.text}</div>`
-        ).join('');
-
-        return `
-          <div class="slide ${activeClass}" id="slide${index + 1}">
-            <div class="row align-items-center my-4">
-              <div class="col-md-6">
-                <h2>${slide.title}</h2>
-                <p>${slide.description}</p>
-                <div class="quiz-options mt-3">${options}</div>
-                <div class="feedback mt-3"></div>
-              </div>
-              ${imageHtml}
-            </div>
-          </div>`;
+    function goToPreviousQuestion() {
+        navigateToQuestion(currentQuestion - 1);
     }
 
-    // Handle menu type (with children buttons)
-    if (slide.type === "menu" && slide.children) {
-        const buttons = slide.children.map(child => `
-          <div class="col-md-4 mb-3">
-            <button class="btn sort-btn w-100"
-                onclick="location.href='{{ url_for('dynamic_lesson', lesson_id=child.id) }}'">
-                    {{ child.title }}
-                </button>
-          </div>
-        `).join('');
+    function navigateToQuestion(index) {
+        // Validate index range
+        if (index < 0 || index >= totalQuestions) return;
 
-        return `
-          <div class="slide ${activeClass}" id="slide${index + 1}">
-            <div class="row align-items-center my-4">
-              <div class="col-md-6">
-                <h2>${slide.title}</h2>
-                <p>${slide.description}</p>
-              </div>
-              ${imageHtml}
-            </div>
-            <div class="row g-3 my-4">
-              ${buttons}
-            </div>
-          </div>`;
+        // Hide current question
+        $(`#question-${currentQuestion}`).removeClass('active');
+
+        // Update current question
+        currentQuestion = index;
+
+        // Show new question with animation
+        $(`#question-${currentQuestion}`).addClass('active');
+
+        // Update UI
+        updateNavigation();
+        updateProgress();
+
+        // Smooth scroll to question
+        $('html, body').animate({
+            scrollTop: $(`#question-${currentQuestion}`).offset().top - 100
+        }, 300);
     }
 
-    // Default content type
-    return `
-        <div class="slide ${activeClass}" id="slide${index + 1}">
-          <div class="row align-items-center my-4">
-            <div class="col-md-6">
-              <h2>${slide.title}</h2>
-              <p>${slide.description}</p>
-            </div>
-            ${imageHtml}
-          </div>
-        </div>`;
-}
+    function validateCurrentQuestion() {
+        const isAnswered = $(`#question-${currentQuestion} input[type="radio"]:checked`).length > 0;
+        $(`#question-${currentQuestion} .validation-message`).toggle(!isAnswered);
+        return isAnswered;
+    }
 
-$(document).ready(function () {
-     // Animate progress circle on results page
+    function updateNavigation() {
+        // Previous button state
+        $('#prev-btn').prop('disabled', currentQuestion === 0);
+
+        // Next/Submit buttons visibility
+        const isLastQuestion = currentQuestion === totalQuestions - 1;
+        $('#next-btn').toggle(!isLastQuestion);
+        $('#submit-btn').toggle(isLastQuestion);
+    }
+
+    function updateProgress() {
+        $('#current-question').text(currentQuestion + 1);
+    }
+
+    // Animate progress circle on results page
     const $progressCircle = $('.progress-circle');
     if ($progressCircle.length) {
         const percentage = $progressCircle.data('percentage');

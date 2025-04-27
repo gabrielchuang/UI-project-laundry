@@ -52,13 +52,17 @@
       "title": "temp quiz",
       "type": "quiz",
       "quiz-type": "multiple",
-      "question": "Temporary quiz question",
-      "options": [
-        "A",
-        "B",
-        "C"
-      ],
-      "answer": "A"
+      "questions": [
+        {
+          "question": "CHOOSE ONE OF THE FOLLOWING",
+          "options": [
+            "A",
+            "B",
+            "C"
+          ],
+          "answer": "B"
+        }
+      ]
     },
     {
       "id": "sorting-color-quiz",
