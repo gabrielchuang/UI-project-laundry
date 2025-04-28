@@ -34,6 +34,48 @@
                             </div>
 
                             {% for question in slide.questions %}
+
+                                {% if question.type == 'drag_and_drop' %}
+                                <div class="drag-drop-question">
+                                    <h3>Question {{ loop.index }}</h3>
+                                    <p>{{ question.question }}</p>
+                                    
+                                    <div class="drag-items">
+                                        {% for item in question["items"] %}
+                                            <div class="drag-item" draggable="true" id="item-{{ loop.index }}-{{ loop.index0 }}" data-group="{{ item.group }}">
+                                                {% if item.img %}
+                                                    <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.text }}" class="drag-image">
+                                                {% else %}
+                                                    {{ item.text }}
+                                                {% endif %}
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                            
+                                    <div class="bins">
+                                        {% for bin_idx in range(question.num_bins) %}
+                                            <div class="bin" data-bin="bin{{ bin_idx }}">
+                                                Drop Here
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    
+                            
+                                    <!-- Hidden inputs to record where each item was dropped -->
+                                    <div class="drop-records">
+                                        {% for item in question["items"] %}
+                                            <input type="hidden" name="drag_result_{{ loop.index0 }}" id="drag-result-item-{{ loop.index }}-{{ loop.index0 }}">
+                                        {% endfor %}
+                                    </div>
+
+
+                                    <button type="button" class="check-drag-btn btn">Check Answer</button>
+                                    <div class="feedback" style="display:none;"></div>
+
+                                </div>
+                            {% else %}
+                        
+
                                 <div class="question-container {% if loop.first %}active{% endif %}"
                                      id="quiz-{{ slide.id }}-question-{{ loop.index0 }}">
                                     <div class="question-card p-4 mb-4 rounded shadow-sm">
@@ -54,6 +96,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            {% endif %}
                             {% endfor %}
 
                             <!-- Navigation controls for embedded quiz -->

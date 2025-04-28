@@ -65,6 +65,10 @@
                     "id": "sorting-colors"
                 },
                 {
+                    "title": "drag and drop quiz test",
+                    "id": "sorting-color-quiz-dragdrop"
+                },
+                {
                     "title": "Sorting by color: quiz",
                     "id": "sorting-temp-quiz"
                 }
@@ -218,6 +222,7 @@
                 }
             ]
         },
+        
         {
             "id": "wash-cycle",
             "title": "Wash cycle",
@@ -454,6 +459,55 @@
                 "C"
             ],
             "answer": "C"
+        },
+        {
+            "id": "sorting-color-quiz-dragdrop",
+            "title": "Sort by color quiz - drag and drop test",
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "Drag and drop test...",
+                    "type": "drag_and_drop",
+                    "num_bins" : 2,
+                    "items": [
+                        {
+                            "id": "1",
+                            "img": "imgs/quiz/sort-color-quiz/1.jpg",
+                            "group": "1"
+                        },
+                        {
+                            "id": "2",
+                            "img": "imgs/quiz/sort-color-quiz/2.jpg",
+                            "group": "2"
+                        },
+                        {
+                            "id": "3",
+                            "img": "imgs/quiz/sort-color-quiz/3.jpg",
+                            "group": "2"
+                        },
+                        {
+                            "id": "4",
+                            "img": "imgs/quiz/sort-color-quiz/4.webp",
+                            "group": "1"
+                        },
+                        {
+                            "id": "5",
+                            "img": "imgs/quiz/sort-color-quiz/5.webp",
+                            "group": "2"
+                        },
+                        {
+                            "id": "7",
+                            "img": "imgs/quiz/sort-color-quiz/7.jpg",
+                            "group": "2"
+                        },
+                        {
+                            "id": "9",
+                            "img": "imgs/quiz/sort-color-quiz/9.jpg",
+                            "group": "2"
+                        }
+                    ] 
+                }
+            ]
         },
         {
             "id": "sorting-temp2-quiz",

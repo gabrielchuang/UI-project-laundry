@@ -233,3 +233,87 @@ $(document).ready(function () {
         }
     });
 });
+
+function checkDragAndDropFlexibleGrouping(questionContainer) {
+    let bins = $(questionContainer).find('.bin');
+    let allGroups = new Set();
+    let usedGroups = new Set();
+    let allCorrect = true;
+
+    bins.each(function() {
+        let groupsInBin = new Set();
+        $(this).find('.drag-item').each(function() {
+            const group = $(this).data('group');
+            console.log("Group in bin: ", group);
+            groupsInBin.add(group);
+            allGroups.add(group);
+        });
+
+        if (groupsInBin.size === 0) {
+            // Empty bin, ignore
+            return;
+        }
+
+        if (groupsInBin.size > 1) {
+            allCorrect = false;
+            $(this).addClass('incorrect-bin');
+        } else {
+            const group = Array.from(groupsInBin)[0];
+            if (usedGroups.has(group)) {
+                // Same group appears in multiple bins, error
+                allCorrect = false;
+                $(this).addClass('incorrect-bin');
+            } else {
+                usedGroups.add(group);
+                $(this).addClass('correct-bin');
+            }
+        }
+    });
+
+    // Final sanity check: Did we account for all groups?
+    if (allGroups.size !== usedGroups.size) {
+        allCorrect = false;
+    }
+
+    const feedback = $(questionContainer).find('.feedback');
+    if (allCorrect) {
+        feedback.text("Perfect grouping!").removeClass('incorrect').addClass('correct').show();
+    } else {
+        feedback.text("Incorrect grouping. Try again!").removeClass('correct').addClass('incorrect').show();
+    }
+}
+
+$(document).on('click', '.check-drag-btn', function() {
+    const questionContainer = $(this).closest('.drag-drop-question');
+    checkDragAndDropFlexibleGrouping(questionContainer);
+});
+
+$(document).ready(function () {
+    let draggedItem = null;
+
+    $(document).on('dragstart', '.drag-item', function (e) {
+        draggedItem = $(this);
+        setTimeout(() => {
+            $(this).addClass('dragging');
+        }, 0);
+    });
+
+    $(document).on('dragend', '.drag-item', function (e) {
+        $(this).removeClass('dragging');
+    });
+
+    $(document).on('dragover', '.bin', function (e) {
+        e.preventDefault();
+    });
+
+    $(document).on('drop', '.bin', function (e) {
+        e.preventDefault();
+        if (draggedItem) {
+            $(this).append(draggedItem);
+            const binName = $(this).data('bin');
+            const itemId = draggedItem.attr('id');
+            // Save the drop result
+            $(`#drag-result-${itemId}`).val(binName);
+        }
+    });
+});
