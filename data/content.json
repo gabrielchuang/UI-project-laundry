@@ -415,14 +415,34 @@
             "type": "content",
             "description": "Congrats on completing!" 
         },
+
+
+
+
+
+
+
+
+
+
+
         {
             "id": "wash-settings-quiz-1",
             "title": "Wash settings quiz",
             "type": "quiz",
-            "quiz-type": "multiple",
             "questions": [
                 {
                     "question": "What settings would you use for a load of heavily soiled white cotton clothing?",
+                    "type": "wash_panel",
+                   "option-cycle": [
+                        "Heavy Duty, Normal, Delicate, "
+                    ],
+                    "option-temp": [
+                        "Cold, Warm, Hot"
+                    ],
+                    "option-spin": [
+                        "Low,  Medium, High "
+                    ],
                     "answer": {
                         "cycle": "Heavy Duty",
                         "temperature": "Hot",
@@ -431,6 +451,16 @@
                 },
                 {
                     "question": "What settings would you use for a load of jeans and pants?",
+                    "type": "wash_panel",
+                    "option-cycle": [
+                        "Heavy Duty, Normal, Delicate, "
+                    ],
+                    "option-temp": [
+                        "Cold, Warm, Hot"
+                    ],
+                    "option-spin": [
+                        "Low,  Medium, High "
+                    ],
                     "answer": {
                         "cycle": ["Normal", "Heavy Duty"],
                         "temperature": ["Cold", "Warm"],
@@ -439,6 +469,17 @@
                 },
                 {
                     "question": "What settings would you use for a load of delicate fabrics?",
+                    "type": "wash_panel",
+                    "option-cycle": [
+                        "Heavy Duty, Normal, Delicate, "
+                    ],
+                    "option-temp": [
+                        "Cold, Warm, Hot"
+                    ],
+                    "option-spin": [
+                        "Low,  Medium, High "
+                    ],
+                   
                     "answer": {
                         "cycle": "Delicate",
                         "temperature": "Cold",
@@ -526,6 +567,14 @@
                 }
             ]
         },
+
+
+
+
+
+
+
+
         {
             "id": "wash-settings-temp-quiz",
             "title": "temp quiz 3",

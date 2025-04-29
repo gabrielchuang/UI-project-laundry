@@ -73,9 +73,62 @@
                                     <div class="feedback" style="display:none;"></div>
 
                                 </div>
+                            {% elif question.type == 'wash_panel' %}
+                            <!-- Wash panel question type -->
+                            <!-- TO DO -->
+
+                            <!-- DO THIS FIRST THING AFTER WORK!!! -->
+                            <div class="question-container wash-panel-question {% if loop.first %}active{% endif %}" data-answer='{{ question.answer | tojson }}' data-index='{{ loop.index0 }}'>
+
+                                <h3>Question {{ loop.index }}</h3>
+                                <p>{{ question.question }}</p>
+                            
+                                <div class="wash-panel">
+                                    <div class="wash-row">
+                                        <div class="wash-label">Cycle</div>
+                                        <div class="wash-options" id="cycle-options-{{ loop.index0 }}">
+                                            {% for option in question["option-cycle"][0].split(",") %}
+                                                {% if option.strip() %}
+                                                <button type="button" class="wash-option" data-type="cycle" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="wash-row">
+                                        <div class="wash-label">Spin Speed</div>
+                                        <div class="wash-options" id="spin-options-{{ loop.index0 }}">
+                                            {% for option in question["option-spin"][0].split(",") %}
+                                                {% if option.strip() %}
+                                                <button type="button" class="wash-option" data-type="spin" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="wash-row">
+                                        <div class="wash-label">Temperature</div>
+                                        <div class="wash-options" id="temp-options-{{ loop.index0 }}">
+                                            {% for option in question["option-temp"][0].split(",") %}
+                                                {% if option.strip() %}
+                                                <button type="button" class="wash-option" data-type="temp" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                                <button type="button" class="btn check-wash-btn">Check Answer</button>
+                                <div class="feedback" style="display:none;"></div>
+                            
+                                <!-- Hidden inputs to store selected answers -->
+                                <input type="hidden" name="selected-cycle-{{ loop.index0 }}" id="selected-cycle-{{ loop.index0 }}">
+                                <input type="hidden" name="selected-spin-{{ loop.index0 }}" id="selected-spin-{{ loop.index0 }}">
+                                <input type="hidden" name="selected-temp-{{ loop.index0 }}" id="selected-temp-{{ loop.index0 }}">
+
+                            </div>
+
+
                             {% else %}
                         
-
                                 <div class="question-container {% if loop.first %}active{% endif %}"
                                      id="quiz-{{ slide.id }}-question-{{ loop.index0 }}">
                                     <div class="question-card p-4 mb-4 rounded shadow-sm">

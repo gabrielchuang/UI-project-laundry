@@ -153,8 +153,6 @@ body {
   }
   .flip-card:hover {
     transform: scale(1.03);
-<<<<<<< HEAD
-=======
   }
 
 
@@ -680,4 +678,52 @@ button:disabled {
 .incorrect-bin {
   border-color: red;
   background-color: #ffe6e6;
+}
+
+
+/* Wash Panel */
+.wash-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 20px;
+}
+
+.wash-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wash-label {
+  width: 120px;
+  font-weight: bold;
+  background-color: #eee;
+  padding: 8px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.wash-options {
+  display: flex;
+  gap: 10px;
+}
+
+.wash-option {
+  background-color: #eee;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.wash-option.active {
+  background-color: #d1e7dd;
+  color: #000;
+}
+
+.check-wash-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
 }

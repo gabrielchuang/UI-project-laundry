@@ -79,12 +79,40 @@ $(document).ready(function () {
         }
 
         // Helper function to validate current question in embedded quiz
+        /*
         function validateEmbeddedQuestion($form, index) {
             const $currentQuestion = $form.find('.question-container').eq(index);
             const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
             $currentQuestion.find('.validation-message').toggle(!isAnswered);
             return isAnswered;
-        }
+        } */
+            function validateEmbeddedQuestion($form, index) {
+                const $currentQuestion = $form.find('.question-container, .wash-panel-question, .drag-drop-question').eq(index);
+            
+                if ($currentQuestion.hasClass('wash-panel-question')) {
+                    const idx = $currentQuestion.data('index');  // Use data-index from HTML
+                    const selectedCycle = $(`input[name="selected-cycle-${idx}"]`).val();
+                    const selectedSpin = $(`input[name="selected-spin-${idx}"]`).val();
+                    const selectedTemp = $(`input[name="selected-temp-${idx}"]`).val();
+            
+                    if (!selectedCycle || !selectedSpin || !selectedTemp) {
+                        $currentQuestion.find('.feedback').text('Please select one option for each setting.').css('color', 'red').show();
+                        return false;
+                    } else {
+                        $currentQuestion.find('.feedback').hide();
+                        return true;
+                    }
+                } else if ($currentQuestion.hasClass('drag-drop-question')) {
+                    // You can add validation here if needed
+                    return true;
+                } else {
+                    // Normal multiple-choice
+                    const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
+                    $currentQuestion.find('.validation-message').toggle(!isAnswered);
+                    return isAnswered;
+                }
+            }            
+            
 
         // Helper function to update navigation in embedded quiz
         function updateEmbeddedNavigation($form, current, total) {
@@ -316,4 +344,61 @@ $(document).ready(function () {
             $(`#drag-result-${itemId}`).val(binName);
         }
     });
+
+
+
+
+//ADDED FOR WASH PANEL
+$(document).on('click', '.wash-option', function () {
+    let type = $(this).data('type'); // "cycle", "spin", or "temp"
+    let parent = $(this).parent();   // the div with wash-options
+    let index = parent.attr('id').split('-').pop(); // grabs the index from the ID
+
+    parent.find('.wash-option').removeClass('active');
+    $(this).addClass('active');
+
+    let value = $(this).data('value');
+    $(`input[name="selected-${type}-${index}"]`).val(value);  // This is the key!
+
 });
+    
+
+    // When Check Answer button is clicked
+    $(document).on('click', '.check-wash-btn', function () {
+        let container = $(this).closest('.wash-panel-question');
+        
+        const index = container.data('index');  // <<<<< fix here
+        const selectedCycle = $(`input[name="selected-cycle-${index}"]`).val();
+        const selectedSpin = $(`input[name="selected-spin-${index}"]`).val();
+        const selectedTemp = $(`input[name="selected-temp-${index}"]`).val();
+        let feedback = container.find('.feedback');
+    
+        if (!selectedCycle || !selectedSpin || !selectedTemp) {
+            feedback.text("Please select one option for each category.").css('color', 'red').show();
+            return;
+        }
+    
+        let correctAnswer;
+        try {
+            correctAnswer = JSON.parse(container.attr("data-answer"));
+        } catch (e) {
+            feedback.text("Missing or invalid answer key.").css('color', 'red').show();
+            return;
+        }
+    
+        const match = (selected, correct) =>
+            Array.isArray(correct) ? correct.includes(selected) : selected === correct;
+    
+        if (
+            match(selectedCycle, correctAnswer.cycle) &&
+            match(selectedSpin, correctAnswer.spin) &&
+            match(selectedTemp, correctAnswer.temperature)
+        ) {
+            feedback.text("Correct! ✅").css('color', 'green').show();
+        } else {
+            feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
+        }
+    });
+    
+    
+});    
