@@ -29,6 +29,13 @@ def home():
     
 @app.route('/page/<page_id>')
 def dynamic_page(page_id):
+    user = users.get("user1")  # TODO: Gervais - replace with actual user session
+    # clearing prev timestamp on new page
+    if "progress" in user and user["progress"]:
+        last_slide = user["progress"][-1]
+        print(f"Resetting timestamp on last slide: {last_slide['slideId']}")
+        last_slide["timestamp"] = datetime.now()
+
     page = content_data.get(page_id)
     if not page:
         abort(404)
@@ -122,6 +129,7 @@ def quiz_page(quiz_id):
 
     return render_template('quiz.html', quiz=quiz)
 
+# TODO: Gervais - to make timing persistent on refresh and maintain it on UI progress sidebar
 @app.route('/save-progress', methods=['POST'])
 def save_progress():
     data = request.get_json()
@@ -140,8 +148,11 @@ def save_progress():
     if user["progress"]:
         last_slide = user["progress"][-1]
         last_time = last_slide["timestamp"]
-        time_spent = (current_time - last_time).total_seconds()
-        print(f"Time spent on slide {last_slide['slideId']}: {time_spent:.2f} seconds")
+        if last_time:
+            time_spent = (current_time - last_time).total_seconds()
+            print(f"Time spent on slide {last_slide['slideId']}: {time_spent:.2f} seconds")
+        else:
+            print("No valid timestamp for previous slide (likely due to refresh).")
     else:
         print("First slide being saved.")
 
