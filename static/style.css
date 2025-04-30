@@ -5,6 +5,10 @@ body {
   .font-16{
     font-size:16px;
   }
+  .font-13{
+    font-size:13px;
+  }
+  
   
   .title{
     font-size: 2.5rem;
@@ -314,8 +318,6 @@ button:disabled {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 15px auto;
-  padding: 0 30px 15px;
   gap: 8px;
 }
 
@@ -680,6 +682,7 @@ button:disabled {
   background-color: #ffe6e6;
 }
 
+<<<<<<< HEAD
 
 /* Wash Panel */
 .wash-panel {
@@ -727,3 +730,57 @@ button:disabled {
   margin-top: 20px;
   padding: 10px 20px;
 }
+=======
+/* lessons sidebar */
+
+.layout {
+  display: flex;
+  gap: 2rem;
+}
+
+.sidebar {
+  width: 280px;
+  border-right: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+.sidebar h4 {
+  padding-left: 1rem;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar li.active {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.sidebar .time {
+  font-size: 0.8em;
+  color: green;
+}
+
+.sidebar .tick {
+  color: green;
+}
+
+
+.slide-image img{
+  width: 100%;
+  max-width: 400px;
+  height: 400px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+}
+>>>>>>> 9597f1e (ft: added learning tracker)
