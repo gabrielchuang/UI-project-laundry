@@ -208,40 +208,92 @@ $(document).ready(function () {
     let currentSlide = 0;
     const totalSlides = $(".slide").length;
 
-    function showSlide(index) {
+    function getSlides() {
+        return document.querySelectorAll(".slide");
+    }
+
+    function showSlide(index, shouldTrackProgress = false) {
+        const slides = getSlides();
         $(".slide").removeClass("active");
         $("#slide" + (index + 1)).addClass("active");
-
+    
         $(".dot").removeClass("active");
         $('.dot[data-slide="' + (index + 1) + '"]').addClass("active");
-
+    
         $("#prev-btn").prop("disabled", index === 0);
         $("#next-btn").prop("disabled", index === totalSlides - 1);
-
+    
         currentSlide = index;
+    
+        if (!shouldTrackProgress) return;
+    
+        const slidesArray = Array.from(slides);
+        const slideEl = slidesArray[index];
+        const slideId = slideEl.getAttribute("data-slide-id");
+    
+        // Send progress for current slide to log time on the *previous* slide
+        $.ajax({
+            url: '/save-progress',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ id: slideId }),
+            success: function(res) {
+                console.log('Progress saved:', res);
+            
+                const prevIndex = index - 1;
+                const prevItem = document.querySelector(`#sidebar-item-${prevIndex}`);
+                if (!prevItem) return;
+            
+                const statusEl = prevItem.querySelector('.sidebar-status');
+                if (!statusEl) return;
+            
+                const elapsedSeconds = Math.round(res.timeSpent || 0);
+                let timeStr;
+            
+                if (elapsedSeconds < 60) {
+                    timeStr = `${elapsedSeconds}s`;
+                } else if (elapsedSeconds < 3600) {
+                    timeStr = `${Math.floor(elapsedSeconds / 60)}m`;
+                } else {
+                    timeStr = `${Math.floor(elapsedSeconds / 3600)}h`;
+                }
+            
+                statusEl.innerHTML = `<div class="d-flex align-items-center"><span class="time">${timeStr}</span></div>`;
+                statusEl.style.display = 'inline';
+                statusEl.style.color = 'green';
+                const sidebarItem = statusEl.closest('li');
+                sidebarItem.style.backgroundColor = '#e6ffe6'; 
+                sidebarItem.style.borderRadius = '6px';
+
+            },
+            error: function(err) {
+                console.error('Progress save failed:', err);
+            }
+        });
     }
+    
 
     // Navigation handlers
     $("#next-btn").on('click', function() {
         if (currentSlide < totalSlides - 1) {
-            showSlide(currentSlide + 1);
+            showSlide(currentSlide + 1, true);
         }
     });
 
     $("#prev-btn").on('click', function() {
         if (currentSlide > 0) {
-            showSlide(currentSlide - 1);
+            showSlide(currentSlide - 1,true);
         }
     });
 
     $(".dot").on('click', function() {
         const target = $(this).data("slide") - 1;
-        showSlide(target);
+        showSlide(target, true);
     });
 
     // Initialize first slide
     if (totalSlides > 0) {
-        showSlide(0);
+        showSlide(0, true);
     }
 
     $('.quiz-option').on('click', function() {
@@ -360,6 +412,33 @@ $(document).on('click', '.wash-option', function () {
     let value = $(this).data('value');
     $(`input[name="selected-${type}-${index}"]`).val(value);  // This is the key!
 
+    // tracking
+
+      $(".sidebar-status").hide();
+
+      showSlide(0, false);
+  
+      $("#next-btn").click(() => {
+          const nextIndex = currentSlide + 1;
+          if (nextIndex < totalSlides) {
+              $(".sidebar-status").eq(nextIndex).show();
+              showSlide(nextIndex, true);
+          }
+      });
+  
+      $("#prev-btn").click(() => {
+          const prevIndex = currentSlide - 1;
+          if (prevIndex >= 0) {
+              showSlide(prevIndex, false);
+          }
+      });
+  
+      $("#sidebar-tracker li").each(function (index) {
+          $(this).click(() => {
+              $(".sidebar-status").eq(index).show();
+              showSlide(index, true);
+          });
+      });
 });
     
 
