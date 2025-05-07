@@ -40,6 +40,7 @@ def dynamic_page(page_id):
     if not page:
         abort(404)
 
+    print("pagetttt:"+page['type'])
     if page['type'] == 'menu':
         return render_template("menu.html", menu=page)
 
@@ -51,112 +52,100 @@ def dynamic_page(page_id):
         slides = [content_data[child['id']] for child in page['children'] if child['id'] in content_data]
         print("Requested page:", page_id)
         print("Slides loaded:", [s['id'] for s in slides])
-        return render_template("lesson2.html", lesson=page, content=slides)
+        return render_template("lesson.html", lesson=page, content=slides)
 
     else:
         # standalone content pages (no children)
         print("Requested single content page:", page_id)
-        return render_template("lesson2.html", lesson=page, content=[page])
-
-
-
+        return render_template("lesson.html", lesson=page, content=[page])
+    
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
 def quiz_page(quiz_id):
-    # Find quiz in quizzes_data first
-    quiz = next((q for q in quizzes_data if q["id"] == quiz_id), None)
+    # Find the quiz from content_data["content"]
+    quiz = content_data.get(quiz_id)
 
-    # If not found, check content_data
-    if not quiz:
-        quiz = content_data.get(quiz_id)
-        if not quiz or quiz['type'] != 'quiz':
-            abort(404)
+    if not quiz or quiz.get('type') != 'quiz':
+        abort(404)
 
-    # Set default parent_id if not specified
-    if 'parent_id' not in quiz:
-        quiz['parent_id'] = 'mainpage'
+    # Set default parent_id if not present
+    quiz.setdefault('parent_id', 'mainpage')
 
-    # Always use single-question format
+    # Always use single-question format in UI
     quiz['display_mode'] = 'single_question'
+
+    # Normalize quizzes that use "question" instead of "questions"
+    if "questions" not in quiz and "question" in quiz:
+        quiz["questions"] = [quiz]
+
+    questions = quiz.get("questions", [])
+    total_questions = len(questions) or 1
 
     if request.method == 'POST':
         score = 0
         user_answers = {}
 
-        # Debug information
         print("Form data received:", request.form)
 
-        if 'questions' in quiz:
-            for i, question in enumerate(quiz['questions']):
-                if question.get('type') == 'wash_panel':
-                    cycle = request.form.get(f'selected-cycle-{i}')
-                    spin = request.form.get(f'selected-spin-{i}')
-                    temp = request.form.get(f'selected-temp-{i}')
-                    user_answer = {
-                        "cycle": cycle,
-                        "temperature": temp,
-                        "spin": spin
-                    } if cycle and temp and spin else None
+        for i, question in enumerate(questions):
+            q_type = question.get("type")
 
-                    print(f"Wash panel question {i}:")
-                    print(f"  Cycle: {cycle}")
-                    print(f"  Spin: {spin}")
-                    print(f"  Temp: {temp}")
-                    print(f"  User answer: {user_answer}")
+            if q_type == 'wash_panel':
+                # Extract and clean options
+                cycle = request.form.get(f'selected-cycle-{i}')
+                spin = request.form.get(f'selected-spin-{i}')
+                temp = request.form.get(f'selected-temp-{i}')
+                user_answer = {"cycle": cycle, "temperature": temp, "spin": spin} if cycle and temp and spin else None
 
-                    correct = question['answer']
-                    def match(val, correct_val):
-                        return val in correct_val if isinstance(correct_val, list) else val == correct_val
+                correct = question['answer']
 
-                    if user_answer and all([
-                        match(user_answer['cycle'], correct['cycle']),
-                        match(user_answer['temperature'], correct['temperature']),
-                        match(user_answer['spin'], correct['spin'])
-                    ]):
-                        score += 1
-                        print(f"  Correct! Score: {score}")
-                    else:
-                        print(f"  Incorrect. Score: {score}")
-                elif question.get('type') == 'drag_and_drop':
-                    bin_assignments = {}
-                    for item in question['items']:
-                        item_id = item['id']
-                        bin_val = request.form.get(f'drag_result_{item_id}')
-                        if bin_val:
-                            bin_assignments.setdefault(bin_val, []).append(item_id)
-                    user_answer = bin_assignments
-                    correct = question.get('answer', {})
+                def match(val, correct_val):
+                    return val in correct_val if isinstance(correct_val, list) else val == correct_val
 
-                    def normalize(grouping):
-                        return {k: sorted(v) for k, v in grouping.items()}
-                    
-                    if normalize(user_answer) == normalize(correct):
-                        score += 1
+                if user_answer and all([
+                    match(user_answer['cycle'], correct['cycle']),
+                    match(user_answer['temperature'], correct['temperature']),
+                    match(user_answer['spin'], correct['spin'])
+                ]):
+                    score += 1
 
-                else:
-                    question_key = f'q{i}'
-                    user_answer = request.form.get(question_key)
-                    if user_answer == question['answer']:
-                        score += 1
+                print(f"Wash panel {i} -> User: {user_answer} | Correct: {correct}")
 
-                user_answers[i] = user_answer
-                correct_answer = question.get('answer')
-                print(f"Question {i + 1}: User answer: '{user_answer}', Correct answer: '{correct_answer}'")
+            elif q_type == 'drag_and_drop':
+                bin_assignments = {}
+                for item in question['items']:
+                    item_id = item['id']
+                    bin_val = request.form.get(f'drag_result_{item_id}')
+                    if bin_val:
+                        bin_assignments.setdefault(bin_val, []).append(item_id)
 
-        else:
-            # Handle single question format
-            user_answer = request.form.get('q0')
-            user_answers[0] = user_answer
-            correct_answer = quiz.get('answer')
+                user_groups = [sorted(v) for v in bin_assignments.values()]
+                correct_groups = [sorted(v) for v in question.get('answer', {}).values()]
 
-            print(f"Single question: User answer: '{user_answer}', Correct answer: '{correct_answer}'")
+                user_groups.sort()
+                correct_groups.sort()
 
-            if user_answer == correct_answer:
-                score = 1
+                user_answer = bin_assignments
 
-        # Calculate total questions for percentage
-        total_questions = len(quiz.get('questions', [1]))  # Default to 1 for single question
+                if user_groups == correct_groups:
+                    score += 1
+
+                print(f"Drag & Drop {i} -> User groups: {user_groups} | Correct groups: {correct_groups}")
+
+
+            else:
+                # Handle multiple choice or single answer questions
+                user_answer = request.form.get(f'q{i}')
+                correct = question.get("answer")
+
+                if user_answer == correct:
+                    score += 1
+
+                print(f"Question {i + 1}: User answer: '{user_answer}', Correct: '{correct}'")
+
+            user_answers[i] = user_answer
 
         percentage = (score / total_questions) * 100
+
         if percentage == 100:
             feedback = "Perfect score! You've mastered this topic."
         elif percentage >= 80:
@@ -178,6 +167,7 @@ def quiz_page(quiz_id):
                                feedback=feedback)
 
     return render_template('quiz.html', quiz=quiz)
+
 
 # TODO: Gervais - to make timing persistent on refresh and maintain it on UI progress sidebar
 @app.route('/save-progress', methods=['POST'])
