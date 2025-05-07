@@ -51,6 +51,7 @@
                             </div>
 
                             {% for question in slide.questions %}
+                            {% set qindex = loop.index0 %} <!-- hehe -->
                                 {% if question.type == 'wash_panel' %}
                                 <!-- Wash panel question type -->
                                 <div class="question-container wash-panel-question {% if loop.first %}active{% endif %}" data-answer='{{ question.answer | tojson }}' data-index='{{ loop.index0 }}'>
@@ -95,9 +96,9 @@
                                     <div class="feedback" style="display:none;"></div>
                                 
                                     <!-- Hidden inputs to store selected answers -->
-                                    <input type="hidden" name="selected-cycle-{{ loop.index0 }}" id="selected-cycle-{{ loop.index0 }}">
-                                    <input type="hidden" name="selected-spin-{{ loop.index0 }}" id="selected-spin-{{ loop.index0 }}">
-                                    <input type="hidden" name="selected-temp-{{ loop.index0 }}" id="selected-temp-{{ loop.index0 }}">
+                                    <input type="hidden" name="selected-cycle-{{ qindex }}" id="selected-cycle-{{ qindex }}">
+                                    <input type="hidden" name="selected-spin-{{ qindex }}" id="selected-spin-{{ qindex }}">
+                                    <input type="hidden" name="selected-temp-{{ qindex }}" id="selected-temp-{{ qindex }}">    
 
                                 </div>
                                 {% elif question.type == 'drag_and_drop' %}
@@ -130,7 +131,7 @@
                                     <!-- Hidden inputs to record where each item was dropped -->
                                     <div class="drop-records">
                                         {% for item in question["items"] %}
-                                            <input type="hidden" name="drag_result_{{ loop.index0 }}" id="drag-result-item-{{ loop.index }}-{{ loop.index0 }}">
+                                        <input type="hidden" name="drag_result_{{ item.id }}" id="drag-result-item-{{ item.id }}">
                                         {% endfor %}
                                     </div>
 

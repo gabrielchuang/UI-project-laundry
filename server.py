@@ -87,14 +87,61 @@ def quiz_page(quiz_id):
 
         if 'questions' in quiz:
             for i, question in enumerate(quiz['questions']):
-                question_key = f'q{i}'
-                user_answer = request.form.get(question_key)
+                if question.get('type') == 'wash_panel':
+                    cycle = request.form.get(f'selected-cycle-{i}')
+                    spin = request.form.get(f'selected-spin-{i}')
+                    temp = request.form.get(f'selected-temp-{i}')
+                    user_answer = {
+                        "cycle": cycle,
+                        "temperature": temp,
+                        "spin": spin
+                    } if cycle and temp and spin else None
+
+                    print(f"Wash panel question {i}:")
+                    print(f"  Cycle: {cycle}")
+                    print(f"  Spin: {spin}")
+                    print(f"  Temp: {temp}")
+                    print(f"  User answer: {user_answer}")
+
+                    correct = question['answer']
+                    def match(val, correct_val):
+                        return val in correct_val if isinstance(correct_val, list) else val == correct_val
+
+                    if user_answer and all([
+                        match(user_answer['cycle'], correct['cycle']),
+                        match(user_answer['temperature'], correct['temperature']),
+                        match(user_answer['spin'], correct['spin'])
+                    ]):
+                        score += 1
+                        print(f"  Correct! Score: {score}")
+                    else:
+                        print(f"  Incorrect. Score: {score}")
+                elif question.get('type') == 'drag_and_drop':
+                    bin_assignments = {}
+                    for item in question['items']:
+                        item_id = item['id']
+                        bin_val = request.form.get(f'drag_result_{item_id}')
+                        if bin_val:
+                            bin_assignments.setdefault(bin_val, []).append(item_id)
+                    user_answer = bin_assignments
+                    correct = question.get('answer', {})
+
+                    def normalize(grouping):
+                        return {k: sorted(v) for k, v in grouping.items()}
+                    
+                    if normalize(user_answer) == normalize(correct):
+                        score += 1
+
+                else:
+                    question_key = f'q{i}'
+                    user_answer = request.form.get(question_key)
+                    if user_answer == question['answer']:
+                        score += 1
+
                 user_answers[i] = user_answer
+                correct_answer = question.get('answer')
+                print(f"Question {i + 1}: User answer: '{user_answer}', Correct answer: '{correct_answer}'")
 
-                print(f"Question {i + 1}: User answer: '{user_answer}', Correct answer: '{question['answer']}'")
-
-                if user_answer == question['answer']:
-                    score += 1
         else:
             # Handle single question format
             user_answer = request.form.get('q0')
@@ -118,6 +165,9 @@ def quiz_page(quiz_id):
             feedback = "Good effort! Review the incorrect answers to improve."
         else:
             feedback = "Keep practicing! Review the lesson and try again."
+
+        print(f"Final score: {score}/{total_questions}")
+        print(f"User answers: {user_answers}")
 
         return render_template('quiz-result.html',
                                quiz=quiz,

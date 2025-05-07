@@ -422,10 +422,6 @@
 
 
 
-
-
-
-
         {
             "id": "wash-settings-quiz-1",
             "title": "Wash settings quiz",
@@ -546,7 +542,11 @@
                             "img": "imgs/quiz/sort-color-quiz/9.jpg",
                             "group": "2"
                         }
-                    ] 
+                    ],
+                    "answer": {
+                        "bin0": ["1", "4"], 
+                        "bin1": ["2", "3", "5", "7", "9"]
+                    } 
                 }
             ]
         },

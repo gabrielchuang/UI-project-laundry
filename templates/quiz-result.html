@@ -62,24 +62,58 @@
                          class="img-fluid rounded" style="max-height: 200px;">
                 </div>
             {% endif %}
-
+        
             <h3 class="h5 mb-3">Question Review</h3>
-
-            <!-- Add this inside the question review section -->
+        
             {% if quiz.questions %}
                 {% for question in quiz.questions %}
-                    <div class="question-review mb-4 p-3 rounded {% if user_answers[loop.index0] == question.answer %}correct-answer{% else %}incorrect-answer{% endif %}">
+                    <div class="question-review mb-4 p-3 rounded">
                         <div class="d-flex justify-content-between mb-2">
                             <strong>Question {{ loop.index }}:</strong>
-                            {% if user_answers[loop.index0] == question.answer %}
-                                <span class="badge bg-success">Correct</span>
+                            {% if question.type == 'wash_panel' %}
+                            {% set user_answer = user_answers[loop.index0] %}
+                            {% set correct_answer = question.answer %}
+                            {% set is_correct = user_answer and
+                                (user_answer.cycle is defined and (correct_answer['cycle'] if correct_answer['cycle'] is string else user_answer['cycle'] in correct_answer['cycle'])) and
+                                (user_answer.temperature is defined and (correct_answer['temperature'] if correct_answer['temperature'] is string else user_answer['temperature'] in correct_answer['temperature'])) and
+                                (user_answer.spin is defined and (correct_answer['spin'] if correct_answer['spin'] is string else user_answer['spin'] in correct_answer['spin']))
+                            %}
+                                {% if is_correct %}
+                                    <span class="badge bg-success">Correct</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Incorrect</span>
+                                {% endif %}
                             {% else %}
-                                <span class="badge bg-danger">Incorrect</span>
+                                {% if user_answers[loop.index0] == question.answer %}
+                                    <span class="badge bg-success">Correct</span>
+                                {% else %}
+                                    <span class="badge bg-danger">Incorrect</span>
+                                {% endif %}
                             {% endif %}
                         </div>
                         <p class="mb-2">{{ question.question }}</p>
-                        <p class="mb-1"><strong>Your answer:</strong> {{ user_answers[loop.index0] }}</p>
-                        <p class="mb-1"><strong>Correct answer:</strong> {{ question.answer }}</p>
+                        <p class="mb-1"><strong>Your answer:</strong>
+                            {% if question.type == 'wash_panel' %}
+                                {% if user_answers[loop.index0] %}
+                                    Cycle: {{ user_answers[loop.index0]['cycle'] }},
+                                    Temperature: {{ user_answers[loop.index0]['temperature'] }},
+                                    Spin: {{ user_answers[loop.index0]['spin'] }}
+                                {% else %}
+                                    None
+                                {% endif %}
+                            {% else %}
+                                {{ user_answers[loop.index0] }}
+                            {% endif %}
+                        </p>
+                        <p class="mb-1"><strong>Correct answer:</strong>
+                            {% if question.type == 'wash_panel' %}
+                                Cycle: {{ question.answer['cycle']|join(', ') if question.answer['cycle'] is iterable else question.answer['cycle'] }},
+                                Temperature: {{ question.answer['temperature']|join(', ') if question.answer['temperature'] is iterable else question.answer['temperature'] }},
+                                Spin: {{ question.answer['spin']|join(', ') if question.answer['spin'] is iterable else question.answer['spin'] }}
+                            {% else %}
+                                {{ question.answer }}
+                            {% endif %}
+                        </p>
                     </div>
                 {% endfor %}
             {% else %}
@@ -97,6 +131,7 @@
                     <p class="mb-1"><strong>Correct answer:</strong> {{ quiz.answer }}</p>
                 </div>
             {% endif %}
+        
             <div class="d-flex justify-content-between mt-4">
                 <a href="{{ url_for('dynamic_page', page_id=quiz.parent_id) }}"
                    class="btn btn-outline-secondary">
@@ -117,4 +152,4 @@
 </div>
 </div>
 </body>
-</html>
+<html>

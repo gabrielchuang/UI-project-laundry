@@ -38,87 +38,106 @@ $(document).ready(function () {
         $('#prev-btn').click(goToPreviousQuestion);
     }
 
-    // Handle embedded quizzes in lesson pages
+    
     $('.embedded-quiz-form').each(function() {
         const $form = $(this);
-        const $questions = $form.find('.question-container');
+        // Include both .question-container and .wash-panel-question in the count
+        const $questions = $form.find('.question-container, .wash-panel-question, .drag-drop-question');
         const totalEmbeddedQuestions = $questions.length;
         let currentEmbeddedQuestion = 0;
-
+    
+        // Debug: Log the number of questions and their types
+        console.log("Total embedded questions:", totalEmbeddedQuestions);
+        $questions.each(function(index) {
+            console.log(`Question ${index}:`, $(this).hasClass('question-container') ? 'Multiple Choice' : $(this).hasClass('wash-panel-question') ? 'Wash Panel' : 'Drag and Drop');
+        });
+    
         // Set up navigation handlers for this embedded quiz
         $form.find('.quiz-next-btn').click(function() {
             if (validateEmbeddedQuestion($form, currentEmbeddedQuestion)) {
                 navigateEmbeddedQuestion($form, currentEmbeddedQuestion + 1);
             }
         });
-
+    
         $form.find('.quiz-prev-btn').click(function() {
             navigateEmbeddedQuestion($form, currentEmbeddedQuestion - 1);
         });
-
+    
+        $form.find('.quiz-submit-btn').click(function (e) {
+            let allAnswered = true;
+            // Validate all questions in the quiz
+            for (let i = 0; i < totalEmbeddedQuestions; i++) {
+                if (!validateEmbeddedQuestion($form, i)) {
+                    allAnswered = false;
+                    navigateEmbeddedQuestion($form, i); // Navigate to the first unanswered question
+                    break;
+                }
+            }
+    
+            if (allAnswered) {
+                console.log("Submitting form with data:", $form.serializeArray());
+                $form.submit();
+            } else {
+                alert("Please answer all questions before submitting.");
+            }
+        });
+    
         // Initialize navigation state
         updateEmbeddedNavigation($form, currentEmbeddedQuestion, totalEmbeddedQuestions);
-
+    
         // Helper function to navigate between questions in embedded quiz
         function navigateEmbeddedQuestion($form, index) {
             // Validate index range
             if (index < 0 || index >= totalEmbeddedQuestions) return;
-
+    
             // Hide current question
-            $form.find('.question-container.active').removeClass('active');
-
+            $form.find('.question-container.active, .wash-panel-question.active, .drag-drop-question.active').removeClass('active');
+    
             // Update current question
             currentEmbeddedQuestion = index;
-
+    
             // Show new question
-            $form.find('.question-container').eq(currentEmbeddedQuestion).addClass('active');
-
+            $form.find('.question-container, .wash-panel-question, .drag-drop-question').eq(currentEmbeddedQuestion).addClass('active');
+    
             // Update UI
             updateEmbeddedNavigation($form, currentEmbeddedQuestion, totalEmbeddedQuestions);
             $form.find('.current-quiz-question').text(currentEmbeddedQuestion + 1);
         }
-
-        // Helper function to validate current question in embedded quiz
-        /*
+    
         function validateEmbeddedQuestion($form, index) {
-            const $currentQuestion = $form.find('.question-container').eq(index);
-            const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
-            $currentQuestion.find('.validation-message').toggle(!isAnswered);
-            return isAnswered;
-        } */
-            function validateEmbeddedQuestion($form, index) {
-                const $currentQuestion = $form.find('.question-container, .wash-panel-question, .drag-drop-question').eq(index);
-            
-                if ($currentQuestion.hasClass('wash-panel-question')) {
-                    const idx = $currentQuestion.data('index');  // Use data-index from HTML
-                    const selectedCycle = $(`input[name="selected-cycle-${idx}"]`).val();
-                    const selectedSpin = $(`input[name="selected-spin-${idx}"]`).val();
-                    const selectedTemp = $(`input[name="selected-temp-${idx}"]`).val();
-            
-                    if (!selectedCycle || !selectedSpin || !selectedTemp) {
-                        $currentQuestion.find('.feedback').text('Please select one option for each setting.').css('color', 'red').show();
-                        return false;
-                    } else {
-                        $currentQuestion.find('.feedback').hide();
-                        return true;
-                    }
-                } else if ($currentQuestion.hasClass('drag-drop-question')) {
-                    // You can add validation here if needed
-                    return true;
+            const $currentQuestion = $form.find('.question-container, .wash-panel-question, .drag-drop-question').eq(index);
+    
+            if ($currentQuestion.hasClass('wash-panel-question')) {
+                const idx = $currentQuestion.data('index');  // Use data-index from HTML
+                const selectedCycle = $(`input[name="selected-cycle-${idx}"]`).val();
+                const selectedSpin = $(`input[name="selected-spin-${idx}"]`).val();
+                const selectedTemp = $(`input[name="selected-temp-${idx}"]`).val();
+    
+                console.log(`Validating wash panel question ${idx}: Cycle=${selectedCycle}, Spin=${selectedSpin}, Temp=${selectedTemp}`);
+    
+                if (!selectedCycle || !selectedSpin || !selectedTemp) {
+                    $currentQuestion.find('.feedback').text('Please select one option for each setting.').css('color', 'red').show();
+                    return false;
                 } else {
-                    // Normal multiple-choice
-                    const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
-                    $currentQuestion.find('.validation-message').toggle(!isAnswered);
-                    return isAnswered;
+                    $currentQuestion.find('.feedback').hide();
+                    return true;
                 }
-            }            
-            
-
+            } else if ($currentQuestion.hasClass('drag-drop-question')) {
+                // Add validation if needed
+                return true;
+            } else {
+                // Normal multiple-choice
+                const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
+                $currentQuestion.find('.validation-message').toggle(!isAnswered);
+                return isAnswered;
+            }
+        }
+    
         // Helper function to update navigation in embedded quiz
         function updateEmbeddedNavigation($form, current, total) {
             // Previous button state
             $form.find('.quiz-prev-btn').prop('disabled', current === 0);
-
+    
             // Next/Submit buttons visibility
             const isLastQuestion = current === total - 1;
             $form.find('.quiz-next-btn').toggle(!isLastQuestion);
@@ -368,7 +387,7 @@ $(document).on('click', '.check-drag-btn', function() {
     checkDragAndDropFlexibleGrouping(questionContainer);
 });
 
-$(document).ready(function () {
+$(document).ready(function () { 
     let draggedItem = null;
 
     $(document).on('dragstart', '.drag-item', function (e) {
@@ -398,19 +417,19 @@ $(document).ready(function () {
     });
 
 
-
-
-//ADDED FOR WASH PANEL
-$(document).on('click', '.wash-option', function () {
+  //ADDED FOR WASH PANEL
+    $(document).on('click', '.wash-option', function () {
     let type = $(this).data('type'); // "cycle", "spin", or "temp"
     let parent = $(this).parent();   // the div with wash-options
-    let index = parent.attr('id').split('-').pop(); // grabs the index from the ID
+    //let index = parent.attr('id').split('-').pop(); // grabs the index from the ID
+    let container = $(this).closest('.wash-panel-question');
+    let index = container.data('index');
 
     parent.find('.wash-option').removeClass('active');
     $(this).addClass('active');
 
     let value = $(this).data('value');
-    $(`input[name="selected-${type}-${index}"]`).val(value);  // This is the key!
+    $(`input[name="selected-${type}-${index}"]`).val(value); // This is the key!
 
     // tracking
 
@@ -439,16 +458,17 @@ $(document).on('click', '.wash-option', function () {
               showSlide(index, true);
           });
       });
-});
+ });
     
 
     // When Check Answer button is clicked
+
     $(document).on('click', '.check-wash-btn', function () {
         let container = $(this).closest('.wash-panel-question');
         
-        const index = container.data('index');  // <<<<< fix here
+        const index = container.data('index');  // Get the index
         const selectedCycle = $(`input[name="selected-cycle-${index}"]`).val();
-        const selectedSpin = $(`input[name="selected-spin-${index}"]`).val();
+        const selectedSpin = $(`input[name="selected-spin-${index}"]`).val()
         const selectedTemp = $(`input[name="selected-temp-${index}"]`).val();
         let feedback = container.find('.feedback');
     
@@ -459,7 +479,7 @@ $(document).on('click', '.wash-option', function () {
     
         let correctAnswer;
         try {
-            correctAnswer = JSON.parse(container.attr("data-answer"));
+            correctAnswer = container.data('answer'); // Use .data() to parse JSON automatically
         } catch (e) {
             feedback.text("Missing or invalid answer key.").css('color', 'red').show();
             return;
@@ -478,6 +498,8 @@ $(document).on('click', '.wash-option', function () {
             feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
         }
     });
+
+    
     
     
 });    

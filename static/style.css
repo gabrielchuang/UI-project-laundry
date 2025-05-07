@@ -682,7 +682,6 @@ button:disabled {
   background-color: #ffe6e6;
 }
 
-<<<<<<< HEAD
 
 /* Wash Panel */
 .wash-panel {
@@ -713,74 +712,29 @@ button:disabled {
 }
 
 .wash-option {
-  background-color: #eee;
-  border: none;
+  background-color: #f8f9fa;
+  border: 2px solid #ced4da;
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  color: #333;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.wash-option:hover {
+  background-color: #e2e6ea;
+  border-color: #007bff;
 }
 
 .wash-option.active {
-  background-color: #d1e7dd;
-  color: #000;
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
 }
 
 .check-wash-btn {
   margin-top: 20px;
   padding: 10px 20px;
 }
-=======
-/* lessons sidebar */
 
-.layout {
-  display: flex;
-  gap: 2rem;
-}
-
-.sidebar {
-  width: 280px;
-  border-right: 1px solid #ccc;
-  padding-top: 1rem;
-}
-
-.sidebar h4 {
-  padding-left: 1rem;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-}
-
-.sidebar li.active {
-  background-color: #f0f0f0;
-  font-weight: bold;
-}
-
-.sidebar .time {
-  font-size: 0.8em;
-  color: green;
-}
-
-.sidebar .tick {
-  color: green;
-}
-
-
-.slide-image img{
-  width: 100%;
-  max-width: 400px;
-  height: 400px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
->>>>>>> 9597f1e (ft: added learning tracker)
