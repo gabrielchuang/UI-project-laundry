@@ -25,7 +25,7 @@ users = {
 
 @app.route('/')
 def home():
-    return redirect(url_for('dynamic_page', page_id='mainpage'))
+    return redirect(url_for('dynamic_page', page_id='mainpage1'))
     
 @app.route('/page/<page_id>')
 def dynamic_page(page_id):
@@ -36,9 +36,16 @@ def dynamic_page(page_id):
         print(f"Resetting timestamp on last slide: {last_slide['slideId']}")
         last_slide["timestamp"] = datetime.now()
 
+    if page_id[:8] == 'mainpage':
+        i = int(page_id[8:])
+        chapters = [["Sorting", "/page/sorting-mainpage"], ["Wash settings", "/page/wash-settings-mainpage"], ["Reading labels", "/page/reading-labels-mainpage"], ["Final Quiz", "/page/final-quiz"]]
+        chapters = [{"name": c[0], "page": c[1]} for c in chapters]
+        return render_template("outline.html", content=content_data.values(), iter=i, chapters=chapters)
+
     page = content_data.get(page_id)
     if not page:
         abort(404)
+
 
     print("pagetttt:"+page['type'])
     if page['type'] == 'menu':

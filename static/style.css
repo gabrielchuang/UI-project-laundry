@@ -66,16 +66,36 @@ body {
   }
   
   .circle {
-    width: 50px;
-    height: 50px;
+    width: 44px;
+    height: 44px;
     background-color: #eee;
     border-radius: 50%;
     z-index: 1;
   }
   
+  .disabled{
+    pointer-events: none;
+  }
+
+  
   .circle.active {
     background-color: #f4a259;
   }
+  .circle.done {
+    background-color: #a4d4a4;
+  }
+
+  .btn.done {
+    background-color: #a4d4a4;
+  }
+  .btn.suggested {
+    background-color: #ddd;
+  }
+  .btn.locked {
+    background-color: #999;
+    color: #555
+  }
+  
 
   .button-column a{
     font-size: 1.5rem; 

@@ -1,86 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>5 Star Laundromat</title>
-        <link
-            href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-            rel="stylesheet"
-        />
-        <link
-            rel="stylesheet"
-            href="{{ url_for('static', filename='style.css') }}"
-        />
-    </head>
-    <body>
+{% extends "layout.html" %}
+
+{% block content %}
+
     <div class="container text-center mt-5">
-        <h1 class="title">Welcome to the 5 Star Laundromat</h1>
+        <h1 class="title">Welcome to the Five Star Laundromat!</h1>
 
-        <!-- Buttons on the right -->
-        <div class="d-grid gap-4 button-column">
-            <a href="{{ url_for('dynamic_lesson', lesson_id='sorting-mainpage') }}"
-               class="btn btn-light btn-lg shadow-sm px-5">Sorting</a>
-            <a href="{{ url_for('dynamic_lesson', lesson_id='wash-settings-mainpage') }}"
-               class="btn btn-light btn-lg shadow-sm px-5">Wash settings</a>
-            <!-- <a href="{{ url_for('dynamic_lesson', lesson_id='reading-labels') }}"--> 
-            <a href="/reading-labels"
-               class="btn btn-light btn-lg shadow-sm px-5">Reading labels</a>
-            <a href="{{ url_for('quiz_page', quiz_id='label-quiz') }}"
-               class="btn btn-light btn-lg shadow-sm px-5">Quiz</a>
-        </div>
+        <p>
+            Welcome to the <b> laundry basics course!</b> This course is designed to help you learn the 
+            fundamentals of laundry care.
+        </p>
 
-        <!-- Step indicator on the left -->
-          <div class="step-indicator d-flex flex-column align-items-center mt-2">
-            <div class="circle active"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-          </div>
-      
-          
-          
-        </div>
-      </div>      
+        <p> By the end of this course, you will be able to sort your laundry, choose the right wash settings,
+            and understand how to read clothing labels. 
+        </p>
+     
 
             <!-- New flex layout: step-indicator + buttons side by side -->
-            <div class="d-flex justify-content-center align-items-start gap-4">
-                <!-- Buttons on the right -->
-                <div class="d-grid gap-4 button-column">
-                    <a
-                        href="/lesson/1"
-                        class="btn btn-light btn-lg shadow-sm px-5"
-                        >Sorting</a
-                    >
-                    <a
-                        href="/wash-settings"
-                        class="btn btn-light btn-lg shadow-sm px-5"
-                        >Wash settings</a
-                    >
-                    <a
-                        href="/reading-labels"
-                        class="btn btn-light btn-lg shadow-sm px-5"
-                        >Reading labels</a
-                    >
-                    <a
-                        href="/quiz/label-quiz"
-                        class="btn btn-light btn-lg shadow-sm px-5"
-                        >Quiz</a
-                    >
-                </div>
+
+            <div class="d-flex justify-content-center align-items-start gap-5" style="margin: 20px">
 
                 <!-- Step indicator on the left -->
-                <div
-                    class="step-indicator d-flex flex-column align-items-center mt-2"
-                >
-                    <div class="circle active"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
-                    <div class="circle"></div>
+                <div class="step-indicator d-flex flex-column align-items-center mt-2">
+                    
+                    {% for j in range(1, 5) %}
+                        <div class="circle {% if j < iter %} done {% elif j == iter %} active {% endif %}"></div>
+                    {% endfor %}
                 </div>
+
+                <!-- Buttons on the right -->
+                <div class="d-grid gap-4 button-column">
+
+                    {% for i in chapters %}
+                        {% if loop.index < iter %} 
+                            <a href= "{{i.page}}"
+                                class="btn btn-light btn-lg shadow-sm px-5 done">{{ i['name'] }}</a> 
+                        {% elif loop.index == iter %} 
+                            <a href= "{{i.page}}"
+                            class="btn btn-light btn-lg shadow-sm px-5 suggested">{{ i['name'] }}</a> 
+                        {% else %} 
+                            <a class="btn btn-light btn-lg shadow-sm px-5 locked disabled ">{{ i['name'] }}</a> 
+                        {% endif %}  
+                    {% endfor %}
+                </div>
+
+                
             </div>
         </div>
+    </div>
 
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
-    </body>
-</html>
+{% endblock %}
