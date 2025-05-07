@@ -697,48 +697,62 @@
             "id": "sorting-color-final-quiz", 
             "title": "Sort by color quiz",
             "type": "quiz",
-            "question": "Sort these items by color into two bins.",
             "quiz-type": "multiple",
             "questions": [
                 {
-                    "question": "Drag and drop test...",
+                    "question": "Sort these items by color into two bins.",
                     "type": "drag_and_drop",
                     "num_bins" : 2,
                     "items": [
                         {
                             "id": "1",
-                            "text": "white cotton t-shirt"
+                            "img": "imgs/quiz/sort-color-quiz/1.jpg",
+                            "text": "white cotton t-shirt",
+                            "group": "1"
                         },
                         {
                             "id": "2",
-                            "text": "black cotton t-shirt"
+                            "text": "black cotton t-shirt",
+                            "img": "imgs/quiz/sort-color-quiz/f1.webp",
+                            "group": "2"
                         },
                         {
                             "id": "3",
-                            "text": "blue denim jeans"
+                            "text": "blue denim jeans",
+                            "img": "imgs/quiz/sort-color-quiz/9.jpg",
+                            "group": "2"
                         },
                         {
                             "id": "4",
-                            "text": "dark green exercise pants"
+                            "text": "dark green exercise pants",
+                            "img": "imgs/quiz/sort-color-quiz/f2.avif",
+                            "group": "2"
                         },
                         {
                             "id": "5",
-                            "text": "pastel yellow silk shirt"
+                            "text": "pastel yellow silk shirt", 
+                            "img": "imgs/quiz/sort-color-quiz/f3.webp",
+                            "group": "1"
                         },
                         {
                             "id": "6",
-                            "text": "white linen pants"
+                            "text": "white linen pants",
+                            "img": "imgs/quiz/sort-color-quiz/4.webp",
+                            "group": "1"
                         }, 
                         {
                             "id": "7",
-                            "text": "dark grey cargo shorts"
+                            "text": "dark grey cargo shorts",
+                            "img": "imgs/quiz/sort-color-quiz/f4.jpg",
+                            "group": "2"
                         }, 
                         {
                             "id": "8",
-                            "text": "red bedsheet"
+                            "text": "red bedsheet",
+                            "img": "imgs/quiz/sort-color-quiz/f5.jpg",
+                            "group": "2"
                         }
-                    ],
-                    "answer": [[1,5,6], [2,3,4,7,8]]
+                    ]
                 }
             ]
         },
@@ -746,45 +760,60 @@
             "id": "sorting-fabric-final-quiz", 
             "title": "Sort by fabric type quiz",
             "type": "quiz",
-            "question": "Great! Now, what if you wanted to sort them by fabric type instead? Sort these items into three bins: delicates, cottons, and heavy-duty.",
             "quiz-type": "multiple",
             "questions": [
                 {
-                    "question": "Drag and drop test...",
+                    "question": "Sort these items by fabric type into three bins: delicates, cottons, and heavy-duty.",
                     "type": "drag_and_drop",
                     "num_bins" : 3,
                     "items": [
                         {
                             "id": "1",
-                            "text": "white cotton t-shirt"
+                            "img": "imgs/quiz/sort-color-quiz/1.jpg",
+                            "text": "white cotton t-shirt",
+                            "group": "1"
                         },
                         {
                             "id": "2",
-                            "text": "black cotton t-shirt"
+                            "text": "black cotton t-shirt",
+                            "img": "imgs/quiz/sort-color-quiz/f1.webp",
+                            "group": "1"
                         },
                         {
                             "id": "3",
-                            "text": "blue denim jeans"
+                            "text": "blue denim jeans",
+                            "img": "imgs/quiz/sort-color-quiz/9.jpg",
+                            "group": "2"
                         },
                         {
                             "id": "4",
-                            "text": "dark green exercise pants"
+                            "text": "dark green exercise pants",
+                            "img": "imgs/quiz/sort-color-quiz/f2.avif",
+                            "group": "3"
                         },
                         {
                             "id": "5",
-                            "text": "pastel yellow silk shirt"
+                            "text": "pastel yellow silk shirt", 
+                            "img": "imgs/quiz/sort-color-quiz/f3.webp",
+                            "group": "3"
                         },
                         {
                             "id": "6",
-                            "text": "white linen pants"
+                            "text": "white linen pants",
+                            "img": "imgs/quiz/sort-color-quiz/4.webp",
+                            "group": "1"
                         }, 
                         {
                             "id": "7",
-                            "text": "dark grey cargo shorts"
+                            "text": "dark grey cargo shorts",
+                            "img": "imgs/quiz/sort-color-quiz/f4.jpg",
+                            "group": "2"
                         }, 
                         {
                             "id": "8",
-                            "text": "red bedsheet"
+                            "text": "red bedsheet",
+                            "img": "imgs/quiz/sort-color-quiz/f5.jpg",
+                            "group": "2"
                         }
                     ],
                     "answer": [[1,2,6], [4,5], [3,7,8]]

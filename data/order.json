@@ -37,12 +37,7 @@
             ]
         },
         "outline-4",
-        {
-            "id": "final-quiz", 
-            "elements": [
-                "sorting-color-final-quiz", "sorting-fabric-final-quiz", "wash-settings-final-quiz", "reading-labels-final-quiz"
-            ]
-        },
+        "final-quiz",
         "congratulations"
     ]
 }

@@ -1,4 +1,3 @@
-
 $(document).ready(function () {
     // Animate progress circle on results page
     const $progressCircle = $('.progress-circle');
@@ -123,6 +122,8 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
     let usedGroups = new Set();
     let allCorrect = true;
 
+    let feedback_text = "";
+
     bins.each(function() {
         let groupsInBin = new Set();
         $(this).find('.drag-item').each(function() {
@@ -140,14 +141,29 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
         if (groupsInBin.size > 1) {
             allCorrect = false;
             $(this).addClass('incorrect-bin');
+            // give more info about which items in this bin can't be washed together 
+            first_item = $(this).find('.drag-item').first().data("text")
+            console.log($(this).find('.drag-item').first())
+            console.log("First item: ", first_item);
+            $(this).find('.drag-item').each(function() {
+                const group = $(this).data('group');
+                if (group != groupsInBin[0]) {
+                    console.log("this dot data text is " + $(this).data("text"))
+                    feedback_text = "You shouldn't wash a " + $(this).data("text") + " with a " + first_item + "!";
+                }
+            });
         } else {
             const group = Array.from(groupsInBin)[0];
             if (usedGroups.has(group)) {
                 // Same group appears in multiple bins, error
+                console.log("Group already used: ", group);
                 allCorrect = false;
+                $(this).removeClass('correct-bin');
                 $(this).addClass('incorrect-bin');
             } else {
+                console.log("Group used: ", group);
                 usedGroups.add(group);
+                $(this).removeClass('incorrect-bin');
                 $(this).addClass('correct-bin');
             }
         }
@@ -156,13 +172,14 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
     // Final sanity check: Did we account for all groups?
     if (allGroups.size !== usedGroups.size) {
         allCorrect = false;
+        console.log("Not all groups accounted for.");
     }
 
     const feedback = $(questionContainer).find('.feedback');
     if (allCorrect) {
         feedback.text("Perfect grouping!").removeClass('incorrect').addClass('correct').show();
     } else {
-        feedback.text("Incorrect grouping. Try again!").removeClass('correct').addClass('incorrect').show();
+        feedback.text("Incorrect grouping. " + feedback_text + " Try again!").removeClass('correct').addClass('incorrect').show();
     }
 }
 

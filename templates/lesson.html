@@ -45,10 +45,12 @@
                           action="{{ url_for('quiz_page', quiz_id=slide.id) }}">
                         {% if slide.questions %}
                             <!-- Progress indicator for embedded quiz -->
-                            <div class="progress-indicator">
-                                <span class="current-quiz-question">1</span> of <span
-                                    class="total-quiz-questions">{{ slide.questions|length }}</span>
-                            </div>
+                             {% if slide.questions|length > 1 %}
+                                <div class="progress-indicator">
+                                    <span class="current-quiz-question">1</span> of <span
+                                        class="total-quiz-questions">{{ slide.questions|length }}</span>
+                                </div>
+                            {% endif %}
 
                             {% for question in slide.questions %}
                             {% set qindex = loop.index0 %} <!-- hehe -->
@@ -109,7 +111,7 @@
                                     
                                     <div class="drag-items">
                                         {% for item in question["items"] %}
-                                            <div class="drag-item" draggable="true" id="item-{{ loop.index }}-{{ loop.index0 }}" data-group="{{ item.group }}">
+                                            <div class="drag-item" draggable="true" id="item-{{ loop.index }}-{{ loop.index0 }}" data-group="{{ item.group }}", data-text="{{ item.text}}">
                                                 {% if item.img %}
                                                     <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.text }}" class="drag-image">
                                                 {% endif %}
@@ -165,11 +167,13 @@
                             {% endfor %}
 
                             <!-- Navigation controls for embedded quiz -->
-                            <div class="quiz-navigation-controls">
-                                <button type="button" class="quiz-prev-btn btn" disabled>Previous</button>
-                                <button type="button" class="quiz-next-btn btn">Next</button>
-                                <button type="submit" class="quiz-submit-btn btn" style="display:none;">Submit Quiz</button>
-                            </div>
+                             {% if slide.questions|length > 1 %}
+                                <div class="quiz-navigation-controls">
+                                    <button type="button" class="quiz-prev-btn btn" disabled>Previous</button>
+                                    <button type="button" class="quiz-next-btn btn">Next</button>
+                                    <button type="submit" class="quiz-submit-btn btn" style="display:none;">Submit Quiz</button>
+                                </div>
+                            {% endif %}
                         {% else %}
                             <!-- Single question format -->
                             <div class="question-container active">
