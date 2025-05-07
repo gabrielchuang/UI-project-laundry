@@ -277,12 +277,12 @@ $(document).ready(function () {
                     timeStr = `${Math.floor(elapsedSeconds / 3600)}h`;
                 }
             
-                statusEl.innerHTML = `<div class="d-flex align-items-center"><span class="time">${timeStr}</span></div>`;
+                // statusEl.innerHTML = `<div class="d-flex align-items-center"><span class="time">${timeStr}</span></div>`;
                 statusEl.style.display = 'inline';
                 statusEl.style.color = 'green';
                 const sidebarItem = statusEl.closest('li');
                 sidebarItem.style.backgroundColor = '#e6ffe6'; 
-                sidebarItem.style.borderRadius = '6px';
+                // sidebarItem.style.borderRadius = '6px';
 
             },
             error: function(err) {

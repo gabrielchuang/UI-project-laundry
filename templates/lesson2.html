@@ -14,14 +14,14 @@
     <!-- Sidebar START -->
     <div class="sidebar col-2">
         <h4>Lesson Progress</h4>
-        <ul id="sidebar-tracker">
+        <div id="sidebar-tracker">
             {% for slide in content %}
                 <li data-slide-index="{{ loop.index0 }}" id="sidebar-item-{{ loop.index0 }}" class="d-flex align-items-center mb-1">
-                    <span class="font-13">{{ slide.title }}</span>
+                    <span class="font-13 px-2 py-1">{{ slide.title }}</span>
                     <span class="sidebar-status"></span>
                 </li>
             {% endfor %}
-        </ul>
+        </div>
     </div>
     <!-- Sidebar END -->
     <div class="col-9">
