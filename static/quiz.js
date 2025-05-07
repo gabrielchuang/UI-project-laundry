@@ -50,7 +50,6 @@ $(function(){
                         }).length > 0;
       if(!answered){
         $q.css('border','2px solid red');
-        alert('Please select an answer before proceeding.');
       } else {
         $q.css('border','none');
       }
