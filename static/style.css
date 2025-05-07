@@ -733,9 +733,11 @@ button:disabled {
   border-color: #007bff;
 }
 
-.check-wash-btn {
+.check-btn {
   margin-top: 20px;
   padding: 10px 20px;
+  background-color:#007bff;
+  border: none;
 }
 
 

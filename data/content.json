@@ -527,11 +527,11 @@
         },
         {
             "id": "sorting-color-quiz-dragdrop",
-            "title": "Sort by color quiz - drag and drop test",
+            "title": "Checkpoint: Sorting by color",
             "type": "quiz",
             "questions": [
                 {
-                    "question": "Drag and drop test...",
+                    "question": "Sort these items by color into two bins.",
                     "type": "drag_and_drop",
                     "num_bins" : 2,
                     "items": [
