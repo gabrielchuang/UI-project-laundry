@@ -1,155 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Results: {{ quiz.title }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quiz Results: {{ quiz.title }}</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="bg-light">
-<div class="container py-4">
+  <div class="container py-4">
     <div class="card shadow-sm">
-        <div class="card-header bg-primary text-white">
-            <h1 class="h4 mb-0">Quiz Results: {{ quiz.title }}</h1>
-            <div class="d-flex align-items-center justify-content-center mt-3">
-                <div class="progress-circle position-relative me-4">
-                    <svg viewBox="0 0 36 36" class="circular-chart">
-                        <path class="circle-bg"
-                              d="M18 2.0845
-                                a 15.9155 15.9155 0 0 1 0 31.831
-                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                              fill="none"
-                              stroke="#eee"
-                              stroke-width="3"/>
-                        <path class="circle-fill"
-                              d="M18 2.0845
-                                a 15.9155 15.9155 0 0 1 0 31.831
-                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                              fill="none"
-                              stroke="#4CC790"
-                              stroke-width="3"
-                              stroke-dasharray="{{ (score/total)*100 }},100"/>
-                    </svg>
-                    <div class="position-absolute top-50 start-50 translate-middle text-center">
-                        <span class="h3 d-block">{{ "%.0f"|format((score/total)*100) }}%</span>
-                        <small class="text-muted">{{ score }}/{{ total }}</small>
-                    </div>
-                </div>
-                <div>
-                    <h2 class="h5 mb-1">Score Summary</h2>
-                    <p class="mb-1">{{ feedback }}</p>
-                    <p class="mb-0">
-                        {% if score == total %}
-                            Perfect! 🎉
-                        {% elif score/total >= 0.8 %}
-                            Great job! 👍
-                        {% elif score/total >= 0.5 %}
-                            Good effort!
-                        {% else %}
-                            Keep practicing!
-                        {% endif %}
-                    </p>
-                </div>
+      <div class="card-header bg-primary text-white">
+        <h1 class="h4 mb-0">Quiz Results: {{ quiz.title }}</h1>
+        <div class="d-flex align-items-center justify-content-center mt-3">
+          <div class="progress-circle position-relative me-4">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg"
+                    d="M18 2.0845
+                       a 15.9155 15.9155 0 0 1 0 31.831
+                       a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none" stroke="#eee" stroke-width="3"/>
+              <path class="circle-fill"
+                    d="M18 2.0845
+                       a 15.9155 15.9155 0 0 1 0 31.831
+                       a 15.9155 15.9155 0 0 1 0 -31.831"
+                    fill="none" stroke="#4CC790" stroke-width="3"
+                    stroke-dasharray="{{ (score/total)*100 }},100"/>
+            </svg>
+            <div class="position-absolute top-50 start-50 translate-middle text-center">
+              <span class="h3 d-block">{{ "%.0f"|format((score/total)*100) }}%</span>
+              <small class="text-muted">{{ score }}/{{ total }}</small>
             </div>
+          </div>
+          <div>
+            <h2 class="h5 mb-1">Score Summary</h2>
+            <p class="mb-1">{{ feedback }}</p>
+            <p class="mb-0">
+              {% if score == total %}Perfect! 🎉
+              {% elif score/total >= 0.8 %}Great job! 👍
+              {% elif score/total >= 0.5 %}Good effort!
+              {% else %}Keep practicing!
+              {% endif %}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card-body">
+        {% if quiz.img %}
+          <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename=quiz.img) }}"
+                 alt="Quiz reference image"
+                 class="img-fluid rounded"
+                 style="max-height: 200px;">
+          </div>
+        {% endif %}
+
+        <h3 class="h5 mb-3">Question Review</h3>
+
+        {% if quiz.questions %}
+          {% for question in quiz.questions %}
+            {% set ua = user_answers[loop.index0] %}
+            {% set ca = question.answer %}
+
+            {% if question.type == 'wash_panel' %}
+              {# —— wash_panel —— #}
+              {% set is_correct = ua and
+                  (ua['cycle'] in ca['cycle'] if ca['cycle'] is iterable else ua['cycle']==ca['cycle']) and
+                  (ua['temperature'] in ca['temperature'] if ca['temperature'] is iterable else ua['temperature']==ca['temperature']) and
+                  (ua['spin'] in ca['spin'] if ca['spin'] is iterable else ua['spin']==ca['spin'])
+              %}
+              <div class="question-review mb-4 p-3 rounded bg-white">
+                <div class="d-flex justify-content-between mb-2">
+                  <strong>Question {{ loop.index }}:</strong>
+                  {% if is_correct %}
+                    <span class="badge bg-success">Correct</span>
+                  {% else %}
+                    <span class="badge bg-danger">Incorrect</span>
+                  {% endif %}
+                </div>
+                <p class="mb-2">{{ question.question }}</p>
+                <p class="mb-1"><strong>Your answer:</strong>
+                  <span class="{{ 'text-success' if is_correct else 'text-danger' }}">
+                    {% if ua %}
+                      Cycle: {{ ua['cycle'] }}, Temperature: {{ ua['temperature'] }}, Spin: {{ ua['spin'] }}
+                    {% else %}None{% endif %}
+                  </span>
+                </p>
+                <p class="mb-1"><strong>Correct answer:</strong>
+                  <span class="text-secondary">
+                    Cycle: {{ ca['cycle']|join(', ') if ca['cycle'] is iterable and ca['cycle'] is not string else ca['cycle'] }},
+                    Temperature: {{ ca['temperature']|join(', ') if ca['temperature'] is iterable and ca['temperature'] is not string else ca['temperature'] }},
+                    Spin: {{ ca['spin']|join(', ') if ca['spin'] is iterable and ca['spin'] is not string else ca['spin'] }}
+                  </span>
+                </p>
+              </div>
+
+            {% elif question.type == 'drag_and_drop' %}
+              {# —— drag_and_drop —— #}
+              {# Build two lists of item-lists (ignore bin names) and sort each group and the outer list #}
+              {% set ua_groups = ua.values()|map('sort')|list %}
+              {% set ua_groups = ua_groups|sort %}
+              {% set ca_groups = ca.values()|map('sort')|list %}
+              {% set ca_groups = ca_groups|sort %}
+              {% set is_correct = ua_groups == ca_groups %}
+
+              <div class="question-review mb-4 p-3 rounded bg-white">
+                <div class="d-flex justify-content-between mb-2">
+                  <strong>Question {{ loop.index }}:</strong>
+                  {% if is_correct %}
+                    <span class="badge bg-success">Correct</span>
+                  {% else %}
+                    <span class="badge bg-danger">Incorrect</span>
+                  {% endif %}
+                </div>
+                <p class="mb-2">{{ question.question }}</p>
+
+                <p class="mb-1"><strong>Your answer:</strong>
+                  <span class="{{ 'text-success' if is_correct else 'text-danger' }}">
+                    {% for grp in ua_groups %}
+                      [{{ grp|join(', ') }}]{{ '; ' if not loop.last }}
+                    {% endfor %}
+                  </span>
+                </p>
+
+                <p class="mb-1"><strong>Correct answer:</strong>
+                  <span class="text-secondary">
+                    {% for grp in ca_groups %}
+                      [{{ grp|join(', ') }}]{{ '; ' if not loop.last }}
+                    {% endfor %}
+                  </span>
+                </p>
+              </div>
+
+            {% else %}
+              {# —— multiple choice —— #}
+              {% set is_correct = ua == ca %}
+              <div class="question-review mb-4 p-3 rounded bg-white">
+                <div class="d-flex justify-content-between mb-2">
+                  <strong>Question {{ loop.index }}:</strong>
+                  {% if is_correct %}
+                    <span class="badge bg-success">Correct</span>
+                  {% else %}
+                    <span class="badge bg-danger">Incorrect</span>
+                  {% endif %}
+                </div>
+                <p class="mb-2">{{ question.question }}</p>
+                <p class="mb-1"><strong>Your answer:</strong>
+                  <span class="{{ 'text-success' if is_correct else 'text-danger' }}">
+                    {{ ua or 'None' }}
+                  </span>
+                </p>
+                <p class="mb-1"><strong>Correct answer:</strong>
+                  <span class="text-secondary">{{ ca }}</span>
+                </p>
+              </div>
+            {% endif %}
+          {% endfor %}
+
+        {% else %}
+          {# —— single-question fallback —— #}
+          {% set ua = user_answers[0] %}
+          {% set ca = quiz.answer %}
+          {% set is_correct = ua == ca %}
+          <div class="question-review mb-4 p-3 rounded bg-white">
+            <div class="d-flex justify-content-between mb-2">
+              <strong>Question 1:</strong>
+              {% if is_correct %}
+                <span class="badge bg-success">Correct</span>
+              {% else %}
+                <span class="badge bg-danger">Incorrect</span>
+              {% endif %}
+            </div>
+            <p class="mb-2">{{ quiz.question }}</p>
+            <p class="mb-1"><strong>Your answer:</strong>
+              <span class="{{ 'text-success' if is_correct else 'text-danger' }}">{{ ua or 'None' }}</span>
+            </p>
+            <p class="mb-1"><strong>Correct answer:</strong>
+              <span class="text-success">{{ ca }}</span>
+            </p>
+          </div>
+        {% endif %}
+
+        <div class="d-flex justify-content-between mt-4">
+          <a href="{{ url_for('dynamic_page', page_id=quiz.parent_id) }}"
+             class="btn btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Back to Lesson
+          </a>
+          <div>
+            <a href="{{ url_for('quiz_page', quiz_id=quiz.id) }}?retry=true"
+               class="btn btn-outline-primary me-2">
+              <i class="bi bi-arrow-repeat"></i> Retry Quiz
+            </a>
+            <a href="{{ url_for('home') }}" class="btn btn-primary">
+              <i class="bi bi-house"></i> Main Menu
+            </a>
+          </div>
         </div>
 
-        <div class="card-body">
-            {% if quiz.img %}
-                <div class="text-center mb-4">
-                    <img src="{{ url_for('static', filename=quiz.img) }}"
-                         alt="Quiz reference image"
-                         class="img-fluid rounded" style="max-height: 200px;">
-                </div>
-            {% endif %}
-        
-            <h3 class="h5 mb-3">Question Review</h3>
-        
-            {% if quiz.questions %}
-                {% for question in quiz.questions %}
-                    <div class="question-review mb-4 p-3 rounded">
-                        <div class="d-flex justify-content-between mb-2">
-                            <strong>Question {{ loop.index }}:</strong>
-                            {% if question.type == 'wash_panel' %}
-                            {% set user_answer = user_answers[loop.index0] %}
-                            {% set correct_answer = question.answer %}
-                            {% set is_correct = user_answer and
-                                (user_answer.cycle is defined and (correct_answer['cycle'] if correct_answer['cycle'] is string else user_answer['cycle'] in correct_answer['cycle'])) and
-                                (user_answer.temperature is defined and (correct_answer['temperature'] if correct_answer['temperature'] is string else user_answer['temperature'] in correct_answer['temperature'])) and
-                                (user_answer.spin is defined and (correct_answer['spin'] if correct_answer['spin'] is string else user_answer['spin'] in correct_answer['spin']))
-                            %}
-                                {% if is_correct %}
-                                    <span class="badge bg-success">Correct</span>
-                                {% else %}
-                                    <span class="badge bg-danger">Incorrect</span>
-                                {% endif %}
-                            {% else %}
-                                {% if user_answers[loop.index0] == question.answer %}
-                                    <span class="badge bg-success">Correct</span>
-                                {% else %}
-                                    <span class="badge bg-danger">Incorrect</span>
-                                {% endif %}
-                            {% endif %}
-                        </div>
-                        <p class="mb-2">{{ question.question }}</p>
-                        <p class="mb-1"><strong>Your answer:</strong>
-                            {% if question.type == 'wash_panel' %}
-                                {% if user_answers[loop.index0] %}
-                                    Cycle: {{ user_answers[loop.index0]['cycle'] }},
-                                    Temperature: {{ user_answers[loop.index0]['temperature'] }},
-                                    Spin: {{ user_answers[loop.index0]['spin'] }}
-                                {% else %}
-                                    None
-                                {% endif %}
-                            {% else %}
-                                {{ user_answers[loop.index0] }}
-                            {% endif %}
-                        </p>
-                        <p class="mb-1"><strong>Correct answer:</strong>
-                            {% if question.type == 'wash_panel' %}
-                                Cycle: {{ question.answer['cycle']|join(', ') if question.answer['cycle'] is iterable else question.answer['cycle'] }},
-                                Temperature: {{ question.answer['temperature']|join(', ') if question.answer['temperature'] is iterable else question.answer['temperature'] }},
-                                Spin: {{ question.answer['spin']|join(', ') if question.answer['spin'] is iterable else question.answer['spin'] }}
-                            {% else %}
-                                {{ question.answer }}
-                            {% endif %}
-                        </p>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <div class="question-review mb-4 p-3 rounded {% if user_answers[0] == quiz.answer %}correct-answer{% else %}incorrect-answer{% endif %}">
-                    <div class="d-flex justify-content-between mb-2">
-                        <strong>Question 1:</strong>
-                        {% if user_answers[0] == quiz.answer %}
-                            <span class="badge bg-success">Correct</span>
-                        {% else %}
-                            <span class="badge bg-danger">Incorrect</span>
-                        {% endif %}
-                    </div>
-                    <p class="mb-2">{{ quiz.question }}</p>
-                    <p class="mb-1"><strong>Your answer:</strong> {{ user_answers[0] }}</p>
-                    <p class="mb-1"><strong>Correct answer:</strong> {{ quiz.answer }}</p>
-                </div>
-            {% endif %}
-        
-            <div class="d-flex justify-content-between mt-4">
-                <a href="{{ url_for('dynamic_page', page_id=quiz.parent_id) }}"
-                   class="btn btn-outline-secondary">
-                    <i class="bi bi-arrow-left"></i> Back to Lesson
-                </a>
-                <div>
-                    <a href="{{ url_for('quiz_page', quiz_id=quiz.id) }}?retry=true"
-                       class="btn btn-outline-primary me-2">
-                        <i class="bi bi-arrow-repeat"></i> Retry Quiz
-                    </a>
-                    <a href="{{ url_for('home') }}" class="btn btn-primary">
-                        <i class="bi bi-house"></i> Main Menu
-                    </a>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </body>
-<html>
+</html>

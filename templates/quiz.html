@@ -1,74 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ quiz.title }}</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ quiz.title }}</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    .border-dashed { border-style: dashed !important; }
+    .wash-card { cursor: pointer; transition: background-color .2s; }
+    .wash-card.active { background-color: #e7f1ff; }
+  </style>
 </head>
 <body class="quiz-page">
-    <div class="container py-4">
-        <div class="quiz-container">
-            <div class="quiz-header text-center mb-4">
-                <h1>{{ quiz.title }}</h1>
-                {% if quiz.img %}
-                <img src="{{ url_for('static', filename=quiz.img) }}"
-                     alt="Quiz image" class="img-fluid my-3" style="max-height: 200px;">
-                {% endif %}
-            </div>
+  <div class="container py-4">
+    <div class="quiz-container">
+      <div class="quiz-header text-center mb-4">
+        <h1>{{ quiz.title }}</h1>
+        {% if quiz.img %}
+          <img src="{{ url_for('static', filename=quiz.img) }}"
+               alt="Quiz image"
+               class="img-fluid my-3"
+               style="max-height: 200px;">
+        {% endif %}
+      </div>
 
-            <form id="quiz-form" method="POST" action="{{ url_for('quiz_page', quiz_id=quiz.id) }}">
-                {% for question in quiz.questions %}
-                <div class="question-container {% if loop.first %}active{% endif %}"
-                     id="question-{{ loop.index0 }}">
-                    <div class="question-card p-4 mb-4 rounded shadow-sm">
-                        <h3 class="question-number mb-3">Question {{ loop.index }}</h3>
-                        <p class="question-text fs-5 mb-4">{{ question.question }}</p>
+      <form id="quiz-form"
+            method="POST"
+            action="{{ url_for('quiz_page', quiz_id=quiz.id) }}">
+        {% for question in quiz.questions %}
+          {% set qidx = loop.index0 %}
+          <div class="question-container {% if loop.first %}active{% endif %}"
+               id="question-{{ qidx }}"
+               data-index="{{ qidx }}"
+               data-type="{{ question.type }}">
+            <div class="question-card p-4 mb-4 rounded shadow-sm">
+              <h3 class="question-number mb-3">Question {{ loop.index }}</h3>
+              <p class="question-text fs-5 mb-4">{{ question.question }}</p>
 
-                        <div class="options-container">
-                            {% for option in question.options %}
-                            <div class="form-check option py-2 px-3 mb-2 rounded">
-                                <input class="form-check-input" type="radio"
-                                       name="q{{ loop.index0 }}"
-                                       id="q{{ loop.index0 }}-opt{{ loop.index0 }}"
-                                       value="{{ option }}" required>
-                                <label class="form-check-label w-100 ps-3"
-                                       for="q{{ loop.index0 }}-opt{{ loop.index0 }}">
-                                    {{ option }}
-                                </label>
+              <div class="options-container">
+                {# — wash_panel as cards — #}
+                {% if question.type == "wash_panel" %}
+                <div class="quiz-wash-cards row mb-2">
+                    {# loop over exactly the keys you have #}
+                    {% for key, label in [
+                         ("cycle",       "Cycle"),
+                         ("temp",        "Temperature"),
+                         ("spin",        "Spin")
+                       ] %}
+                      <div class="col mb-3">
+                        <h6 class="text-uppercase text-muted">{{ label }}</h6>
+                        <div class="d-flex flex-wrap">
+                          {% for opt in question["option-" ~ key][0].split(',') %}
+                            {% set val = opt.strip() %}
+                            {% if val %}
+                            <div class="wash-card border border-secondary rounded px-3 py-2 me-2 mb-2"
+                                 data-type="{{ key }}"
+                                 data-index="{{ qidx }}"
+                                 data-value="{{ val }}">
+                              {{ val }}
                             </div>
-                            {% endfor %}
+                            {% endif %}
+                          {% endfor %}
                         </div>
-                        <div class="validation-message mt-3">
-                            <i class="bi bi-exclamation-circle-fill"></i> Please select an answer
+                        <input type="hidden"
+                               name="selected-{{ key }}-{{ qidx }}"
+                               id="selected-{{ key }}-{{ qidx }}"
+                               required>
+                      </div>
+                    {% endfor %}
+                  </div>
+                  <div class="quiz-feedback feedback mt-2 text-danger" style="display:none;"></div>
+                {# — drag_and_drop — #}
+                {% elif question.type == "drag_and_drop" %}
+                  <div class="drag-drop-question quiz-drag-drop mb-4">
+                    <div class="quiz-drag-items mb-3">
+                      {% for item in question["items"] %}
+                        <div class="quiz-drag-item d-inline-block m-2"
+                             draggable="true"
+                             data-item-id="{{ item.id }}"
+                             data-group="{{ item.group }}">
+                          {% if item.img %}
+                            <img src="{{ url_for('static', filename=item.img) }}"
+                                 alt="{{ item.text }}"
+                                 class="img-fluid rounded"
+                                 style="max-width:80px;">
+                          {% else %}
+                            {{ item.text }}
+                          {% endif %}
                         </div>
+                        <input type="hidden"
+                               name="drag_result_{{ item.id }}"
+                               id="drag_result_{{ item.id }}"
+                               required>
+                      {% endfor %}
                     </div>
-                </div>
-                {% endfor %}
 
-                <div class="progress-indicator">
-                    <span id="current-question">1</span> of <span id="total-questions">{{ quiz.questions|length }}</span>
-                </div>
+                    <div class="quiz-bins row g-2 mb-3">
+                      {% for bin_idx in range(question.num_bins) %}
+                        <div class="col-6">
+                          <div class="quiz-bin border-1 border-dashed rounded p-3 text-center"
+                               data-bin="bin{{ bin_idx }}">
+                           <div class="w-full"> Bin {{ bin_idx + 1 }}</div>
+                          </div>
+                        </div>
+                      {% endfor %}
+                    </div>
 
-                <div class="navigation-controls">
-                    <button type="button" class="btn btn-outline-secondary" id="prev-btn" disabled>
-                        <i class="bi bi-chevron-left"></i> Previous
+                    <button type="button"
+                            class="quiz-check-drag-btn btn btn-outline-primary mb-2">
+                      Check Answer
                     </button>
-                    <button type="button" class="btn btn-primary" id="next-btn">
-                        Next <i class="bi bi-chevron-right"></i>
-                    </button>
-                    <button type="submit" class="btn btn-success" id="submit-btn" style="display:none;">
-                        Submit Quiz <i class="bi bi-check-circle"></i>
-                    </button>
-                </div>
-            </form>
+                    <div class="quiz-feedback feedback text-center" style="display:none;"></div>
+                  </div>
+
+                {# — normal multiple choice — #}
+                {% else %}
+                  {% for option in question.options %}
+                    <div class="form-check option py-2 px-3 mb-2 rounded">
+                      <input class="form-check-input"
+                             type="radio"
+                             name="q{{ qidx }}"
+                             id="q{{ qidx }}-opt{{ loop.index }}"
+                             value="{{ option }}"
+                             required>
+                      <label class="form-check-label w-100 ps-3"
+                             for="q{{ qidx }}-opt{{ loop.index }}">
+                        {{ option }}
+                      </label>
+                    </div>
+                  {% endfor %}
+                {% endif %}
+              </div>
+
+              <div class="validation-message mt-3 text-danger" style="display:none;">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                Please select an answer
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+        <div class="progress-indicator mb-3">
+          <span id="current-question">1</span> of
+          <span id="total-questions">{{ quiz.questions|length }}</span>
         </div>
-    </div>
 
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <div class="navigation-controls d-flex justify-content-between">
+          <button type="button"
+                  class="btn btn-outline-secondary"
+                  id="prev-btn"
+                  disabled>
+            <i class="bi bi-chevron-left"></i> Previous
+          </button>
+          <div>
+            <button type="button"
+                    class="btn btn-primary"
+                    id="next-btn">
+              Next <i class="bi bi-chevron-right"></i>
+            </button>
+            <button type="submit"
+                    class="btn btn-success"
+                    id="submit-btn"
+                    style="display:none;">
+              Submit Quiz <i class="bi bi-check-circle"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Bootstrap Icons & jQuery -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script src="{{ url_for('static', filename='quiz.js') }}"></script>
 </body>
 </html>

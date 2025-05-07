@@ -738,3 +738,16 @@ button:disabled {
   padding: 10px 20px;
 }
 
+
+.wash-card {
+  cursor: pointer;
+  transition: background-color .2s;
+}
+.wash-card.active {
+  background-color:rgb(7, 98, 225) !important;
+  color:#fff;
+}
+
+.quiz-bin{
+  min-height: 200px;
+}
