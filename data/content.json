@@ -17,6 +17,34 @@
                 {
                     "title": "Reading labels",
                     "id": "reading-labels-mainpage"
+                },
+                {
+                    "title": "Final quiz",
+                    "id": "final-quiz"
+                }
+            ]
+        },
+        {
+            "id":"final-quiz",
+            "title": "Final quiz",
+            "type":"lesson",
+            "description": "Congratulations on completing the course! Now it’s time to test your knowledge. This quiz will cover everything you’ve learned about sorting laundry, wash settings, and reading labels. Good luck!",
+            "children": [
+                {
+                    "title": "Sorting by color quiz",
+                    "id": "sorting-color-final-quiz"
+                },
+                {
+                    "title": "Sorting by fabric type quiz",
+                    "id": "sorting-fabric-final-quiz"
+                },
+                {
+                    "title": "Wash settings review quiz",
+                    "id": "wash-settings-final-quiz"
+                },
+                {
+                    "title": "Reading labels review quiz",
+                    "id": "reading-labels-final-quiz"
                 }
             ]
         },
@@ -510,37 +538,44 @@
                         {
                             "id": "1",
                             "img": "imgs/quiz/sort-color-quiz/1.jpg",
-                            "group": "1"
+                            "group": "1",
+                            "text": "white t-shirt"
                         },
                         {
                             "id": "2",
                             "img": "imgs/quiz/sort-color-quiz/2.jpg",
-                            "group": "2"
+                            "group": "2",
+                            "text": "black jeans"
                         },
                         {
                             "id": "3",
                             "img": "imgs/quiz/sort-color-quiz/3.jpg",
-                            "group": "2"
+                            "group": "2", 
+                            "text": "red t-shirt"
                         },
                         {
                             "id": "4",
                             "img": "imgs/quiz/sort-color-quiz/4.webp",
-                            "group": "1"
+                            "group": "1", 
+                            "text": "white pants"
                         },
                         {
                             "id": "5",
                             "img": "imgs/quiz/sort-color-quiz/5.webp",
-                            "group": "2"
+                            "group": "2",
+                            "text": "blue t-shirt"
                         },
                         {
                             "id": "7",
                             "img": "imgs/quiz/sort-color-quiz/7.jpg",
-                            "group": "2"
+                            "group": "2",
+                            "text": "red flannel"
                         },
                         {
                             "id": "9",
                             "img": "imgs/quiz/sort-color-quiz/9.jpg",
-                            "group": "2"
+                            "group": "2",
+                            "text": "blue jeans"
                         }
                     ],
                     "answer": {
@@ -567,14 +602,6 @@
                 }
             ]
         },
-
-
-
-
-
-
-
-
         {
             "id": "wash-settings-temp-quiz",
             "title": "temp quiz 3",
@@ -587,51 +614,6 @@
                 "C"
             ],
             "answer": "B"
-        },
-        {
-            "id": "sorting-color-quiz", 
-            "title": "Sort by color quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "items": [
-                {
-                    "id": "1",
-                    "img": "imgs/quiz/sort-color-quiz/1.jpg"
-                },
-                {
-                    "id": "2",
-                    "img": "imgs/quiz/sort-color-quiz/2.jpg"
-                },
-                {
-                    "id": "3",
-                    "img": "imgs/quiz/sort-color-quiz/3.jpg"
-                },
-                {
-                    "id": "4",
-                    "img": "imgs/quiz/sort-color-quiz/4.webp"
-                },
-                {
-                    "id": "5",
-                    "img": "imgs/quiz/sort-color-quiz/5.webp"
-                },
-                {
-                    "id": "6",
-                    "img": "imgs/quiz/sort-color-quiz/6.jpg"
-                },
-                {
-                    "id": "7",
-                    "img": "imgs/quiz/sort-color-quiz/7.jpg"
-                },
-                {
-                    "id": "8",
-                    "img": "imgs/quiz/sort-color-quiz/8.jpg"
-                },
-                {
-                    "id": "9",
-                    "img": "imgs/quiz/sort-color-quiz/9.jpg"
-                }
-            ],
-            "answer": [[1,4], [3,5,7], [6,8], [2,9]]
         },
         {
             "id": "label-quiz",
@@ -710,6 +692,194 @@
                 "C"
             ],
             "answer": "B"
+        },
+        {
+            "id": "sorting-color-final-quiz", 
+            "title": "Sort by color quiz",
+            "type": "quiz",
+            "question": "Sort these items by color into two bins.",
+            "quiz-type": "multiple",
+            "questions": [
+                {
+                    "question": "Drag and drop test...",
+                    "type": "drag_and_drop",
+                    "num_bins" : 2,
+                    "items": [
+                        {
+                            "id": "1",
+                            "text": "white cotton t-shirt"
+                        },
+                        {
+                            "id": "2",
+                            "text": "black cotton t-shirt"
+                        },
+                        {
+                            "id": "3",
+                            "text": "blue denim jeans"
+                        },
+                        {
+                            "id": "4",
+                            "text": "dark green exercise pants"
+                        },
+                        {
+                            "id": "5",
+                            "text": "pastel yellow silk shirt"
+                        },
+                        {
+                            "id": "6",
+                            "text": "white linen pants"
+                        }, 
+                        {
+                            "id": "7",
+                            "text": "dark grey cargo shorts"
+                        }, 
+                        {
+                            "id": "8",
+                            "text": "red bedsheet"
+                        }
+                    ],
+                    "answer": [[1,5,6], [2,3,4,7,8]]
+                }
+            ]
+        },
+        {
+            "id": "sorting-fabric-final-quiz", 
+            "title": "Sort by fabric type quiz",
+            "type": "quiz",
+            "question": "Great! Now, what if you wanted to sort them by fabric type instead? Sort these items into three bins: delicates, cottons, and heavy-duty.",
+            "quiz-type": "multiple",
+            "questions": [
+                {
+                    "question": "Drag and drop test...",
+                    "type": "drag_and_drop",
+                    "num_bins" : 3,
+                    "items": [
+                        {
+                            "id": "1",
+                            "text": "white cotton t-shirt"
+                        },
+                        {
+                            "id": "2",
+                            "text": "black cotton t-shirt"
+                        },
+                        {
+                            "id": "3",
+                            "text": "blue denim jeans"
+                        },
+                        {
+                            "id": "4",
+                            "text": "dark green exercise pants"
+                        },
+                        {
+                            "id": "5",
+                            "text": "pastel yellow silk shirt"
+                        },
+                        {
+                            "id": "6",
+                            "text": "white linen pants"
+                        }, 
+                        {
+                            "id": "7",
+                            "text": "dark grey cargo shorts"
+                        }, 
+                        {
+                            "id": "8",
+                            "text": "red bedsheet"
+                        }
+                    ],
+                    "answer": [[1,2,6], [4,5], [3,7,8]]
+                }
+            ]
+        },
+        {
+            "id": "wash-settings-final-quiz",
+            "title": "Wash settings: review quiz",
+            "type": "quiz",
+            "questions": [
+                {
+                    "question": "What settings would you use for a load of heavily soiled colored cotton clothing and jeans?",
+                    "type": "wash_panel",
+                   "option-cycle": [
+                        "Heavy Duty, Normal, Delicate"
+                    ],
+                    "option-temp": [
+                        "Cold, Warm, Hot"
+                    ],
+                    "option-spin": [
+                        "Low,  Medium, High"
+                    ],
+                    "answer": {
+                        "cycle": "Heavy Duty",
+                        "temperature": "Warm",
+                        "spin": "High"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "reading-labels-final-quiz",
+            "title": "Reading labels: quiz",
+            "type": "quiz",
+            "quiz-type": "multiple",
+            "img":"imgs/quiz/label-quiz/1.png",
+            "questions": [
+                {
+                    "question": "How should you machine wash this?",
+                    "options": [
+                        "Cold, gentle cycle",
+                        "Warm, gentle cycle",
+                        "Hot, gentle cycle",
+                        "Cold, normal cycle/perm press",
+                        "Warm, normal cycle/perm press",
+                        "Hot, normal cycle/perm press",
+                        "Cold, any cycle",
+                        "Warm, any cycle",
+                        "Hot, any cycle"
+                    ],
+                    "answer": "Cold, any cycle"
+                },
+                {
+                    "question": "What bleach should you use?",
+                    "options": [
+                        "No bleach",
+                        "Non-chlorine bleach",
+                        "Chlorine bleach"
+                    ],
+                    "answer": "Non-chlorine bleach"
+                },
+                {
+                    "question": "How should you dry this item?",
+                    "options": [
+                        "Tumble dry low",
+                        "Tumble dry medium",
+                        "Tumble dry high",
+                        "Line dry",
+                        "Lay flat to dry",
+                        "Do not tumble dry"
+                    ],
+                    "answer": "Tumble dry low"
+                },
+                {
+                    "question": "How should you iron this item?",
+                    "options": [
+                        "Do not iron",
+                        "Iron on low heat",
+                        "Iron on medium heat",
+                        "Iron on high heat"
+                    ],
+                    "answer": "Iron on low heat"
+                },
+                {
+                    "question": "How should you dry clean this item?",
+                    "options": [
+                        "Do not dry clean",
+                        "Dry clean with any solvent",
+                        "Dry clean with any solvent except tetrachlorethylene",
+                        "Dry clean with tetrachlorethylene only"
+                    ],
+                    "answer": "Do not dry clean"
+                }
+            ]
         }
     ]
 }

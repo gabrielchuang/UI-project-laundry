@@ -112,7 +112,8 @@
                                             <div class="drag-item" draggable="true" id="item-{{ loop.index }}-{{ loop.index0 }}" data-group="{{ item.group }}">
                                                 {% if item.img %}
                                                     <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.text }}" class="drag-image">
-                                                {% else %}
+                                                {% endif %}
+                                                {% if item.text %}
                                                     {{ item.text }}
                                                 {% endif %}
                                             </div>
