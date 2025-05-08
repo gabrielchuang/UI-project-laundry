@@ -1,27 +1,3 @@
-function checkAnswers() {
-    console.log("Checking answers...");
-    const form = document.getElementById('quiz-form');
-    const questions = form.querySelectorAll('.question-block');
-    let allAnswered = true;
-
-    questions.forEach((questionBlock, index) => {
-        const selectedOption = questionBlock.querySelector(`input[name="q${index}"]:checked`);
-        if (!selectedOption) {
-            allAnswered = false;
-            questionBlock.style.border = "2px solid red";
-        } else {
-            questionBlock.style.border = "none";
-        }
-    });
-
-    if (!allAnswered) {
-        alert("Please select an answer for all questions.");
-        return false; // Prevent form submission
-    }
-
-    return true; // Allow form submission
-}
-
 $(document).ready(function () {
     // Quiz page initialization
     const quizId = window.location.pathname.split('/').pop();
@@ -38,21 +14,98 @@ $(document).ready(function () {
         $('#prev-btn').click(goToPreviousQuestion);
     }
 
+    // Modify the quiz submission behavior to return to menu after submission
+    $('.quiz-submit-btn, button[type="submit"]').on('click', function (e) {
+        // Prevent the default form submission
+        e.preventDefault();
+
+        // Get the moduleId or quizId from wherever it's available
+        let moduleId = '';
+        if (window.location.pathname.includes('/page/')) {
+            moduleId = window.location.pathname.split('/page/').pop();
+        } else if (window.location.pathname.includes('/quiz/')) {
+            moduleId = window.location.pathname.split('/quiz/').pop();
+        }
+
+        if (validateAllQuestions()) {
+            // Show a congratulatory message
+            alert("Quiz completed successfully!");
+
+            // Mark this module as completed
+            const completedModules = JSON.parse(localStorage.getItem('completedModules') || '[]');
+            if (!completedModules.includes(moduleId)) {
+                completedModules.push(moduleId);
+                localStorage.setItem('completedModules', JSON.stringify(completedModules));
+            }
+
+            // Redirect back to menu with completion parameter
+            window.location.href = `/?completed=${moduleId}`;
+        }
+    });
+
+    // Helper function to validate all questions in a quiz
+    function validateAllQuestions() {
+        let allValid = true;
+
+        // For standard multiple choice questions
+        $('.question-container:not(.wash-panel-question):not(.drag-drop-question)').each(function () {
+            const isAnswered = $(this).find('input[type="radio"]:checked').length > 0;
+            if (!isAnswered) {
+                $(this).find('.validation-message').show();
+                allValid = false;
+            }
+        });
+
+        // For wash panel questions
+        $('.wash-panel-question').each(function () {
+            const index = $(this).data('index');
+            const selectedCycle = $(`input[name="selected-cycle-${index}"]`).val();
+            const selectedSpin = $(`input[name="selected-spin-${index}"]`).val();
+            const selectedTemp = $(`input[name="selected-temp-${index}"]`).val();
+
+            if (!selectedCycle || !selectedSpin || !selectedTemp) {
+                $(this).find('.feedback').text('Please select one option for each setting.').css('color', 'red').show();
+                allValid = false;
+            }
+        });
+
+        // For drag and drop questions
+        $('.drag-drop-question').each(function () {
+            const bins = $(this).find('.bin');
+            let allItemsPlaced = true;
+
+            // Check if all items are placed in bins
+            const totalItems = $(this).find('.drag-item').length;
+            let placedItems = 0;
+
+            bins.each(function () {
+                placedItems += $(this).find('.drag-item').length;
+            });
+
+            if (placedItems < totalItems) {
+                $(this).find('.feedback').text('Please place all items into bins.').css('color', 'red').show();
+                allValid = false;
+            }
+        });
+
+        return allValid;
+    }
+
     // Handle embedded quizzes in lesson pages
-    $('.embedded-quiz-form').each(function() {
+    $('.embedded-quiz-form').each(function () {
         const $form = $(this);
         const $questions = $form.find('.question-container');
         const totalEmbeddedQuestions = $questions.length;
         let currentEmbeddedQuestion = 0;
 
         // Set up navigation handlers for this embedded quiz
-        $form.find('.quiz-next-btn').click(function() {
+        $form.find('.quiz-next-btn').click(function () {
             if (validateEmbeddedQuestion($form, currentEmbeddedQuestion)) {
                 navigateEmbeddedQuestion($form, currentEmbeddedQuestion + 1);
             }
         });
 
-        $form.find('.quiz-prev-btn').click(function() {
+        $form.find('.quiz-prev-btn').click(function () {
             navigateEmbeddedQuestion($form, currentEmbeddedQuestion - 1);
         });
 
@@ -78,41 +131,32 @@ $(document).ready(function () {
             $form.find('.current-quiz-question').text(currentEmbeddedQuestion + 1);
         }
 
-        // Helper function to validate current question in embedded quiz
-        /*
         function validateEmbeddedQuestion($form, index) {
-            const $currentQuestion = $form.find('.question-container').eq(index);
-            const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
-            $currentQuestion.find('.validation-message').toggle(!isAnswered);
-            return isAnswered;
-        } */
-            function validateEmbeddedQuestion($form, index) {
-                const $currentQuestion = $form.find('.question-container, .wash-panel-question, .drag-drop-question').eq(index);
-            
-                if ($currentQuestion.hasClass('wash-panel-question')) {
-                    const idx = $currentQuestion.data('index');  // Use data-index from HTML
-                    const selectedCycle = $(`input[name="selected-cycle-${idx}"]`).val();
-                    const selectedSpin = $(`input[name="selected-spin-${idx}"]`).val();
-                    const selectedTemp = $(`input[name="selected-temp-${idx}"]`).val();
-            
-                    if (!selectedCycle || !selectedSpin || !selectedTemp) {
-                        $currentQuestion.find('.feedback').text('Please select one option for each setting.').css('color', 'red').show();
-                        return false;
-                    } else {
-                        $currentQuestion.find('.feedback').hide();
-                        return true;
-                    }
-                } else if ($currentQuestion.hasClass('drag-drop-question')) {
-                    // You can add validation here if needed
-                    return true;
+            const $currentQuestion = $form.find('.question-container, .wash-panel-question, .drag-drop-question').eq(index);
+
+            if ($currentQuestion.hasClass('wash-panel-question')) {
+                const idx = $currentQuestion.data('index');  // Use data-index from HTML
+                const selectedCycle = $(`input[name="selected-cycle-${idx}"]`).val();
+                const selectedSpin = $(`input[name="selected-spin-${idx}"]`).val();
+                const selectedTemp = $(`input[name="selected-temp-${idx}"]`).val();
+
+                if (!selectedCycle || !selectedSpin || !selectedTemp) {
+                    $currentQuestion.find('.feedback').text('Please select one option for each setting.').css('color', 'red').show();
+                    return false;
                 } else {
-                    // Normal multiple-choice
-                    const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
-                    $currentQuestion.find('.validation-message').toggle(!isAnswered);
-                    return isAnswered;
+                    $currentQuestion.find('.feedback').hide();
+                    return true;
                 }
-            }            
-            
+            } else if ($currentQuestion.hasClass('drag-drop-question')) {
+                // You can add validation here if needed
+                return true;
+            } else {
+                // Normal multiple-choice
+                const isAnswered = $currentQuestion.find('input[type="radio"]:checked').length > 0;
+                $currentQuestion.find('.validation-message').toggle(!isAnswered);
+                return isAnswered;
+            }
+        }
 
         // Helper function to update navigation in embedded quiz
         function updateEmbeddedNavigation($form, current, total) {
@@ -187,7 +231,7 @@ $(document).ready(function () {
     }
 
     // Add interactivity to quiz options
-    $('.option').on('click', function() {
+    $('.option').on('click', function () {
         // Remove active class from all options in this question
         const $questionCard = $(this).closest('.question-card');
         $questionCard.find('.option').removeClass('active');
@@ -200,7 +244,7 @@ $(document).ready(function () {
     });
 
     // Add animation delays for question cards
-    $('.question-card, .question-review').each(function(index) {
+    $('.question-card, .question-review').each(function (index) {
         $(this).css('animation-delay', index * 0.1 + 's');
     });
 
@@ -216,40 +260,40 @@ $(document).ready(function () {
         const slides = getSlides();
         $(".slide").removeClass("active");
         $("#slide" + (index + 1)).addClass("active");
-    
+
         $(".dot").removeClass("active");
         $('.dot[data-slide="' + (index + 1) + '"]').addClass("active");
-    
+
         $("#prev-btn").prop("disabled", index === 0);
         $("#next-btn").prop("disabled", index === totalSlides - 1);
-    
+
         currentSlide = index;
-    
+
         if (!shouldTrackProgress) return;
-    
+
         const slidesArray = Array.from(slides);
         const slideEl = slidesArray[index];
         const slideId = slideEl.getAttribute("data-slide-id");
-    
+
         // Send progress for current slide to log time on the *previous* slide
         $.ajax({
             url: '/save-progress',
             type: 'POST',
             contentType: 'application/json',
-            data: JSON.stringify({ id: slideId }),
-            success: function(res) {
+            data: JSON.stringify({id: slideId}),
+            success: function (res) {
                 console.log('Progress saved:', res);
-            
+
                 const prevIndex = index - 1;
                 const prevItem = document.querySelector(`#sidebar-item-${prevIndex}`);
                 if (!prevItem) return;
-            
+
                 const statusEl = prevItem.querySelector('.sidebar-status');
                 if (!statusEl) return;
-            
+
                 const elapsedSeconds = Math.round(res.timeSpent || 0);
                 let timeStr;
-            
+
                 if (elapsedSeconds < 60) {
                     timeStr = `${elapsedSeconds}s`;
                 } else if (elapsedSeconds < 3600) {
@@ -257,36 +301,36 @@ $(document).ready(function () {
                 } else {
                     timeStr = `${Math.floor(elapsedSeconds / 3600)}h`;
                 }
-            
+
                 statusEl.innerHTML = `<div class="d-flex align-items-center"><span class="time">${timeStr}</span></div>`;
                 statusEl.style.display = 'inline';
                 statusEl.style.color = 'green';
                 const sidebarItem = statusEl.closest('li');
-                sidebarItem.style.backgroundColor = '#e6ffe6'; 
+                sidebarItem.style.backgroundColor = '#e6ffe6';
                 sidebarItem.style.borderRadius = '6px';
 
             },
-            error: function(err) {
+            error: function (err) {
                 console.error('Progress save failed:', err);
             }
         });
     }
-    
+
 
     // Navigation handlers
-    $("#next-btn").on('click', function() {
+    $("#next-btn").on('click', function () {
         if (currentSlide < totalSlides - 1) {
             showSlide(currentSlide + 1, true);
         }
     });
 
-    $("#prev-btn").on('click', function() {
+    $("#prev-btn").on('click', function () {
         if (currentSlide > 0) {
-            showSlide(currentSlide - 1,true);
+            showSlide(currentSlide - 1, true);
         }
     });
 
-    $(".dot").on('click', function() {
+    $(".dot").on('click', function () {
         const target = $(this).data("slide") - 1;
         showSlide(target, true);
     });
@@ -296,7 +340,7 @@ $(document).ready(function () {
         showSlide(0, true);
     }
 
-    $('.quiz-option').on('click', function() {
+    $('.quiz-option').on('click', function () {
         $(this).siblings('.quiz-option').removeClass('correct incorrect');
 
         if ($(this).data('correct') === 'true') {
@@ -320,9 +364,9 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
     let usedGroups = new Set();
     let allCorrect = true;
 
-    bins.each(function() {
+    bins.each(function () {
         let groupsInBin = new Set();
-        $(this).find('.drag-item').each(function() {
+        $(this).find('.drag-item').each(function () {
             const group = $(this).data('group');
             console.log("Group in bin: ", group);
             groupsInBin.add(group);
@@ -363,7 +407,7 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
     }
 }
 
-$(document).on('click', '.check-drag-btn', function() {
+$(document).on('click', '.check-drag-btn', function () {
     const questionContainer = $(this).closest('.drag-drop-question');
     checkDragAndDropFlexibleGrouping(questionContainer);
 });
@@ -397,66 +441,61 @@ $(document).ready(function () {
         }
     });
 
+    //ADDED FOR WASH PANEL
+    $(document).on('click', '.wash-option', function () {
+        let type = $(this).data('type'); // "cycle", "spin", or "temp"
+        let parent = $(this).parent();   // the div with wash-options
+        let index = parent.attr('id').split('-').pop(); // grabs the index from the ID
 
+        parent.find('.wash-option').removeClass('active');
+        $(this).addClass('active');
 
+        let value = $(this).data('value');
+        $(`input[name="selected-${type}-${index}"]`).val(value);  // This is the key!
 
-//ADDED FOR WASH PANEL
-$(document).on('click', '.wash-option', function () {
-    let type = $(this).data('type'); // "cycle", "spin", or "temp"
-    let parent = $(this).parent();   // the div with wash-options
-    let index = parent.attr('id').split('-').pop(); // grabs the index from the ID
+        // tracking
+        $(".sidebar-status").hide();
 
-    parent.find('.wash-option').removeClass('active');
-    $(this).addClass('active');
+        showSlide(0, false);
 
-    let value = $(this).data('value');
-    $(`input[name="selected-${type}-${index}"]`).val(value);  // This is the key!
+        $("#next-btn").click(() => {
+            const nextIndex = currentSlide + 1;
+            if (nextIndex < totalSlides) {
+                $(".sidebar-status").eq(nextIndex).show();
+                showSlide(nextIndex, true);
+            }
+        });
 
-    // tracking
+        $("#prev-btn").click(() => {
+            const prevIndex = currentSlide - 1;
+            if (prevIndex >= 0) {
+                showSlide(prevIndex, false);
+            }
+        });
 
-      $(".sidebar-status").hide();
-
-      showSlide(0, false);
-  
-      $("#next-btn").click(() => {
-          const nextIndex = currentSlide + 1;
-          if (nextIndex < totalSlides) {
-              $(".sidebar-status").eq(nextIndex).show();
-              showSlide(nextIndex, true);
-          }
-      });
-  
-      $("#prev-btn").click(() => {
-          const prevIndex = currentSlide - 1;
-          if (prevIndex >= 0) {
-              showSlide(prevIndex, false);
-          }
-      });
-  
-      $("#sidebar-tracker li").each(function (index) {
-          $(this).click(() => {
-              $(".sidebar-status").eq(index).show();
-              showSlide(index, true);
-          });
-      });
-});
-    
+        $("#sidebar-tracker li").each(function (index) {
+            $(this).click(() => {
+                $(".sidebar-status").eq(index).show();
+                showSlide(index, true);
+            });
+        });
+    });
 
     // When Check Answer button is clicked
     $(document).on('click', '.check-wash-btn', function () {
         let container = $(this).closest('.wash-panel-question');
-        
+
         const index = container.data('index');  // <<<<< fix here
         const selectedCycle = $(`input[name="selected-cycle-${index}"]`).val();
         const selectedSpin = $(`input[name="selected-spin-${index}"]`).val();
         const selectedTemp = $(`input[name="selected-temp-${index}"]`).val();
         let feedback = container.find('.feedback');
-    
+
         if (!selectedCycle || !selectedSpin || !selectedTemp) {
             feedback.text("Please select one option for each category.").css('color', 'red').show();
             return;
         }
-    
+
         let correctAnswer;
         try {
             correctAnswer = JSON.parse(container.attr("data-answer"));
@@ -464,10 +503,10 @@ $(document).on('click', '.wash-option', function () {
             feedback.text("Missing or invalid answer key.").css('color', 'red').show();
             return;
         }
-    
+
         const match = (selected, correct) =>
             Array.isArray(correct) ? correct.includes(selected) : selected === correct;
-    
+
         if (
             match(selectedCycle, correctAnswer.cycle) &&
             match(selectedSpin, correctAnswer.spin) &&
@@ -478,6 +517,4 @@ $(document).on('click', '.wash-option', function () {
             feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
         }
     });
-    
-    
-});    
+});

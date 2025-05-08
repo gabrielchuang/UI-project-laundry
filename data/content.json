@@ -2,9 +2,9 @@
     "content": [
         {
             "id": "mainpage",
-            "title": "Laundry Basics",
+            "title": "Welcome to the Laundry Basics course!",
             "type": "menu", 
-            "description": "Welcome to the Laundry Basics course! This course is designed to help you learn the fundamentals of laundry care. By the end of this course, you’ll be able to sort your laundry, choose the right wash settings, and understand how to read clothing labels.",
+            "description": "This course is designed to help you learn the fundamentals of laundry care. By the end of this course, you’ll be able to sort your laundry, choose the right wash settings, and understand how to read clothing labels.",
             "children": [
                 {
                     "title": "Sorting your laundry",
@@ -17,6 +17,11 @@
                 {
                     "title": "Reading labels",
                     "id": "reading-labels-mainpage"
+                },
+                {
+                    "title": "Final Quiz",
+                    "id": "final-quiz-mainpage"
+
                 }
             ]
         },
@@ -189,6 +194,22 @@
         {
             "id": "sorting-soil-main",
             "title": "Sorting by soil level",
+            "type": "lesson",
+            "description":"s",
+            "children": [
+                {
+                    "title": "Sorting level",
+                    "id": "sorting-soil-1"
+                },
+                {
+                    "title": "Sorting by soil level: quiz",
+                    "id": "sorting-soil-quiz"
+                }
+            ]
+        },
+        {
+            "id": "sorting-soil-1",
+            "title": "Sorting level",
             "type": "content",
             "description": "Sorting by soil level helps ensure that heavily soiled items are cleaned properly without damaging other clothes.",
             "images": [
@@ -198,6 +219,22 @@
                 }
             ]
         },
+
+
+        {
+            "id": "sorting-soil-quiz",
+            "title": "temp quiz 3",
+            "type": "quiz",
+            "quiz-type": "multiple",
+            "question": "Temporary quiz question",
+            "options": [
+                "A",
+                "B",
+                "C"
+            ],
+            "answer": "B"
+        },
+
         {
             "id": "wash-settings-mainpage",
             "title": "Wash settings",
@@ -418,14 +455,6 @@
 
 
 
-
-
-
-
-
-
-
-
         {
             "id": "wash-settings-quiz-1",
             "title": "Wash settings quiz",
@@ -567,8 +596,6 @@
                 }
             ]
         },
-
-
 
 
 

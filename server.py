@@ -5,10 +5,6 @@ import os
 
 app = Flask(__name__)
 
-# Load quizzes once
-with open(os.path.join("data", "quizzes.json")) as f:
-    quizzes_data = json.load(f)["quizzes"]
-
 with open(os.path.join("data", "content.json")) as f:
     content_data = json.load(f)["content"]
     content_data = {x["id"]: x for x in content_data}
@@ -29,6 +25,10 @@ def home():
     
 @app.route('/page/<page_id>')
 def dynamic_page(page_id):
+    with open(os.path.join("data", "content.json")) as f:
+        content_data = json.load(f)["content"]
+        content_data = {x["id"]: x for x in content_data}
+
     user = users.get("user1")  # TODO: Gervais - replace with actual user session
     # clearing prev timestamp on new page
     if "progress" in user and user["progress"]:
@@ -59,57 +59,61 @@ def dynamic_page(page_id):
         return render_template("lesson2.html", lesson=page, content=[page])
 
 
+@app.route('/quiz/<quiz_id>/results')
+def quiz_results(quiz_id):
+    quiz = next((q for q in content_data if q["id"] == quiz_id), None)
+
+    # Get results from query parameters
+    score = request.args.get('score', type=int)
+    total = request.args.get('total', type=int)
+    percentage = request.args.get('percentage', type=float)
+    feedback = request.args.get('feedback', '')
+
+    user_answers = {}
+    if 'questions' in quiz:
+        for i in range(len(quiz['questions'])):
+            user_answers[i] = "User's answer"
+    else:
+        user_answers[0] = "User's answer"
+
+    return render_template('quiz-result.html',
+                           quiz=quiz,
+                           score=score,
+                           total=total,
+                           percentage=percentage,
+                           feedback=feedback,
+                           user_answers=user_answers)
+
 
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
 def quiz_page(quiz_id):
-    # Find quiz in quizzes_data first
-    quiz = next((q for q in quizzes_data if q["id"] == quiz_id), None)
-
-    # If not found, check content_data
-    if not quiz:
-        quiz = content_data.get(quiz_id)
-        if not quiz or quiz['type'] != 'quiz':
-            abort(404)
-
-    # Set default parent_id if not specified
-    if 'parent_id' not in quiz:
-        quiz['parent_id'] = 'mainpage'
-
-    # Always use single-question format
-    quiz['display_mode'] = 'single_question'
+    quiz = next((q for q in content_data if q["id"] == quiz_id), None)
 
     if request.method == 'POST':
         score = 0
         user_answers = {}
+        total_questions = len(quiz.get('questions', [1]))
 
-        # Debug information
-        print("Form data received:", request.form)
-
+        # Calculate score
         if 'questions' in quiz:
             for i, question in enumerate(quiz['questions']):
                 question_key = f'q{i}'
                 user_answer = request.form.get(question_key)
                 user_answers[i] = user_answer
 
-                print(f"Question {i + 1}: User answer: '{user_answer}', Correct answer: '{question['answer']}'")
-
                 if user_answer == question['answer']:
                     score += 1
         else:
-            # Handle single question format
+            # Single question format
             user_answer = request.form.get('q0')
             user_answers[0] = user_answer
-            correct_answer = quiz.get('answer')
-
-            print(f"Single question: User answer: '{user_answer}', Correct answer: '{correct_answer}'")
-
-            if user_answer == correct_answer:
+            if user_answer == quiz.get('answer'):
                 score = 1
 
-        # Calculate total questions for percentage
-        total_questions = len(quiz.get('questions', [1]))  # Default to 1 for single question
-
+        # Calculate percentage
         percentage = (score / total_questions) * 100
+
+        # Generate feedback
         if percentage == 100:
             feedback = "Perfect score! You've mastered this topic."
         elif percentage >= 80:
@@ -119,13 +123,12 @@ def quiz_page(quiz_id):
         else:
             feedback = "Keep practicing! Review the lesson and try again."
 
-        return render_template('quiz-result.html',
-                               quiz=quiz,
-                               score=score,
-                               total=total_questions,
-                               percentage=percentage,
-                               user_answers=user_answers,
-                               feedback=feedback)
+        return jsonify({
+            'score': score,
+            'total': total_questions,
+            'percentage': percentage,
+            'feedback': feedback
+        })
 
     return render_template('quiz.html', quiz=quiz)
 

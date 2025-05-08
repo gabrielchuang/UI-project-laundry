@@ -65,7 +65,6 @@
 
             <h3 class="h5 mb-3">Question Review</h3>
 
-            <!-- Add this inside the question review section -->
             {% if quiz.questions %}
                 {% for question in quiz.questions %}
                     <div class="question-review mb-4 p-3 rounded {% if user_answers[loop.index0] == question.answer %}correct-answer{% else %}incorrect-answer{% endif %}">
@@ -97,13 +96,21 @@
                     <p class="mb-1"><strong>Correct answer:</strong> {{ quiz.answer }}</p>
                 </div>
             {% endif %}
+            <!-- Replace the navigation section with this -->
             <div class="d-flex justify-content-between mt-4">
-                <a href="{{ url_for('dynamic_page', page_id=quiz.parent_id) }}"
-                   class="btn btn-outline-secondary">
-                    <i class="bi bi-arrow-left"></i> Back to Lesson
-                </a>
+                {% if quiz.parent_id %}
+                    <a href="{{ url_for('dynamic_page', page_id=quiz.parent_id) }}"
+                       class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Lesson
+                    </a>
+                {% else %}
+                    <a href="{{ url_for('home') }}"
+                       class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> Back to Menu
+                    </a>
+                {% endif %}
                 <div>
-                    <a href="{{ url_for('quiz_page', quiz_id=quiz.id) }}?retry=true"
+                    <a href="{{ url_for('quiz_page', quiz_id=quiz.id) }}"
                        class="btn btn-outline-primary me-2">
                         <i class="bi bi-arrow-repeat"></i> Retry Quiz
                     </a>
