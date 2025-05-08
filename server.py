@@ -59,12 +59,12 @@ def dynamic_page(page_id):
         slides = [content_data[child['id']] for child in page['children'] if child['id'] in content_data]
         print("Requested page:", page_id)
         print("Slides loaded:", [s['id'] for s in slides])
-        return render_template("lesson.html", lesson=page, content=slides)
+        return render_template("lesson.html", lesson=page, content=slides, nextpage=page['next_page'])
 
     else:
         # standalone content pages (no children)
         print("Requested single content page:", page_id)
-        return render_template("lesson.html", lesson=page, content=[page])
+        return render_template("lesson.html", lesson=page, content=[page], nextpage=page['next_page'])
     
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
 def quiz_page(quiz_id):

@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                 
-                                    <button type="button" class="btn check-btn">Check Answer</button>
+                                    <button type="button" class="btn check-btn check-wash-btn">Check Answer</button>
                                     <div class="feedback" style="display:none;"></div>
                                 
                                     <!-- Hidden inputs to store selected answers -->
@@ -134,7 +134,7 @@
                                         {% endfor %}
                                     </div>
 
-                                    <button type="button" class="check-btn btn">Check Answer</button>
+                                    <button type="button" class="check-drag-btn btn">Check Answer</button>
                                     <div class="feedback" style="display:none;"></div>
                                 </div>
                                 {% else %}
@@ -154,6 +154,10 @@
                                                 </div>
                                             {% endfor %}
                                         </div>
+                                        <div class="quiz-actions">
+                                            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+                                        </div>
+        
                                         <div class="validation-message">
                                             Please select an answer
                                         </div>
@@ -218,18 +222,16 @@
             <button id="next-btn">Next</button>
         </div>
 
-        <div class="progress my-2">
+        <div class="progress_bar my-2">
             {% for slide in content %}
                 <span class="dot" data-slide="{{ loop.index }}"></span>
             {% endfor %}
         </div>
-        <div class="mb-5">
-            <button class="btn btn-outline-secondary btn-lg font-16"
-                    onclick="history.back()">
-                &larr; Back
-            </button>
-        </div>
+
+        <a id="continue-btn" href="{{ nextpage }}" class="btn btn-primary" style="display: none;">Continue</a>
+        
     </div>
 </div>
 
+    
 {% endblock %}

@@ -16,7 +16,7 @@
       {% if menu.images %}
         <div class="row justify-content-center my-4">
           <div class="col-md-6 text-center">
-            <img src="{{ url_for('static', filename='imgs/' ~ menu.images[0]) }}"
+            <img src="{{ url_for('static', filename=menu.images[0].src) }}"
                  alt="{{ menu.title }}"
                  class="rounded sorting--bg-image">
           </div>

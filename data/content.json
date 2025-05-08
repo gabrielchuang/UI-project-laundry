@@ -28,6 +28,7 @@
             "id":"final-quiz",
             "title": "Final quiz",
             "type":"lesson",
+            "next_page": "congratulations",
             "description": "Congratulations on completing the course! Now it’s time to test your knowledge. This quiz will cover everything you’ve learned about sorting laundry, wash settings, and reading labels. Good luck!",
             "children": [
                 {
@@ -55,7 +56,7 @@
             "description": "Sorting your laundry is a the secret to keeping your clothes fresh, clean, and drama-free. By sorting, you’ll save time, protect your favorite fits, and make everything last longer. It’s like giving your clothes VIP treatment—and your wallet (and wardrobe) will thank you.",
             "images":[
                     {
-                        "src": "dirty-clothes.png", 
+                        "src": "imgs/colors.png", 
                         "alt": "temp alt"
                     }
             ],
@@ -78,6 +79,7 @@
             "id": "sorting-color-main",
             "title": "Sorting by color",
             "type": "lesson",
+            "next_page": "sorting-mainpage",
             "description": "Sorting by color is the first step to keeping your clothes looking fresh and vibrant. By separating whites, darks, and colors, you’ll prevent dye transfer and keep your clothes looking their best.",
             "children": [
                 {
@@ -95,10 +97,6 @@
                 {
                     "title": "drag and drop quiz test",
                     "id": "sorting-color-quiz-dragdrop"
-                },
-                {
-                    "title": "Sorting by color: quiz",
-                    "id": "sorting-temp-quiz"
                 }
             ]
         },
@@ -142,6 +140,7 @@
             "id": "sorting-fabric-main",
             "title": "Sorting by fabric type",
             "type": "lesson",
+            "next_page": "sorting-mainpage",
             "description": "Sorting clothes by fabric type helps protect your clothes and improves wash efficiency. ",
             "children": [
                 {
@@ -218,6 +217,7 @@
             "id": "sorting-soil-main",
             "title": "Sorting by soil level",
             "type": "content",
+            "next_page": "mainpage2",
             "description": "Sorting by soil level helps ensure that heavily soiled items are cleaned properly without damaging other clothes.",
             "images": [
                 {
@@ -230,6 +230,7 @@
             "id": "wash-settings-mainpage",
             "title": "Wash settings",
             "type": "lesson",
+            "next_page": "mainpage3",
             "description": "Choosing the right wash settings is crucial for keeping your clothes looking their best. By selecting the appropriate cycle, temperature, and spin speed, you’ll ensure that your clothes are cleaned effectively without causing damage.",
             "children": [
                 {
@@ -303,6 +304,7 @@
             "id": "reading-labels-mainpage", 
             "title": "Reading labels",
             "type": "lesson",
+            "next_page": "mainpage4",
             "description": "Reading clothing labels is essential for understanding how to care for your clothes. Labels provide important information about fabric content, care instructions, and wash settings. By learning how to read labels, you’ll be able to keep your clothes looking their best.",
             "children": [
                 {
@@ -517,7 +519,7 @@
             "title": "temp quiz",
             "type": "quiz",
             "quiz-type": "multiple",
-            "question": "Temporary quiz question",
+            "question": "",
             "options": [
                 "A",
                 "B",
@@ -587,18 +589,19 @@
         },
         {
             "id": "sorting-temp2-quiz",
-            "title": "temp quiz",
+            "title": "Fabric types checkpoint",
             "type": "quiz",
             "quiz-type": "multiple",
             "questions": [
                 {
-                    "question": "CHOOSE ONE OF THE FOLLOWING",
+                    "question": "Which of these are in a different category from the others?",
                     "options": [
-                        "A",
-                        "B",
-                        "C"
+                        "Silk",
+                        "Cotton",
+                        "Jeans",
+                        "Towels"
                     ],
-                    "answer": "B"
+                    "answer": "Silk"
                 }
             ]
         },
@@ -909,6 +912,20 @@
                     "answer": "Do not dry clean"
                 }
             ]
+        },
+        {
+            "id": "congratulations",
+            "title": "Congratulations!",
+            "type": "content",
+            "next_page": "mainpage5",
+            "description": "Congratulations on completing the course!",
+            "images": [
+                {
+                    "src": "imgs/washing-machine.webp",
+                    "alt": "an image of a washing machine"
+                }
+            ]
         }
     ]
+
 }

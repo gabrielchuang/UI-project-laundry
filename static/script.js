@@ -117,6 +117,7 @@ $(document).ready(function () {
 });
 
 function checkDragAndDropFlexibleGrouping(questionContainer) {
+    console.log("Checking drag and drop flexible grouping...");
     let bins = $(questionContainer).find('.bin');
     let allGroups = new Set();
     let usedGroups = new Set();
@@ -298,9 +299,49 @@ $(document).ready(function () {
         } else {
             feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
         }
-    });
-
-    
-    
-    
+    });    
 });    
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const slides = document.querySelectorAll(".slide");
+    const nextBtn = document.getElementById("next-btn");
+    const prevBtn = document.getElementById("prev-btn");
+    const continueBtn = document.getElementById("continue-btn");
+    let currentSlide = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.classList.toggle("active", i === index);
+        });
+
+        // Update visibility of Previous button
+        //prevBtn.style.display = index === 0 ? "none" : "inline-block";
+
+        // Hide Next button and show Continue on last slide
+        if (index === slides.length - 1) {
+            //nextBtn.style.display = "none";
+            continueBtn.style.display = "inline-block";
+        } else {
+            //nextBtn.style.display = "inline-block";
+            continueBtn.style.display = "none";
+        }
+
+        currentSlide = index;
+    }
+
+    prevBtn.onclick = function () {
+        if (currentSlide > 0) {
+            showSlide(currentSlide - 1);
+        }
+    };
+
+    nextBtn.onclick = function () {
+        if (currentSlide < slides.length - 1) {
+            showSlide(currentSlide + 1);
+        }
+    };
+
+    // Initialize
+    showSlide(0);
+});

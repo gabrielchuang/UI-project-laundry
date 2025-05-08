@@ -160,8 +160,7 @@ body {
     border-color: #053a74;
   }
   .sorting--bg-image{
-    width: 500px;
-    height: 350px;
+    width: 70%;
   }
 
    .flip-card {
@@ -199,7 +198,6 @@ body {
   width: 90%;
   max-width: 1400px;
   margin: 0 auto;
-  background-color: rgb(185, 204, 230);
   border-radius: 10px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
@@ -356,11 +354,16 @@ button:disabled {
   cursor: not-allowed;
 }
 
+#continue-btn {
+  float: right;
+}
+
 /* Fix for progress dots spacing and alignment */
-.progress {
+.progress_bar {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #fff;
   gap: 8px;
 }
 
@@ -838,4 +841,9 @@ button:disabled {
 
 .back-link:hover {
   text-decoration: none;
+}
+
+.laundry-icon { 
+  width: 30%;
+  border: 5px solid #1d3f8b
 }
