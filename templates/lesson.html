@@ -144,14 +144,17 @@
                                     <div class="question-card p-4 mb-4 rounded shadow-sm">
                                         <h3>Question {{ loop.index }}</h3>
                                         <p>{{ question.question }}</p>
+                                        
+
                                         <div class="options-container">
                                             {% for option in question.options %}
-                                                <div class="form-check option py-2 px-3 mb-2 rounded">
-                                                    <input type="radio" name="q{{ loop.index0 }}"
-                                                           id="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}"
-                                                           value="{{ option }}">
-                                                    <label for="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}">{{ option }}</label>
-                                                </div>
+                                                <label class="form-check option py-2 px-3 mb-2 rounded" style="cursor: pointer;">
+                                                    <input type="radio" name="q0"
+                                                        id="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}"
+                                                        value="{{ option }}" class="me-2">
+                                                    {{ option }}
+                                                </label>
+                                
                                             {% endfor %}
                                         </div>
                                         <div class="quiz-actions">
