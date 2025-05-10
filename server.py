@@ -38,7 +38,7 @@ def dynamic_page(page_id):
 
     if page_id[:8] == 'mainpage':
         i = int(page_id[8:])
-        chapters = [["Sorting", "/page/sorting-mainpage"], ["Wash settings", "/page/wash-settings-mainpage"], ["Reading labels", "/page/reading-labels-mainpage"], ["Final Quiz", "/page/final-quiz"]]
+        chapters = [["Sorting", "/page/sorting-mainpage2"], ["Wash settings", "/page/wash-settings-mainpage"], ["Reading labels", "/page/reading-labels-mainpage"], ["Final Quiz", "/page/final-quiz"]]
         chapters = [{"name": c[0], "page": c[1]} for c in chapters]
         return render_template("outline.html", content=content_data.values(), iter=i, chapters=chapters)
 
@@ -56,7 +56,7 @@ def dynamic_page(page_id):
 
     elif 'children' in page and page['children']:
         # lessons with children
-        slides = [content_data[child['id']] for child in page['children'] if child['id'] in content_data]
+        slides = [content_data[child] for child in page['children'] if child in content_data]
         print("Requested page:", page_id)
         print("Slides loaded:", [s['id'] for s in slides])
         return render_template("lesson.html", lesson=page, content=slides, nextpage=page['next_page'])
@@ -117,26 +117,26 @@ def quiz_page(quiz_id):
 
                 print(f"Wash panel {i} -> User: {user_answer} | Correct: {correct}")
 
-            elif q_type == 'drag_and_drop':
-                bin_assignments = {}
-                for item in question['items']:
-                    item_id = item['id']
-                    bin_val = request.form.get(f'drag_result_{item_id}')
-                    if bin_val:
-                        bin_assignments.setdefault(bin_val, []).append(item_id)
+            # elif q_type == 'drag_and_drop':
+            #     bin_assignments = {}
+            #     for item in question['items']:
+            #         item_id = item['id']
+            #         bin_val = request.form.get(f'drag_result_{item_id}')
+            #         if bin_val:
+            #             bin_assignments.setdefault(bin_val, []).append(item_id)
 
-                user_groups = [sorted(v) for v in bin_assignments.values()]
-                correct_groups = [sorted(v) for v in question.get('answer', {}).values()]
+            #     user_groups = [sorted(v) for v in bin_assignments.values()]
+            #     correct_groups = [sorted(v) for v in question.get('answer', {}).values()]
 
-                user_groups.sort()
-                correct_groups.sort()
+            #     user_groups.sort()
+            #     correct_groups.sort()
 
-                user_answer = bin_assignments
+            #     user_answer = bin_assignments
 
-                if user_groups == correct_groups:
-                    score += 1
+            #     if user_groups == correct_groups:
+            #         score += 1
 
-                print(f"Drag & Drop {i} -> User groups: {user_groups} | Correct groups: {correct_groups}")
+            #     print(f"Drag & Drop {i} -> User groups: {user_groups} | Correct groups: {correct_groups}")
 
 
             else:
@@ -165,15 +165,8 @@ def quiz_page(quiz_id):
         print(f"Final score: {score}/{total_questions}")
         print(f"User answers: {user_answers}")
 
-        return render_template('quiz-result.html',
-                               quiz=quiz,
-                               score=score,
-                               total=total_questions,
-                               percentage=percentage,
-                               user_answers=user_answers,
-                               feedback=feedback)
 
-    return render_template('quiz.html', quiz=quiz)
+    #return render_template('quiz.html', quiz=quiz)
 
 
 # TODO: Gervais - to make timing persistent on refresh and maintain it on UI progress sidebar

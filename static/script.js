@@ -299,7 +299,36 @@ $(document).ready(function () {
         } else {
             feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
         }
-    });    
+    });
+
+    document.querySelectorAll('.question-container-mcq').forEach(container => {
+        const form = container.querySelector('.question-card');
+        const submitBtn = form.querySelector('.btn.btn-primary');
+        const optionsContainer = form.querySelector('.options-container');
+        const feedbackEl = form.querySelector('.feedback-message');
+        const validationMsg = form.querySelector('.validation-message');
+    
+        submitBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+    
+          const selected = optionsContainer.querySelector('input[type="radio"]:checked');
+          const correctAnswer = optionsContainer.dataset.answer;
+    
+          if (!selected) {
+            validationMsg.style.display = 'block';
+            feedbackEl.textContent = '';
+            return;
+          }
+    
+          validationMsg.style.display = 'none';
+          const userAnswer = selected.value;
+    
+          feedbackEl.textContent = userAnswer === correctAnswer
+            ? '✅ Correct!'
+            : `❌ Incorrect. Try again!`;
+          feedbackEl.style.color = userAnswer === correctAnswer ? 'green' : 'red';
+        });
+      });
 });    
 
 

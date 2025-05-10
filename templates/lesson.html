@@ -37,8 +37,6 @@
                         <p>{{ slide.description }}</p>
                     {% endif %}
 
-                    <form id="quiz-form-{{ slide.id }}" class="embedded-quiz-form" method="POST"
-                          action="{{ url_for('quiz_page', quiz_id=slide.id) }}">
                         {% if slide.questions %}
                             <!-- Progress indicator for embedded quiz -->
                              {% if slide.questions|length > 1 %}
@@ -139,14 +137,12 @@
                                 </div>
                                 {% else %}
                                 <!-- Default question type -->
-                                <div class="question-container {% if loop.first %}active{% endif %}"
+                                <div class="question-container-mcq {% if loop.first %}active{% endif %}"
                                      id="quiz-{{ slide.id }}-question-{{ loop.index0 }}">
                                     <div class="question-card p-4 mb-4 rounded shadow-sm">
                                         <h3>Question {{ loop.index }}</h3>
                                         <p>{{ question.question }}</p>
-                                        
-
-                                        <div class="options-container">
+                                        <div class="options-container" data-answer="{{ question.answer }}">
                                             {% for option in question.options %}
                                                 <label class="form-check option py-2 px-3 mb-2 rounded" style="cursor: pointer;">
                                                     <input type="radio" name="q0"
@@ -154,11 +150,13 @@
                                                         value="{{ option }}" class="me-2">
                                                     {{ option }}
                                                 </label>
-                                
                                             {% endfor %}
+                                            <div class="feedback-message mt-2 fw-bold"></div>
                                         </div>
+
+
                                         <div class="quiz-actions">
-                                            <button type="submit" class="btn btn-primary">Submit Quiz</button>
+                                            <button type="submit" class="btn btn-primary">Check answer</button>
                                         </div>
         
                                         <div class="validation-message">
@@ -168,38 +166,9 @@
                                 </div>
                                 {% endif %}
                             {% endfor %}
-
-                            <!-- Navigation controls for embedded quiz -->
-                             {% if slide.questions|length > 1 %}
-                                <div class="quiz-navigation-controls">
-                                    <button type="button" class="quiz-prev-btn btn" disabled>Previous</button>
-                                    <button type="button" class="quiz-next-btn btn">Next</button>
-                                    <button type="submit" class="quiz-submit-btn btn" style="display:none;">Submit Quiz</button>
-                                </div>
-                            {% endif %}
                         {% else %}
-                            <!-- Single question format -->
-                            <div class="question-container active">
-                                <div class="question-card p-4 mb-4 rounded shadow-sm">
-                                    <h3>Question 1</h3>
-                                    <p>{{ slide.question }}</p>
-                                    <div class="options-container">
-                                        {% for option in slide.options %}
-                                            <div class="form-check option py-2 px-3 mb-2 rounded">
-                                                <input type="radio" name="q0"
-                                                       id="quiz-{{ slide.id }}-q0-opt{{ loop.index }}"
-                                                       value="{{ option }}">
-                                                <label for="quiz-{{ slide.id }}-q0-opt{{ loop.index }}">{{ option }}</label>
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                </div>
-                                <div class="quiz-actions">
-                                    <button type="submit" class="btn btn-primary">Submit Quiz</button>
-                                </div>
-                            </div>
+                            <div class="alert alert-warning">No questions available for this quiz.</div>
                         {% endif %}
-                    </form>
                 </div>
             {% else %}
                 <!-- Regular content slide -->

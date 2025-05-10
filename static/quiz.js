@@ -62,11 +62,11 @@ $(function(){
     $('#prev-btn').click(function(){
       showQuestion(current - 1);
     });
-    $('#quiz-form').on('submit', function(e){
-      if(!validateCurrent()){
-        e.preventDefault();
-      }
-    });
+    //$('#quiz-form').on('submit', function(e){
+    //  if(!validateCurrent()){
+    //    e.preventDefault();
+    //  }
+    //});
   
     if(total) showQuestion(0);
   
@@ -150,4 +150,3 @@ $(function(){
       }
     });
   });
-  

@@ -8,7 +8,7 @@
             "children": [
                 {
                     "title": "Sorting your laundry",
-                    "id": "sorting-mainpage"
+                    "id": "sorting-mainpage2"
                 },
                 {
                     "title": "Wash settings",
@@ -31,22 +31,10 @@
             "next_page": "congratulations",
             "description": "Congratulations on completing the course! Now it’s time to test your knowledge. This quiz will cover everything you’ve learned about sorting laundry, wash settings, and reading labels. Good luck!",
             "children": [
-                {
-                    "title": "Sorting by color quiz",
-                    "id": "sorting-color-final-quiz"
-                },
-                {
-                    "title": "Sorting by fabric type quiz",
-                    "id": "sorting-fabric-final-quiz"
-                },
-                {
-                    "title": "Wash settings review quiz",
-                    "id": "wash-settings-final-quiz"
-                },
-                {
-                    "title": "Reading labels review quiz",
-                    "id": "reading-labels-final-quiz"
-                }
+                "sorting-color-final-quiz",
+                "sorting-fabric-final-quiz",
+                "wash-settings-final-quiz",
+                "reading-labels-final-quiz"
             ]
         },
         {
@@ -76,33 +64,54 @@
             ]
         }, 
         {
+            "id": "sorting-mainpage2", 
+            "title": "Sorting your laundry", 
+            "type": "lesson", 
+            "next_page": "mainpage2",
+            "description": "temp description",
+            "children": [
+                "sorting-color-main",
+                "sorting-whites",
+                "sorting-darks",
+                "sorting-colors",
+                "sorting-color-quiz-dragdrop",
+                "sorting-fabric-main",
+                "sorting-delicates",
+                "sorting-cottons",
+                "sorting-synthetics",
+                "sorting-heavy",
+                "sorting-temp2-quiz",
+                "sorting-soil-main"
+            ]
+
+        },
+        {
+            "id": "sorting-mainpage3", 
+            "title": "Sorting your laundry", 
+            "type": "lesson", 
+            "next_page": "mainpage2",
+            "description": "temp description",
+            "children": [
+                "sorting-temp2-quiz",
+                "sorting-soil-main"
+            ]
+
+        },
+        {
             "id": "sorting-color-main",
             "title": "Sorting by color",
-            "type": "lesson",
-            "next_page": "sorting-mainpage",
+            "type": "content",
             "description": "Sorting by color is the first step to keeping your clothes looking fresh and vibrant. By separating whites, darks, and colors, you’ll prevent dye transfer and keep your clothes looking their best.",
-            "children": [
+            "images": [
                 {
-                    "title": "Sorting whites",
-                    "id": "sorting-whites"
-                },
-                {
-                    "title": "Sorting darks",
-                    "id": "sorting-darks"
-                },
-                {
-                    "title": "Sorting colors",
-                    "id": "sorting-colors"
-                },
-                {
-                    "title": "drag and drop quiz test",
-                    "id": "sorting-color-quiz-dragdrop"
+                    "src": "imgs/colors.png",
+                    "alt": "Sorting colors"
                 }
             ]
         },
         {
             "id": "sorting-whites",
-            "title": "Sorting whites",
+            "title": "Sorting by color: whites",
             "type": "content",
             "description": "Sorting whites is all about keeping your light-colored clothes looking bright and fresh. By separating whites from colors, you’ll prevent dye transfer and keep your whites looking their best. Whites typically include white shirts, socks, undergarments, and white sheets. They can often be washed with pastels.",
             "images": [
@@ -114,7 +123,7 @@
         },
         {
             "id": "sorting-darks",
-            "title": "Sorting darks",
+            "title": "Sorting by color: darks",
             "type": "content",
             "description": "Dark clothes include grays, blues, blacks, and other dark colors, as well as pants, jeans, and sweatshirts.",
             "images": [
@@ -126,7 +135,7 @@
         },
         {
             "id": "sorting-colors",
-            "title": "Sorting colors",
+            "title": "Sorting by color: colors",
             "type": "content",
             "description": "Brightly colored clothes can be washed together. This often includes athletic wear, t-shirts, and similar.",
             "images": [
@@ -139,35 +148,12 @@
         {
             "id": "sorting-fabric-main",
             "title": "Sorting by fabric type",
-            "type": "lesson",
-            "next_page": "sorting-mainpage",
-            "description": "Sorting clothes by fabric type helps protect your clothes and improves wash efficiency. ",
-            "children": [
-                {
-                    "title": "Delicates and Lightweight fabrics",
-                    "id": "sorting-delicates"
-                },
-                {
-                    "title": "Cotton and natural fabrics",
-                    "id": "sorting-cottons"
-                },
-                { 
-                    "title": "Synthetics and blends",
-                    "id": "sorting-synthetics"
-                },
-                {
-                    "title": "Heavy and bulky items",
-                    "id": "sorting-heavy"
-                },
-                {
-                    "title": "Sorting by fabric type: quiz",
-                    "id": "sorting-temp2-quiz"
-                }
-            ]
+            "type": "content",
+            "description": "Sorting clothes by fabric type helps protect your clothes and improves wash efficiency. "
         },
         {
             "id": "sorting-delicates",
-            "title": "Delicates and Lightweight fabrics",
+            "title": "Sorting by fabric type: delicates",
             "type": "content",
             "description": "Delicate fabrics include lace, silk, and other lightweight materials. These items should be washed on a gentle cycle to prevent damage.",
             "images": [
@@ -179,7 +165,7 @@
         },
         {
             "id": "sorting-cottons",
-            "title": "Cotton and natural fabrics",
+            "title": "Sorting by fabric type: cottons",
             "type": "content",
             "description": "Cotton and natural fabrics are durable and can be washed together. This includes items like t-shirts, jeans, and towels.",
             "images": [
@@ -191,7 +177,7 @@
         },
         {
             "id": "sorting-synthetics",
-            "title": "Synthetics and blends",
+            "title": "Sorting by fabric type: synthetics",
             "type": "content",
             "description": "Synthetic fabrics include polyester, nylon, and blends. These items can be washed together on a regular cycle.",
             "images": [
@@ -203,7 +189,7 @@
         },
         {
             "id": "sorting-heavy",
-            "title": "Heavy and bulky items",
+            "title": "Sorting by fabric type: bulky items",
             "type": "content",
             "description": "Heavy items, like comforters, rugs, coats, pillows, etc. should be washed separately to prevent damage to other items. These items can be washed on a heavy-duty cycle.",
             "images": [
@@ -233,22 +219,10 @@
             "next_page": "mainpage3",
             "description": "Choosing the right wash settings is crucial for keeping your clothes looking their best. By selecting the appropriate cycle, temperature, and spin speed, you’ll ensure that your clothes are cleaned effectively without causing damage.",
             "children": [
-                {
-                    "title": "Wash cycle",
-                    "id": "wash-cycle"
-                },
-                {
-                    "title": "Water temperature",
-                    "id": "water-temperature"
-                },
-                {
-                    "title": "Spin speed",
-                    "id": "spin-speed"
-                },
-                {
-                    "title": "Wash settings: quiz",
-                    "id": "wash-settings-quiz-1"
-                }
+                "wash-cycle",
+                "water-temperature",
+                "spin-speed",
+                "wash-settings-quiz-1"
             ]
         },
         
@@ -307,35 +281,14 @@
             "next_page": "mainpage4",
             "description": "Reading clothing labels is essential for understanding how to care for your clothes. Labels provide important information about fabric content, care instructions, and wash settings. By learning how to read labels, you’ll be able to keep your clothes looking their best.",
             "children": [
-                {
-                    "title": "Reading labels: intro",
-                    "id": "reading-labels-intro"
-                },
-                {
-                    "title": "Label symbols: wash",
-                    "id": "label-wash"
-                },
-                {
-                    "title": "Label symbols: bleach",
-                    "id": "label-bleach"
-                },
-                {
-                    "title": "Label symbols: dry",
-                    "id": "label-dry"
-                },
-                {
-                    "title": "Label symbols: iron",
-                    "id": "label-iron"
-                },
-                {
-                    "title": "Label symbols: dry clean",
-                    "id": "label-dryclean"
-                },
-                {
-                    "title": "Reading labels: quiz",
-                    "id": "label-quiz"
-                }
-            ]
+                "reading-labels-intro",
+                "label-wash",
+                "label-bleach",
+                "label-dry",
+                "label-iron",
+                "label-dryclean",
+                "label-quiz"
+        ]   
         },
         {
             "id": "reading-labels-intro",
@@ -589,11 +542,12 @@
         },
         {
             "id": "sorting-temp2-quiz",
-            "title": "Fabric types checkpoint",
+            "title": "Checkpoint: Sorting by fabric type",
             "type": "quiz",
             "quiz-type": "multiple",
             "questions": [
                 {
+                    "qid": "sorting-fabric-mcq",
                     "question": "Which of these are in a different category from the others?",
                     "options": [
                         "Silk",
