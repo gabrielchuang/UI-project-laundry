@@ -19,7 +19,7 @@ users = {
     "user1": {
         "name": "Joe Doe",
         "progress": [],  # stores visited slide/content IDs
-        "completed": 0  # stores completed quiz IDs
+        "completed": 1  # stores completed quiz IDs
     }
 }
 
@@ -131,6 +131,12 @@ def get_progress():
         "user": user_id,
         "progress": serialized
     })
+
+@app.route("/reset-progress", methods=["POST"])
+def reset_progress():
+    users["user1"]["completed"] = 1
+    users["user1"]["progress"] = []
+    return jsonify({"status": "success", "message": "Progress reset"})
 
 
 if __name__ == '__main__':

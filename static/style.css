@@ -728,6 +728,12 @@ button:disabled {
   background-color: #ffe6e6;
 }
 
+#reset-progress-btn {
+  color: black;
+  border: none;
+  float: inline-end;
+  padding: 10px 20px;
+}
 
 /* Wash Panel */
 .wash-panel {

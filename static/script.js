@@ -26,11 +26,10 @@ $(document).ready(function () {
         const type = slides[index].getAttribute('data-slide-type');
         const isQuiz = type === "quiz";
         console.log("isQuiz: ", isQuiz);
-        $("#next-btn").prop("disabled", isQuiz);  // lock only if quiz
-      
+     
 
         $("#prev-btn").prop("disabled", index === 0);
-        $("#next-btn").prop("disabled", index === totalSlides - 1);
+        $("#next-btn").prop("disabled", index === totalSlides - 1 || isQuiz);
     
         currentSlide = index;
 
@@ -81,6 +80,24 @@ $(document).ready(function () {
             }
         });
     }
+
+    const btn = document.getElementById("reset-progress-btn");
+    if (btn) {
+      btn.addEventListener("click", function () {
+        if (confirm("Are you sure you want to reset your progress?")) {
+          fetch("/reset-progress", { method: "POST" })
+            .then(res => res.json())
+            .then(data => {
+              alert(data.message);
+              window.location.href = "/page/mainpage1";  // ✅ redirect here
+            })
+            .catch(err => {
+              alert("Error resetting progress");
+              console.error(err);
+            });
+        }
+      });
+    }
     
 
     // Navigation handlers
@@ -122,6 +139,153 @@ $(document).ready(function () {
                 .removeClass('correct').addClass('incorrect').show();
         }
     });
+
+    let draggedItem = null;
+
+    $(document).on('dragstart', '.drag-item', function (e) {
+        draggedItem = $(this);
+        setTimeout(() => {
+            $(this).addClass('dragging');
+        }, 0);
+    });
+
+    $(document).on('dragend', '.drag-item', function (e) {
+        $(this).removeClass('dragging');
+    });
+
+    $(document).on('dragover', '.bin', function (e) {
+        e.preventDefault();
+    });
+
+    $(document).on('drop', '.bin', function (e) {
+        e.preventDefault();
+        if (draggedItem) {
+            $(this).append(draggedItem);
+            const binName = $(this).data('bin');
+            const itemId = draggedItem.attr('id');
+            // Save the drop result
+            $(`#drag-result-${itemId}`).val(binName);
+        }
+    });
+
+
+  //ADDED FOR WASH PANEL
+    $(document).on('click', '.wash-option', function () {
+    let type = $(this).data('type'); // "cycle", "spin", or "temp"
+    let parent = $(this).parent();   // the div with wash-options
+    //let index = parent.attr('id').split('-').pop(); // grabs the index from the ID
+    let container = $(this).closest('.wash-panel-question');
+    let index = container.data('index');
+
+    parent.find('.wash-option').removeClass('active');
+    $(this).addClass('active');
+
+    let value = $(this).data('value');
+    $(`input[name="selected-${type}-${index}"]`).val(value); // This is the key!
+
+    // tracking
+
+      $(".sidebar-status").hide();
+
+      showSlide(0, false);
+  
+      $("#next-btn").click(() => {
+          const nextIndex = currentSlide + 1;
+          if (nextIndex < totalSlides) {
+              $(".sidebar-status").eq(nextIndex).show();
+              showSlide(nextIndex, true);
+          }
+      });
+  
+      $("#prev-btn").click(() => {
+          const prevIndex = currentSlide - 1;
+          if (prevIndex >= 0) {
+              showSlide(prevIndex, false);
+          }
+      });
+  
+      $("#sidebar-tracker li").each(function (index) {
+          $(this).click(() => {
+              $(".sidebar-status").eq(index).show();
+              showSlide(index, true);
+          });
+      });
+    });
+
+
+    // When Check Answer button is clicked
+
+    $(document).on('click', '.check-wash-btn', function () {
+        let container = $(this).closest('.wash-panel-question');
+        
+        const index = container.data('index');  // Get the index
+        const selectedCycle = $(`input[name="selected-cycle-${index}"]`).val();
+        const selectedSpin = $(`input[name="selected-spin-${index}"]`).val()
+        const selectedTemp = $(`input[name="selected-temp-${index}"]`).val();
+        let feedback = container.find('.feedback');
+    
+        if (!selectedCycle || !selectedSpin || !selectedTemp) {
+            feedback.text("Please select one option for each category.").css('color', 'red').show();
+            return;
+        }
+    
+        let correctAnswer;
+        try {
+            correctAnswer = container.data('answer'); // Use .data() to parse JSON automatically
+        } catch (e) {
+            feedback.text("Missing or invalid answer key.").css('color', 'red').show();
+            return;
+        }
+    
+        const match = (selected, correct) =>
+            Array.isArray(correct) ? correct.includes(selected) : selected === correct;
+    
+        if (
+            match(selectedCycle, correctAnswer.cycle) &&
+            match(selectedSpin, correctAnswer.spin) &&
+            match(selectedTemp, correctAnswer.temperature)
+        ) {
+            feedback.text("Correct! ✅").css('color', 'green').show();
+            $('#next-btn').prop('disabled', false);  // ✅ enable next
+        } else {
+            feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
+            $('#next-btn').prop('disabled', true);   // 🔒 stay locked
+        }
+    });
+
+    document.querySelectorAll('.question-container-mcq').forEach(container => {
+        const form = container.querySelector('.question-card');
+        const submitBtn = form.querySelector('.btn.btn-primary');
+        const optionsContainer = form.querySelector('.options-container');
+        const feedbackEl = form.querySelector('.feedback-message');
+        const validationMsg = form.querySelector('.validation-message');
+    
+        submitBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+    
+          const selected = optionsContainer.querySelector('input[type="radio"]:checked');
+          const correctAnswer = optionsContainer.dataset.answer;
+    
+          if (!selected) {
+            validationMsg.style.display = 'block';
+            feedbackEl.textContent = '';
+            return;
+          }
+    
+          validationMsg.style.display = 'none';
+          const userAnswer = selected.value;
+    
+          if (userAnswer === correctAnswer) {
+            feedbackEl.textContent = '✅ Correct!';
+            feedbackEl.style.color = 'green';
+            $('#next-btn').prop('disabled', false);  // ✅ enable next
+          } else {
+            feedbackEl.textContent = `❌ Incorrect. Try again!`;
+            feedbackEl.style.color = 'red';
+            $('#next-btn').prop('disabled', true);   // 🔒 stay locked
+          }
+        });
+      });
 });
 
 function checkDragAndDropFlexibleGrouping(questionContainer) {
@@ -205,155 +369,6 @@ $(document).on('click', '.check-drag-btn', function() {
     const questionContainer = $(this).closest('.drag-drop-question');
     checkDragAndDropFlexibleGrouping(questionContainer);
 });
-
-$(document).ready(function () { 
-    let draggedItem = null;
-
-    $(document).on('dragstart', '.drag-item', function (e) {
-        draggedItem = $(this);
-        setTimeout(() => {
-            $(this).addClass('dragging');
-        }, 0);
-    });
-
-    $(document).on('dragend', '.drag-item', function (e) {
-        $(this).removeClass('dragging');
-    });
-
-    $(document).on('dragover', '.bin', function (e) {
-        e.preventDefault();
-    });
-
-    $(document).on('drop', '.bin', function (e) {
-        e.preventDefault();
-        if (draggedItem) {
-            $(this).append(draggedItem);
-            const binName = $(this).data('bin');
-            const itemId = draggedItem.attr('id');
-            // Save the drop result
-            $(`#drag-result-${itemId}`).val(binName);
-        }
-    });
-
-
-  //ADDED FOR WASH PANEL
-    $(document).on('click', '.wash-option', function () {
-    let type = $(this).data('type'); // "cycle", "spin", or "temp"
-    let parent = $(this).parent();   // the div with wash-options
-    //let index = parent.attr('id').split('-').pop(); // grabs the index from the ID
-    let container = $(this).closest('.wash-panel-question');
-    let index = container.data('index');
-
-    parent.find('.wash-option').removeClass('active');
-    $(this).addClass('active');
-
-    let value = $(this).data('value');
-    $(`input[name="selected-${type}-${index}"]`).val(value); // This is the key!
-
-    // tracking
-
-      $(".sidebar-status").hide();
-
-      showSlide(0, false);
-  
-      $("#next-btn").click(() => {
-          const nextIndex = currentSlide + 1;
-          if (nextIndex < totalSlides) {
-              $(".sidebar-status").eq(nextIndex).show();
-              showSlide(nextIndex, true);
-          }
-      });
-  
-      $("#prev-btn").click(() => {
-          const prevIndex = currentSlide - 1;
-          if (prevIndex >= 0) {
-              showSlide(prevIndex, false);
-          }
-      });
-  
-      $("#sidebar-tracker li").each(function (index) {
-          $(this).click(() => {
-              $(".sidebar-status").eq(index).show();
-              showSlide(index, true);
-          });
-      });
- });
-    
-
-    // When Check Answer button is clicked
-
-    $(document).on('click', '.check-wash-btn', function () {
-        let container = $(this).closest('.wash-panel-question');
-        
-        const index = container.data('index');  // Get the index
-        const selectedCycle = $(`input[name="selected-cycle-${index}"]`).val();
-        const selectedSpin = $(`input[name="selected-spin-${index}"]`).val()
-        const selectedTemp = $(`input[name="selected-temp-${index}"]`).val();
-        let feedback = container.find('.feedback');
-    
-        if (!selectedCycle || !selectedSpin || !selectedTemp) {
-            feedback.text("Please select one option for each category.").css('color', 'red').show();
-            return;
-        }
-    
-        let correctAnswer;
-        try {
-            correctAnswer = container.data('answer'); // Use .data() to parse JSON automatically
-        } catch (e) {
-            feedback.text("Missing or invalid answer key.").css('color', 'red').show();
-            return;
-        }
-    
-        const match = (selected, correct) =>
-            Array.isArray(correct) ? correct.includes(selected) : selected === correct;
-    
-        if (
-            match(selectedCycle, correctAnswer.cycle) &&
-            match(selectedSpin, correctAnswer.spin) &&
-            match(selectedTemp, correctAnswer.temperature)
-        ) {
-            feedback.text("Correct! ✅").css('color', 'green').show();
-            $('#next-btn').prop('disabled', false);  // ✅ enable next
-        } else {
-            feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
-            $('#next-btn').prop('disabled', true);   // 🔒 stay locked
-        }
-    });
-
-    document.querySelectorAll('.question-container-mcq').forEach(container => {
-        const form = container.querySelector('.question-card');
-        const submitBtn = form.querySelector('.btn.btn-primary');
-        const optionsContainer = form.querySelector('.options-container');
-        const feedbackEl = form.querySelector('.feedback-message');
-        const validationMsg = form.querySelector('.validation-message');
-    
-        submitBtn.addEventListener('click', function (e) {
-          e.preventDefault();
-    
-          const selected = optionsContainer.querySelector('input[type="radio"]:checked');
-          const correctAnswer = optionsContainer.dataset.answer;
-    
-          if (!selected) {
-            validationMsg.style.display = 'block';
-            feedbackEl.textContent = '';
-            return;
-          }
-    
-          validationMsg.style.display = 'none';
-          const userAnswer = selected.value;
-    
-          if (userAnswer === correctAnswer) {
-            feedbackEl.textContent = '✅ Correct!';
-            feedbackEl.style.color = 'green';
-            $('#next-btn').prop('disabled', false);  // ✅ enable next
-          } else {
-            feedbackEl.textContent = `❌ Incorrect. Try again!`;
-            feedbackEl.style.color = 'red';
-            $('#next-btn').prop('disabled', true);   // 🔒 stay locked
-          }
-        });
-      });
-});    
 
 
 document.addEventListener("DOMContentLoaded", function () {
