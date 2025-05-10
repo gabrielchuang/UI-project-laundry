@@ -222,7 +222,9 @@
                 "wash-cycle",
                 "water-temperature",
                 "spin-speed",
-                "wash-settings-quiz-1"
+                "wash-settings-quiz-1",
+                "wash-settings-quiz-2",
+                "wash-settings-quiz-3"
             ]
         },
         
@@ -398,16 +400,9 @@
             "type": "content",
             "description": "Congrats on completing!" 
         },
-
-
-
-
-
-
-
         {
             "id": "wash-settings-quiz-1",
-            "title": "Wash settings quiz",
+            "title": "Wash settings quiz: Q1",
             "type": "quiz",
             "questions": [
                 {
@@ -427,7 +422,14 @@
                         "temperature": "Hot",
                         "spin": "High"
                     }
-                },
+                }
+            ]
+        }, 
+        {
+            "id": "wash-settings-quiz-2",
+            "title": "Wash settings quiz: Q2",
+            "type": "quiz",
+            "questions": [
                 {
                     "question": "What settings would you use for a load of jeans and pants?",
                     "type": "wash_panel",
@@ -445,7 +447,14 @@
                         "temperature": ["Cold", "Warm"],
                         "spin": ["Medium", "High"]
                     }
-                },
+                }
+            ]
+        },
+        {
+            "id": "wash-settings-quiz-3",
+            "title": "Wash settings quiz: Q3",
+            "type": "quiz",
+            "questions": [
                 {
                     "question": "What settings would you use for a load of delicate fabrics?",
                     "type": "wash_panel",
@@ -458,7 +467,6 @@
                     "option-spin": [
                         "Low,  Medium, High "
                     ],
-                   
                     "answer": {
                         "cycle": "Delicate",
                         "temperature": "Cold",
