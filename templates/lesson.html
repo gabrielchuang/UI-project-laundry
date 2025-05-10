@@ -27,8 +27,7 @@
 
         {% for slide in content %}
         <div class="slide {% if loop.first %}active{% endif %}" 
-            id="slide{{ loop.index }}" 
-            data-slide-id="{{ slide.id }}">
+            id="slide{{ loop.index }}" data-slide-id="{{ slide.id }}" data-slide-type="{{ slide.type }}">
             {% if slide.type == 'quiz' %}
                 <!-- Special handling for quiz slides -->
                 <div class="quiz-container">
