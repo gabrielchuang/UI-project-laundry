@@ -22,11 +22,19 @@ $(document).ready(function () {
         $(".dot").removeClass("active");
         $('.dot[data-slide="' + (index + 1) + '"]').addClass("active");
     
+
+        const type = slides[index].getAttribute('data-slide-type');
+        const isQuiz = type === "quiz";
+        console.log("isQuiz: ", isQuiz);
+        $("#next-btn").prop("disabled", isQuiz);  // lock only if quiz
+      
+
         $("#prev-btn").prop("disabled", index === 0);
         $("#next-btn").prop("disabled", index === totalSlides - 1);
     
         currentSlide = index;
-    
+
+        
         if (!shouldTrackProgress) return;
     
         const slidesArray = Array.from(slides);
@@ -125,6 +133,13 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
 
     let feedback_text = "";
 
+    let num_items_unsorted = 0;
+    num_items_unsorted = $(questionContainer).find('.drag-items .drag-item').length;
+    if (num_items_unsorted !== 0) {
+        allCorrect = false;
+        feedback_text = "You have not sorted all items. ";
+    }
+
     bins.each(function() {
         let groupsInBin = new Set();
         $(this).find('.drag-item').each(function() {
@@ -179,8 +194,10 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
     const feedback = $(questionContainer).find('.feedback');
     if (allCorrect) {
         feedback.text("Perfect grouping!").removeClass('incorrect').addClass('correct').show();
+        $('#next-btn').prop('disabled', false);  // ✅ enable next
     } else {
         feedback.text("Incorrect grouping. " + feedback_text + " Try again!").removeClass('correct').addClass('incorrect').show();
+        $('#next-btn').prop('disabled', true);   // 🔒 stay locked
     }
 }
 
@@ -296,8 +313,10 @@ $(document).ready(function () {
             match(selectedTemp, correctAnswer.temperature)
         ) {
             feedback.text("Correct! ✅").css('color', 'green').show();
+            $('#next-btn').prop('disabled', false);  // ✅ enable next
         } else {
             feedback.text("Incorrect. Try again! ❌").css('color', 'red').show();
+            $('#next-btn').prop('disabled', true);   // 🔒 stay locked
         }
     });
 
@@ -323,10 +342,15 @@ $(document).ready(function () {
           validationMsg.style.display = 'none';
           const userAnswer = selected.value;
     
-          feedbackEl.textContent = userAnswer === correctAnswer
-            ? '✅ Correct!'
-            : `❌ Incorrect. Try again!`;
-          feedbackEl.style.color = userAnswer === correctAnswer ? 'green' : 'red';
+          if (userAnswer === correctAnswer) {
+            feedbackEl.textContent = '✅ Correct!';
+            feedbackEl.style.color = 'green';
+            $('#next-btn').prop('disabled', false);  // ✅ enable next
+          } else {
+            feedbackEl.textContent = `❌ Incorrect. Try again!`;
+            feedbackEl.style.color = 'red';
+            $('#next-btn').prop('disabled', true);   // 🔒 stay locked
+          }
         });
       });
 });    
