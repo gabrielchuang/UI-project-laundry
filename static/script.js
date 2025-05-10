@@ -133,6 +133,13 @@ function checkDragAndDropFlexibleGrouping(questionContainer) {
 
     let feedback_text = "";
 
+    let num_items_unsorted = 0;
+    num_items_unsorted = $(questionContainer).find('.drag-items .drag-item').length;
+    if (num_items_unsorted !== 0) {
+        allCorrect = false;
+        feedback_text = "You have not sorted all items. ";
+    }
+
     bins.each(function() {
         let groupsInBin = new Set();
         $(this).find('.drag-item').each(function() {
