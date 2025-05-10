@@ -18,7 +18,7 @@
     <!-- Sidebar END -->
     <div class="col-9">
         <div class="lesson-back-button mb-3">
-            <a href="javascript:history.back()" class="back-link">&larr; Back</a>
+            <a href="javascript:history.back()" class="back-link">&larr; Back to Main Page</a>
           </div>
           
         <div class="header">
@@ -37,6 +37,13 @@
                         <p>{{ slide.description }}</p>
                     {% endif %}
 
+                    {% if slide.img %}
+                    <div class="quiz-image text-center mb-3">
+                        <img src="{{ url_for('static', filename=slide.img) }}" alt="Quiz image" class="img-fluid" style="max-height: 300px;">
+                    </div>
+                    {% endif %}
+            
+
                         {% if slide.questions %}
                             <!-- Progress indicator for embedded quiz -->
                              {% if slide.questions|length > 1 %}
@@ -47,7 +54,7 @@
                             {% endif %}
 
                             {% for question in slide.questions %}
-                            {% set qindex = loop.index0 %} <!-- hehe -->
+                            {% set qindex = loop.index0 %} 
                                 {% if question.type == 'wash_panel' %}
                                 <!-- Wash panel question type -->
                                 <div class="question-container wash-panel-question {% if loop.first %}active{% endif %}" data-answer='{{ question.answer | tojson }}' data-index='{{ loop.index0 }}'>
