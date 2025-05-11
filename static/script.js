@@ -186,8 +186,6 @@ $(document).ready(function () {
     // tracking
 
       $(".sidebar-status").hide();
-
-      showSlide(0, false);
   
       $("#next-btn").click(() => {
           const nextIndex = currentSlide + 1;
