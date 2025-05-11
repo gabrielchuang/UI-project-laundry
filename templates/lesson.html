@@ -46,14 +46,6 @@
             {{ lesson.title }}
         </div>
 
-        <!-- Breadcrumb navigation -->
-        <nav aria-label="breadcrumb" class="mb-3">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">Home</a></li>
-                <li class="breadcrumb-item active">{{ lesson.title }}</li>
-            </ol>
-        </nav>
-
         {% for slide in content %}
         <div class="slide {% if loop.first %}active{% endif %}"
             id="slide{{ loop.index }}" data-slide-id="{{ slide.id }}" data-slide-type="{{ slide.type }}">
