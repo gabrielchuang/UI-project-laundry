@@ -585,31 +585,17 @@
             "title": "Reading labels: quiz",
             "type": "quiz",
             "quiz-type": "multiple",
-            "img":"imgs/quiz/label-quiz/1.png",
+            "img":"imgs/quiz/label-quiz/2.png",
             "questions": [
                 {
                     "question": "How should you machine wash this?",
                     "options": [
-                        "Cold, gentle cycle",
-                        "Warm, gentle cycle",
-                        "Hot, gentle cycle",
-                        "Cold, normal cycle/perm press",
-                        "Warm, normal cycle/perm press",
-                        "Hot, normal cycle/perm press",
-                        "Cold, any cycle",
-                        "Warm, any cycle",
-                        "Hot, any cycle"
+                        "Don't wash",
+                        "Machine Wash perm press",
+                        "Machine Wash delicate",
+                        "Hand wash, normal"
                     ],
-                    "answer": "Cold, any cycle"
-                },
-                {
-                    "question": "What bleach should you use?",
-                    "options": [
-                        "No bleach",
-                        "Non-chlorine bleach",
-                        "Chlorine bleach"
-                    ],
-                    "answer": "Non-chlorine bleach"
+                    "answer": "Hand wash, normal"
                 },
                 {
                     "question": "How should you dry this item?",
@@ -617,11 +603,9 @@
                         "Tumble dry low",
                         "Tumble dry medium",
                         "Tumble dry high",
-                        "Line dry",
-                        "Lay flat to dry",
                         "Do not tumble dry"
                     ],
-                    "answer": "Tumble dry low"
+                    "answer": "Do not tumble dry"
                 },
                 {
                     "question": "How should you iron this item?",
@@ -631,17 +615,7 @@
                         "Iron on medium heat",
                         "Iron on high heat"
                     ],
-                    "answer": "Iron on low heat"
-                },
-                {
-                    "question": "How should you dry clean this item?",
-                    "options": [
-                        "Do not dry clean",
-                        "Dry clean with any solvent",
-                        "Dry clean with any solvent except tetrachlorethylene",
-                        "Dry clean with tetrachlorethylene only"
-                    ],
-                    "answer": "Do not dry clean"
+                    "answer": "Do not iron"
                 }
             ]
         },
