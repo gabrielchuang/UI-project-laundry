@@ -1,893 +1,928 @@
 {
-    "content": [
+  "content": [
+    {
+      "id": "mainpage",
+      "title": "Laundry Basics",
+      "type": "menu",
+      "description": "Welcome to the Laundry Basics course! This course is designed to help you learn the fundamentals of laundry care. By the end of this course, you’ll be able to sort your laundry, choose the right wash settings, and understand how to read clothing labels.",
+      "children": [
         {
-            "id": "mainpage",
-            "title": "Laundry Basics",
-            "type": "menu", 
-            "description": "Welcome to the Laundry Basics course! This course is designed to help you learn the fundamentals of laundry care. By the end of this course, you’ll be able to sort your laundry, choose the right wash settings, and understand how to read clothing labels.",
-            "children": [
-                {
-                    "title": "Sorting your laundry",
-                    "id": "sorting-mainpage2"
-                },
-                {
-                    "title": "Wash settings",
-                    "id": "wash-settings-mainpage"
-                },
-                {
-                    "title": "Reading labels",
-                    "id": "reading-labels-mainpage"
-                },
-                {
-                    "title": "Final quiz",
-                    "id": "final-quiz"
-                }
-            ]
+          "title": "Sorting your laundry",
+          "id": "sorting-mainpage2"
         },
         {
-            "id":"final-quiz",
-            "title": "Final quiz",
-            "type":"lesson",
-            "next_page": "congratulations",
-            "description": "Congratulations on completing the course! Now it’s time to test your knowledge. This quiz will cover everything you’ve learned about sorting laundry, wash settings, and reading labels. Good luck!",
-            "children": [
-                "sorting-color-final-quiz",
-                "sorting-fabric-final-quiz",
-                "wash-settings-final-quiz",
-                "reading-labels-final-quiz"
-            ]
+          "title": "Wash settings",
+          "id": "wash-settings-mainpage"
         },
         {
-            "id": "sorting-mainpage",
-            "title": "Sorting your laundry",
-            "type": "menu", 
-            "description": "Sorting your laundry is a the secret to keeping your clothes fresh, clean, and drama-free. By sorting, you’ll save time, protect your favorite fits, and make everything last longer. It’s like giving your clothes VIP treatment—and your wallet (and wardrobe) will thank you.",
-            "images":[
-                    {
-                        "src": "imgs/colors.png", 
-                        "alt": "temp alt"
-                    }
-            ],
-            "children": [
-                {
-                    "title": "Sorting by color",
-                    "id": "sorting-color-main" 
-                },
-                {
-                    "title": "Sorting by fabric type",
-                    "id": "sorting-fabric-main" 
-                },
-                {
-                    "title": "Sorting by soil level",
-                    "id": "sorting-soil-main"
-                }
-            ]
-        }, 
-        {
-            "id": "sorting-mainpage2", 
-            "title": "Sorting your laundry", 
-            "type": "lesson", 
-            "next_page": "mainpage2",
-            "description": "temp description",
-            "children": [
-                "sorting-color-main",
-                "sorting-whites",
-                "sorting-darks",
-                "sorting-colors",
-                "sorting-color-quiz-dragdrop",
-                "sorting-fabric-main",
-                "sorting-delicates",
-                "sorting-cottons",
-                "sorting-synthetics",
-                "sorting-heavy",
-                "sorting-temp2-quiz",
-                "sorting-soil-main"
-            ]
-
+          "title": "Reading labels",
+          "id": "reading-labels-mainpage"
         },
         {
-            "id": "sorting-mainpage3", 
-            "title": "Sorting your laundry", 
-            "type": "lesson", 
-            "next_page": "mainpage2",
-            "description": "temp description",
-            "children": [
-                "sorting-temp2-quiz",
-                "sorting-soil-main"
-            ]
-
-        },
-        {
-            "id": "sorting-color-main",
-            "title": "Sorting by color",
-            "type": "content",
-            "description": "Sorting by color is the first step to keeping your clothes looking fresh and vibrant. By separating whites, darks, and colors, you’ll prevent dye transfer and keep your clothes looking their best.",
-            "images": [
-                {
-                    "src": "imgs/colors.png",
-                    "alt": "Sorting colors"
-                }
-            ]
-        },
-        {
-            "id": "sorting-whites",
-            "title": "Sorting by color: whites",
-            "type": "content",
-            "description": "Sorting whites is all about keeping your light-colored clothes looking bright and fresh. By separating whites from colors, you’ll prevent dye transfer and keep your whites looking their best. Whites typically include white shirts, socks, undergarments, and white sheets. They can often be washed with pastels.",
-            "images": [
-                {
-                    "src": "imgs/whites.png",
-                    "alt": "Sorting whites"
-                }
-            ]
-        },
-        {
-            "id": "sorting-darks",
-            "title": "Sorting by color: darks",
-            "type": "content",
-            "description": "Dark clothes include grays, blues, blacks, and other dark colors, as well as pants, jeans, and sweatshirts.",
-            "images": [
-                {
-                    "src": "imgs/darks.png",
-                    "alt": "Sorting darks"
-                }
-            ]
-        },
-        {
-            "id": "sorting-colors",
-            "title": "Sorting by color: colors",
-            "type": "content",
-            "description": "Brightly colored clothes can be washed together. This often includes athletic wear, t-shirts, and similar.",
-            "images": [
-                {
-                    "src": "imgs/colors.png",
-                    "alt": "Sorting colors"
-                }
-            ]
-        },
-        {
-            "id": "sorting-fabric-main",
-            "title": "Sorting by fabric type",
-            "type": "content",
-            "description": "Sorting clothes by fabric type helps protect your clothes and improves wash efficiency. "
-        },
-        {
-            "id": "sorting-delicates",
-            "title": "Sorting by fabric type: delicates",
-            "type": "content",
-            "description": "Delicate fabrics include lace, silk, and other lightweight materials. These items should be washed on a gentle cycle to prevent damage.",
-            "images": [
-                {
-                    "src": "imgs/delicates.png",
-                    "alt": "Sorting delicates"
-                }
-            ]
-        },
-        {
-            "id": "sorting-cottons",
-            "title": "Sorting by fabric type: cottons",
-            "type": "content",
-            "description": "Cotton and natural fabrics are durable and can be washed together. This includes items like t-shirts, jeans, and towels.",
-            "images": [
-                {
-                    "src": "imgs/cottons.png",
-                    "alt": "Sorting cotton"
-                }
-            ]
-        },
-        {
-            "id": "sorting-synthetics",
-            "title": "Sorting by fabric type: synthetics",
-            "type": "content",
-            "description": "Synthetic fabrics include polyester, nylon, and blends. These items can be washed together on a regular cycle.",
-            "images": [
-                {
-                    "src": "imgs/synthetics.png",
-                    "alt": "Sorting synthetics"
-                }
-            ]
-        },
-        {
-            "id": "sorting-heavy",
-            "title": "Sorting by fabric type: bulky items",
-            "type": "content",
-            "description": "Heavy items, like comforters, rugs, coats, pillows, etc. should be washed separately to prevent damage to other items. These items can be washed on a heavy-duty cycle.",
-            "images": [
-                {
-                    "src": "imgs/blankets.jpg",
-                    "alt": "Sorting heavy items"
-                }
-            ]
-        },
-        {
-            "id": "sorting-soil-main",
-            "title": "Sorting by soil level",
-            "type": "content",
-            "next_page": "mainpage2",
-            "description": "Sorting by soil level helps ensure that heavily soiled items are cleaned properly without damaging other clothes.",
-            "images": [
-                {
-                    "src": "imgs/soil.png",
-                    "alt": "Sorting by soil level"
-                }
-            ]
-        },
-        {
-            "id": "wash-settings-mainpage",
-            "title": "Wash settings",
-            "type": "lesson",
-            "next_page": "mainpage3",
-            "description": "Choosing the right wash settings is crucial for keeping your clothes looking their best. By selecting the appropriate cycle, temperature, and spin speed, you’ll ensure that your clothes are cleaned effectively without causing damage.",
-            "children": [
-                "wash-cycle",
-                "water-temperature",
-                "spin-speed",
-                "wash-settings-quiz-1",
-                "wash-settings-quiz-2",
-                "wash-settings-quiz-3"
-            ]
-        },
-        
-        {
-            "id": "wash-cycle",
-            "title": "Wash cycle",
-            "type": "content",
-            "description": "The wash cycle determines how your clothes are cleaned. Different cycles are designed for different types of fabrics and soil levels. For example, a gentle cycle is best for delicates, while a heavy-duty cycle is ideal for heavily soiled items. Perm press is a medium cycle that is good for most items, especially synthetics.",
-            "images": [
-                {
-                    "src": "imgs/wash-cycle.png",
-                    "alt": "Wash cycle"
-                }
-            ]
-        },
-        {
-            "id": "water-temperature",
-            "title": "Water temperature",
-            "type": "content",
-            "description": "Water temperature affects how well your clothes are cleaned. Hot water is best for whites and heavily soiled items, while cold water is gentler on colors and delicate fabrics.",
-            "images": [
-                {
-                    "src": "imgs/water-temperature.png",
-                    "alt": "Water temperature"
-                }
-            ]
-        },
-        {
-            "id": "spin-speed",
-            "title": "Spin speed",
-            "type": "content",
-            "description": "Some machines let you choose spin speed. This determines how much water is removed from your clothes after washing. A higher spin speed removes more water but can be rougher on fabrics. A lower spin speed is gentler but may leave clothes wetter.",
-            "images": [
-                {
-                    "src": "imgs/spin-speed.png",
-                    "alt": "Spin speed"
-                }
-            ]
-        },
-        {
-            "id": "laundry-bags", 
-            "title": "Laundry bags",
-            "type": "content",
-            "description": "Laundry bags are a great way to protect delicate items during the wash. They help prevent snagging and tangling, and can also be used to keep small items together.",
-            "images": [
-                {
-                    "src": "imgs/laundry-bags.png",
-                    "alt": "Laundry bags"
-                }
-            ]
-        },
-        {
-            "id": "reading-labels-mainpage", 
-            "title": "Reading labels",
-            "type": "lesson",
-            "next_page": "mainpage4",
-            "description": "Reading clothing labels is essential for understanding how to care for your clothes. Labels provide important information about fabric content, care instructions, and wash settings. By learning how to read labels, you’ll be able to keep your clothes looking their best.",
-            "children": [
-                "reading-labels-intro",
-                "label-wash",
-                "label-bleach",
-                "label-dry",
-                "label-iron",
-                "label-dryclean",
-                "label-quiz"
-        ]   
-        },
-        {
-            "id": "reading-labels-intro",
-            "title": "Reading labels",
-            "type": "content",
-            "description": "When in doubt, you can always consult the labels on your clothes. Labels provide important information about fabric content, care instructions, and wash settings. The symbols on the labels can be confusing, but are very sysetematic.",
-            "images": [
-                {
-                    "src": "imgs/all-wash-label.png",
-                    "alt": "Reading labels"
-                }
-            ]
-        },
-        {
-            "id": "label-wash",
-            "title": "Label symbols: Wash",
-            "type": "content",
-            "description": "The wash symbol resembles the drum of a washing machine. The number or dots inside the tub indicates the maximum water temperature. The hand symbol indicates that the item should be hand washed. The number of lines below indicate the gentleness of the cycle.",
-            "images": [
-                {
-                    "src": "imgs/wash-label.png",
-                    "alt": "Label symbols: Wash"
-                }
-            ]
-        },
-        {
-            "id": "label-bleach",
-            "title": "Label symbols: Bleach",
-            "type": "content",
-            "description": "The triangle symbol indicates whether bleach can be used. A triangle with a cross through it means no bleach. A triangle with a 'CL' inside means only non-chlorine bleach can be used. A triangle with no cross or letters means any bleach can be used.",
-            "images": [
-                {
-                    "src": "imgs/bleach-label.png",
-                    "alt": "Label symbols: Bleach"
-                }
-            ]
-        },
-        {
-            "id": "label-dry",
-            "title": "Label symbols: Dry",
-            "type": "content",
-            "description": "The square with a circle inside indicates that the item can be tumble dried. The dots inside the circle indicate the maximum heat setting. A square with a circle and a cross through it means do not tumble dry.",
-            "images": [
-                {
-                    "src": "imgs/dry-label.png",
-                    "alt": "Label symbols: Dry"
-                }
-            ]
-        },
-        {
-            "id": "label-iron",
-            "title": "Label symbols: Iron",
-            "type": "content",
-            "description": "The iron symbol indicates whether the item can be ironed. The dots inside the iron indicate the maximum heat setting. An iron with a cross through it means do not iron.",
-            "images": [
-                {
-                    "src": "imgs/iron-label.png",
-                    "alt": "Label symbols: Iron"
-                }
-            ]
-        },
-        {
-            "id": "label-dryclean",
-            "title": "Label symbols: Dry clean",
-            "type": "content",
-            "description": "The circle symbol indicates whether the item can be dry cleaned. A circle with a cross through it means do not dry clean. A circle with a 'P' inside means any solvent can be used. A circle with a 'F' inside means only petroleum solvent can be used.",
-            "images": [
-                {
-                    "src": "imgs/dryclean-label.png",
-                    "alt": "Label symbols: Dry clean"
-                }
-            ]
-        },
-        {
-            "id": "outline-0",
-            "title": "Outline",
-            "type": "outline",
-            "stage": 0
-        },
-        {
-            "id": "outline-1",
-            "title": "Outline",
-            "type": "outline",
-            "stage": 1
-        },
-        {
-            "id": "outline-2",
-            "title": "Outline",
-            "type": "outline",
-            "stage": 2
-        },
-        {
-            "id": "outline-3",
-            "title": "Outline",
-            "type": "outline",
-            "stage": 3
-        },
-        {
-            "id": "outline-4",
-            "title": "Outline",
-            "type": "outline",
-            "stage": 4
-        },
-        {
-            "id": "final",
-            "title": "Congratulations!",
-            "type": "content",
-            "description": "Congrats on completing!" 
-        },
-        {
-            "id": "wash-settings-quiz-1",
-            "title": "Wash settings quiz: Q1",
-            "type": "quiz",
-            "questions": [
-                {
-                    "question": "What settings would you use for a load of heavily soiled white cotton clothing?",
-                    "type": "wash_panel",
-                   "option-cycle": [
-                        "Heavy Duty, Normal, Delicate, "
-                    ],
-                    "option-temp": [
-                        "Cold, Warm, Hot"
-                    ],
-                    "option-spin": [
-                        "Low,  Medium, High "
-                    ],
-                    "answer": {
-                        "cycle": "Heavy Duty",
-                        "temperature": "Hot",
-                        "spin": "High"
-                    }
-                }
-            ]
-        }, 
-        {
-            "id": "wash-settings-quiz-2",
-            "title": "Wash settings quiz: Q2",
-            "type": "quiz",
-            "questions": [
-                {
-                    "question": "What settings would you use for a load of jeans and pants?",
-                    "type": "wash_panel",
-                    "option-cycle": [
-                        "Heavy Duty, Normal, Delicate, "
-                    ],
-                    "option-temp": [
-                        "Cold, Warm, Hot"
-                    ],
-                    "option-spin": [
-                        "Low,  Medium, High "
-                    ],
-                    "answer": {
-                        "cycle": ["Normal", "Heavy Duty"],
-                        "temperature": ["Cold", "Warm"],
-                        "spin": ["Medium", "High"]
-                    }
-                }
-            ]
-        },
-        {
-            "id": "wash-settings-quiz-3",
-            "title": "Wash settings quiz: Q3",
-            "type": "quiz",
-            "questions": [
-                {
-                    "question": "What settings would you use for a load of delicate fabrics?",
-                    "type": "wash_panel",
-                    "option-cycle": [
-                        "Heavy Duty, Normal, Delicate, "
-                    ],
-                    "option-temp": [
-                        "Cold, Warm, Hot"
-                    ],
-                    "option-spin": [
-                        "Low,  Medium, High "
-                    ],
-                    "answer": {
-                        "cycle": "Delicate",
-                        "temperature": "Cold",
-                        "spin": "Low"
-                    }
-                }
-            ]
-        },
-        {
-            "id": "sorting-temp-quiz", 
-            "title": "temp quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "question": "",
-            "options": [
-                "A",
-                "B",
-                "C"
-            ],
-            "answer": "C"
-        },
-        {
-            "id": "sorting-color-quiz-dragdrop",
-            "title": "Checkpoint: Sorting by color",
-            "type": "quiz",
-            "questions": [
-                {
-                    "question": "Sort these items by color into two bins.",
-                    "type": "drag_and_drop",
-                    "num_bins" : 2,
-                    "items": [
-                        {
-                            "id": "1",
-                            "img": "imgs/quiz/sort-color-quiz/1.jpg",
-                            "group": "1",
-                            "text": "white t-shirt"
-                        },
-                        {
-                            "id": "2",
-                            "img": "imgs/quiz/sort-color-quiz/2.jpg",
-                            "group": "2",
-                            "text": "black jeans"
-                        },
-                        {
-                            "id": "3",
-                            "img": "imgs/quiz/sort-color-quiz/3.jpg",
-                            "group": "2", 
-                            "text": "red t-shirt"
-                        },
-                        {
-                            "id": "4",
-                            "img": "imgs/quiz/sort-color-quiz/4.webp",
-                            "group": "1", 
-                            "text": "white pants"
-                        },
-                        {
-                            "id": "5",
-                            "img": "imgs/quiz/sort-color-quiz/5.webp",
-                            "group": "2",
-                            "text": "blue t-shirt"
-                        },
-                        {
-                            "id": "7",
-                            "img": "imgs/quiz/sort-color-quiz/7.jpg",
-                            "group": "2",
-                            "text": "red flannel"
-                        },
-                        {
-                            "id": "9",
-                            "img": "imgs/quiz/sort-color-quiz/9.jpg",
-                            "group": "2",
-                            "text": "blue jeans"
-                        }
-                    ],
-                    "answer": {
-                        "bin0": ["1", "4"], 
-                        "bin1": ["2", "3", "5", "7", "9"]
-                    } 
-                }
-            ]
-        },
-        {
-            "id": "sorting-temp2-quiz",
-            "title": "Checkpoint: Sorting by fabric type",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "questions": [
-                {
-                    "qid": "sorting-fabric-mcq",
-                    "question": "Which of these are in a different category from the others?",
-                    "options": [
-                        "Silk",
-                        "Cotton",
-                        "Jeans",
-                        "Towels"
-                    ],
-                    "answer": "Silk"
-                }
-            ]
-        },
-        {
-            "id": "wash-settings-temp-quiz",
-            "title": "temp quiz 3",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "question": "Temporary quiz question",
-            "options": [
-                "A",
-                "B",
-                "C"
-            ],
-            "answer": "B"
-        },
-        {
-            "id": "label-quiz",
-            "title": "Reading labels: quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "img":"imgs/quiz/label-quiz/1.png",
-            "questions": [
-                {
-                    "question": "How should you machine wash this?",
-                    "options": [
-                        "Cold, gentle cycle",
-                        "Warm, gentle cycle",
-                        "Hot, gentle cycle",
-                        "Cold, normal cycle/perm press",
-                        "Warm, normal cycle/perm press",
-                        "Hot, normal cycle/perm press",
-                        "Cold, any cycle",
-                        "Warm, any cycle",
-                        "Hot, any cycle"
-                    ],
-                    "answer": "Cold, any cycle"
-                },
-                {
-                    "question": "What bleach should you use?",
-                    "options": [
-                        "No bleach",
-                        "Non-chlorine bleach",
-                        "Chlorine bleach"
-                    ],
-                    "answer": "Non-chlorine bleach"
-                },
-                {
-                    "question": "How should you dry this item?",
-                    "options": [
-                        "Tumble dry low",
-                        "Tumble dry medium",
-                        "Tumble dry high",
-                        "Line dry",
-                        "Lay flat to dry",
-                        "Do not tumble dry"
-                    ],
-                    "answer": "Tumble dry low"
-                },
-                {
-                    "question": "How should you iron this item?",
-                    "options": [
-                        "Do not iron",
-                        "Iron on low heat",
-                        "Iron on medium heat",
-                        "Iron on high heat"
-                    ],
-                    "answer": "Iron on low heat"
-                },
-                {
-                    "question": "How should you dry clean this item?",
-                    "options": [
-                        "Do not dry clean",
-                        "Dry clean with any solvent",
-                        "Dry clean with any solvent except tetrachlorethylene",
-                        "Dry clean with tetrachlorethylene only"
-                    ],
-                    "answer": "Do not dry clean"
-                }
-            ]
-        },
-        {
-            "id": "big-quiz", 
-            "title": "Final quiz", 
-            "type": "quiz", 
-            "quiz-type": "multiple",
-            "question": "Temporary quiz question",
-            "options": [
-                "A",
-                "B",
-                "C"
-            ],
-            "answer": "B"
-        },
-        {
-            "id": "sorting-color-final-quiz", 
-            "title": "Sort by color quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "questions": [
-                {
-                    "question": "Sort these items by color into two bins.",
-                    "type": "drag_and_drop",
-                    "num_bins" : 2,
-                    "items": [
-                        {
-                            "id": "1",
-                            "img": "imgs/quiz/sort-color-quiz/1.jpg",
-                            "text": "white cotton t-shirt",
-                            "group": "1"
-                        },
-                        {
-                            "id": "2",
-                            "text": "black cotton t-shirt",
-                            "img": "imgs/quiz/sort-color-quiz/f1.webp",
-                            "group": "2"
-                        },
-                        {
-                            "id": "3",
-                            "text": "blue denim jeans",
-                            "img": "imgs/quiz/sort-color-quiz/9.jpg",
-                            "group": "2"
-                        },
-                        {
-                            "id": "4",
-                            "text": "dark green exercise pants",
-                            "img": "imgs/quiz/sort-color-quiz/f2.avif",
-                            "group": "2"
-                        },
-                        {
-                            "id": "5",
-                            "text": "pastel yellow silk shirt", 
-                            "img": "imgs/quiz/sort-color-quiz/f3.webp",
-                            "group": "1"
-                        },
-                        {
-                            "id": "6",
-                            "text": "white linen pants",
-                            "img": "imgs/quiz/sort-color-quiz/4.webp",
-                            "group": "1"
-                        }, 
-                        {
-                            "id": "7",
-                            "text": "dark grey cargo shorts",
-                            "img": "imgs/quiz/sort-color-quiz/f4.jpg",
-                            "group": "2"
-                        }, 
-                        {
-                            "id": "8",
-                            "text": "red bedsheet",
-                            "img": "imgs/quiz/sort-color-quiz/f5.jpg",
-                            "group": "2"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "id": "sorting-fabric-final-quiz", 
-            "title": "Sort by fabric type quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "questions": [
-                {
-                    "question": "Sort these items by fabric type into three bins: delicates, cottons, and heavy-duty.",
-                    "type": "drag_and_drop",
-                    "num_bins" : 3,
-                    "items": [
-                        {
-                            "id": "1",
-                            "img": "imgs/quiz/sort-color-quiz/1.jpg",
-                            "text": "white cotton t-shirt",
-                            "group": "1"
-                        },
-                        {
-                            "id": "2",
-                            "text": "black cotton t-shirt",
-                            "img": "imgs/quiz/sort-color-quiz/f1.webp",
-                            "group": "1"
-                        },
-                        {
-                            "id": "3",
-                            "text": "blue denim jeans",
-                            "img": "imgs/quiz/sort-color-quiz/9.jpg",
-                            "group": "2"
-                        },
-                        {
-                            "id": "4",
-                            "text": "dark green exercise pants",
-                            "img": "imgs/quiz/sort-color-quiz/f2.avif",
-                            "group": "3"
-                        },
-                        {
-                            "id": "5",
-                            "text": "pastel yellow silk shirt", 
-                            "img": "imgs/quiz/sort-color-quiz/f3.webp",
-                            "group": "3"
-                        },
-                        {
-                            "id": "6",
-                            "text": "white linen pants",
-                            "img": "imgs/quiz/sort-color-quiz/4.webp",
-                            "group": "1"
-                        }, 
-                        {
-                            "id": "7",
-                            "text": "dark grey cargo shorts",
-                            "img": "imgs/quiz/sort-color-quiz/f4.jpg",
-                            "group": "2"
-                        }, 
-                        {
-                            "id": "8",
-                            "text": "red bedsheet",
-                            "img": "imgs/quiz/sort-color-quiz/f5.jpg",
-                            "group": "2"
-                        }
-                    ],
-                    "answer": [[1,2,6], [4,5], [3,7,8]]
-                }
-            ]
-        },
-        {
-            "id": "wash-settings-final-quiz",
-            "title": "Wash settings: review quiz",
-            "type": "quiz",
-            "questions": [
-                {
-                    "question": "What settings would you use for a load of heavily soiled colored cotton clothing and jeans?",
-                    "type": "wash_panel",
-                   "option-cycle": [
-                        "Heavy Duty, Normal, Delicate"
-                    ],
-                    "option-temp": [
-                        "Cold, Warm, Hot"
-                    ],
-                    "option-spin": [
-                        "Low,  Medium, High"
-                    ],
-                    "answer": {
-                        "cycle": "Heavy Duty",
-                        "temperature": "Warm",
-                        "spin": "High"
-                    }
-                }
-            ]
-        },
-        {
-            "id": "reading-labels-final-quiz",
-            "title": "Reading labels: quiz",
-            "type": "quiz",
-            "quiz-type": "multiple",
-            "img":"imgs/quiz/label-quiz/1.png",
-            "questions": [
-                {
-                    "question": "How should you machine wash this?",
-                    "options": [
-                        "Cold, gentle cycle",
-                        "Warm, gentle cycle",
-                        "Hot, gentle cycle",
-                        "Cold, normal cycle/perm press",
-                        "Warm, normal cycle/perm press",
-                        "Hot, normal cycle/perm press",
-                        "Cold, any cycle",
-                        "Warm, any cycle",
-                        "Hot, any cycle"
-                    ],
-                    "answer": "Cold, any cycle"
-                },
-                {
-                    "question": "What bleach should you use?",
-                    "options": [
-                        "No bleach",
-                        "Non-chlorine bleach",
-                        "Chlorine bleach"
-                    ],
-                    "answer": "Non-chlorine bleach"
-                },
-                {
-                    "question": "How should you dry this item?",
-                    "options": [
-                        "Tumble dry low",
-                        "Tumble dry medium",
-                        "Tumble dry high",
-                        "Line dry",
-                        "Lay flat to dry",
-                        "Do not tumble dry"
-                    ],
-                    "answer": "Tumble dry low"
-                },
-                {
-                    "question": "How should you iron this item?",
-                    "options": [
-                        "Do not iron",
-                        "Iron on low heat",
-                        "Iron on medium heat",
-                        "Iron on high heat"
-                    ],
-                    "answer": "Iron on low heat"
-                },
-                {
-                    "question": "How should you dry clean this item?",
-                    "options": [
-                        "Do not dry clean",
-                        "Dry clean with any solvent",
-                        "Dry clean with any solvent except tetrachlorethylene",
-                        "Dry clean with tetrachlorethylene only"
-                    ],
-                    "answer": "Do not dry clean"
-                }
-            ]
-        },
-        {
-            "id": "congratulations",
-            "title": "Congratulations!",
-            "type": "content",
-            "next_page": "mainpage5",
-            "description": "Congratulations on completing the course!",
-            "images": [
-                {
-                    "src": "imgs/washing-machine.webp",
-                    "alt": "an image of a washing machine"
-                }
-            ]
+          "title": "Final quiz",
+          "id": "final-quiz"
         }
-    ]
-
+      ]
+    },
+    {
+      "id": "final-quiz",
+      "title": "Final quiz",
+      "type": "lesson",
+      "next_page": "congratulations",
+      "description": "Congratulations on completing the course! Now it’s time to test your knowledge. This quiz will cover everything you’ve learned about sorting laundry, wash settings, and reading labels. Good luck!",
+      "children": [
+        "sorting-color-final-quiz",
+        "sorting-fabric-final-quiz",
+        "wash-settings-final-quiz",
+        "reading-labels-final-quiz"
+      ]
+    },
+    {
+      "id": "sorting-mainpage",
+      "title": "Sorting your laundry",
+      "type": "menu",
+      "description": "Sorting your laundry is a the secret to keeping your clothes fresh, clean, and drama-free. By sorting, you’ll save time, protect your favorite fits, and make everything last longer. It’s like giving your clothes VIP treatment—and your wallet (and wardrobe) will thank you.",
+      "images": [
+        {
+          "src": "imgs/colors.png",
+          "alt": "temp alt"
+        }
+      ],
+      "children": [
+        {
+          "title": "Sorting by color",
+          "id": "sorting-color-main"
+        },
+        {
+          "title": "Sorting by fabric type",
+          "id": "sorting-fabric-main"
+        },
+        {
+          "title": "Sorting by soil level",
+          "id": "sorting-soil-main"
+        }
+      ]
+    },
+    {
+      "id": "sorting-mainpage2",
+      "title": "Sorting your laundry",
+      "type": "lesson",
+      "next_page": "mainpage2",
+      "description": "temp description",
+      "children": [
+        "sorting-color-main",
+        "sorting-whites",
+        "sorting-darks",
+        "sorting-colors",
+        "sorting-color-quiz-dragdrop",
+        "sorting-fabric-main",
+        "sorting-delicates",
+        "sorting-cottons",
+        "sorting-synthetics",
+        "sorting-heavy",
+        "sorting-temp2-quiz",
+        "sorting-soil-main"
+      ]
+    },
+    {
+      "id": "sorting-mainpage3",
+      "title": "Sorting your laundry",
+      "type": "lesson",
+      "next_page": "mainpage2",
+      "description": "temp description",
+      "children": [
+        "sorting-temp2-quiz",
+        "sorting-soil-main"
+      ]
+    },
+    {
+      "id": "sorting-color-main",
+      "title": "Sorting by color",
+      "type": "content",
+      "description": "Sorting by color is the first step to keeping your clothes looking fresh and vibrant. By separating whites, darks, and colors, you’ll prevent dye transfer and keep your clothes looking their best.",
+      "images": [
+        {
+          "src": "imgs/colors.png",
+          "alt": "Sorting colors"
+        }
+      ]
+    },
+    {
+      "id": "sorting-whites",
+      "title": "Sorting by color: whites",
+      "type": "content",
+      "description": "Sorting whites is all about keeping your light-colored clothes looking bright and fresh. By separating whites from colors, you’ll prevent dye transfer. Whites typically include white shirts, socks, undergarments, and white sheets. They can often be washed with pastels.",
+      "images": [
+        {
+          "src": "imgs/whites.png",
+          "alt": "Sorting whites"
+        }
+      ]
+    },
+    {
+      "id": "sorting-darks",
+      "title": "Sorting by color: darks",
+      "type": "content",
+      "description": "Dark clothes include grays, blues, blacks, and other dark colors, as well as pants, jeans, and sweatshirts.",
+      "images": [
+        {
+          "src": "imgs/darks.png",
+          "alt": "Sorting darks"
+        }
+      ]
+    },
+    {
+      "id": "sorting-colors",
+      "title": "Sorting by color: colors",
+      "type": "content",
+      "description": "Brightly colored clothes can be washed together. This often includes athletic wear, t-shirts, and similar.",
+      "images": [
+        {
+          "src": "imgs/colors.png",
+          "alt": "Sorting colors"
+        }
+      ]
+    },
+    {
+      "id": "sorting-fabric-main",
+      "title": "Sorting by fabric type",
+      "type": "content",
+      "description": "Sorting clothes by fabric type helps protect your clothes and improves wash efficiency. ",
+      "images": [
+        {
+          "src": "imgs/sort_fabric.png",
+          "alt": "Sorting fabric"
+        }
+      ]
+    },
+    {
+      "id": "sorting-delicates",
+      "title": "Sorting by fabric type: delicates",
+      "type": "content",
+      "description": "Delicate fabrics include lace, silk, and other lightweight materials. These items should be washed on a gentle cycle to prevent damage.",
+      "images": [
+        {
+          "src": "imgs/delicates.png",
+          "alt": "Sorting delicates"
+        }
+      ]
+    },
+    {
+      "id": "sorting-cottons",
+      "title": "Sorting by fabric type: cottons",
+      "type": "content",
+      "description": "Cotton and natural fabrics are durable and can be washed together. This includes items like t-shirts, jeans, and towels.",
+      "images": [
+        {
+          "src": "imgs/cottons.png",
+          "alt": "Sorting cotton"
+        }
+      ]
+    },
+    {
+      "id": "sorting-synthetics",
+      "title": "Sorting by fabric type: synthetics",
+      "type": "content",
+      "description": "Synthetic fabrics include polyester, nylon, and blends. These items can be washed together on a regular cycle.",
+      "images": [
+        {
+          "src": "imgs/synthetics.png",
+          "alt": "Sorting synthetics"
+        }
+      ]
+    },
+    {
+      "id": "sorting-heavy",
+      "title": "Sorting by fabric type: bulky items",
+      "type": "content",
+      "description": "Heavy items, like comforters, rugs, coats, pillows, etc. should be washed separately to prevent damage to other items. These items can be washed on a heavy-duty cycle.",
+      "images": [
+        {
+          "src": "imgs/blankets.jpg",
+          "alt": "Sorting heavy items"
+        }
+      ]
+    },
+    {
+      "id": "sorting-soil-main",
+      "title": "Sorting by soil level",
+      "type": "content",
+      "next_page": "mainpage2",
+      "description": "Sorting by soil level helps ensure that heavily soiled items are cleaned properly without damaging other clothes.",
+      "images": [
+        {
+          "src": "imgs/soil.png",
+          "alt": "Sorting by soil level"
+        }
+      ]
+    },
+    {
+      "id": "wash-settings-mainpage",
+      "title": "Wash settings",
+      "type": "lesson",
+      "next_page": "mainpage3",
+      "description": "Learn to choose the right settings for clean, well-maintained clothes.",
+      "children": [
+        "wash-cycle",
+        "water-temperature",
+        "spin-speed",
+        "wash-settings-quiz-1",
+        "wash-settings-quiz-2",
+        "wash-settings-quiz-3"
+      ]
+    },
+    {
+      "id": "wash-cycle",
+      "title": "Wash cycle",
+      "type": "content",
+      "description": "Choose the right cycle for your fabrics: Heavy Duty: For very dirty items, Normal: Everyday clothes, Delicate: For fragile fabrics, Perm Press: Reduces wrinkles",
+      "images": [
+        {
+          "src": "imgs/wash-cycle.png",
+          "alt": "Wash cycle"
+        }
+      ]
+    },
+    {
+      "id": "water-temperature",
+      "title": "Water temperature",
+      "type": "content",
+      "description": "Select temperature based on fabric and color: Hot: Whites & very dirty items, Warm: Colors & moderately dirty,  Cold: Dark colors & delicates",
+      "images": [
+        {
+          "src": "imgs/water-temperature.png",
+          "alt": "Water temperature"
+        }
+      ]
+    },
+    {
+      "id": "spin-speed",
+      "title": "Spin speed",
+      "type": "content",
+      "description": "Controls how wet clothes are after washing: High: Faster drying (rougher), Medium: Balanced, Low: Gentler (wetter clothes)",
+      "images": [
+        {
+          "src": "imgs/spin-speed.png",
+          "alt": "Spin speed"
+        }
+      ]
+    },
+    {
+      "id": "laundry-bags",
+      "title": "Laundry bags",
+      "type": "content",
+      "description": "Laundry bags are a great way to protect delicate items during the wash. They help prevent snagging and tangling, and can also be used to keep small items together.",
+      "images": [
+        {
+          "src": "imgs/laundry-bags.png",
+          "alt": "Laundry bags"
+        }
+      ]
+    },
+    {
+      "id": "reading-labels-mainpage",
+      "title": "Reading labels",
+      "type": "lesson",
+      "next_page": "mainpage4",
+      "description": "Reading clothing labels is essential for understanding how to care for your clothes. Labels provide important information about fabric content, care instructions, and wash settings. By learning how to read labels, you’ll be able to keep your clothes looking their best.",
+      "children": [
+        "reading-labels-intro",
+        "label-wash",
+        "label-bleach",
+        "label-dry",
+        "label-iron",
+        "label-dryclean",
+        "label-quiz"
+      ]
+    },
+    {
+      "id": "reading-labels-intro",
+      "title": "Reading labels",
+      "type": "content",
+      "description": "When in doubt, you can always consult the labels on your clothes. Labels provide important information about fabric content, care instructions, and wash settings. The symbols on the labels can be confusing, but are very sysetematic.",
+      "images": [
+        {
+          "src": "imgs/all-wash-label.png",
+          "alt": "Reading labels"
+        }
+      ]
+    },
+    {
+      "id": "label-wash",
+      "title": "Label symbols: Wash",
+      "type": "content",
+      "description": "The wash symbol resembles the drum of a washing machine. The number or dots inside the tub indicates the maximum water temperature. The hand symbol indicates that the item should be hand washed. The number of lines below indicate the gentleness of the cycle.",
+      "images": [
+        {
+          "src": "imgs/wash-label.png",
+          "alt": "Label symbols: Wash"
+        }
+      ]
+    },
+    {
+      "id": "label-bleach",
+      "title": "Label symbols: Bleach",
+      "type": "content",
+      "description": "The triangle symbol indicates whether bleach can be used. A triangle with a cross through it means no bleach. A triangle with a 'CL' inside means only non-chlorine bleach can be used. A triangle with no cross or letters means any bleach can be used.",
+      "images": [
+        {
+          "src": "imgs/bleach_label.png",
+          "alt": "Label symbols: Bleach"
+        }
+      ]
+    },
+    {
+      "id": "label-dry",
+      "title": "Label symbols: Dry",
+      "type": "content",
+      "description": "The square with a circle inside indicates that the item can be tumble dried. The dots inside the circle indicate the maximum heat setting. A square with a circle and a cross through it means do not tumble dry.",
+      "images": [
+        {
+          "src": "imgs/dry-label.png",
+          "alt": "Label symbols: Dry"
+        }
+      ]
+    },
+    {
+      "id": "label-iron",
+      "title": "Label symbols: Iron",
+      "type": "content",
+      "description": "The iron symbol indicates whether the item can be ironed. The dots inside the iron indicate the maximum heat setting. An iron with a cross through it means do not iron.",
+      "images": [
+        {
+          "src": "imgs/iron-label.png",
+          "alt": "Label symbols: Iron"
+        }
+      ]
+    },
+    {
+      "id": "label-dryclean",
+      "title": "Label symbols: Dry clean",
+      "type": "content",
+      "description": "The circle symbol indicates whether the item can be dry cleaned. A circle with a cross through it means do not dry clean. A circle with a 'P' inside means any solvent can be used. A circle with a 'F' inside means only petroleum solvent can be used.",
+      "images": [
+        {
+          "src": "imgs/dryclean-label.png",
+          "alt": "Label symbols: Dry clean"
+        }
+      ]
+    },
+    {
+      "id": "outline-0",
+      "title": "Outline",
+      "type": "outline",
+      "stage": 0
+    },
+    {
+      "id": "outline-1",
+      "title": "Outline",
+      "type": "outline",
+      "stage": 1
+    },
+    {
+      "id": "outline-2",
+      "title": "Outline",
+      "type": "outline",
+      "stage": 2
+    },
+    {
+      "id": "outline-3",
+      "title": "Outline",
+      "type": "outline",
+      "stage": 3
+    },
+    {
+      "id": "outline-4",
+      "title": "Outline",
+      "type": "outline",
+      "stage": 4
+    },
+    {
+      "id": "final",
+      "title": "Congratulations!",
+      "type": "content",
+      "description": "Congrats on completing!"
+    },
+    {
+      "id": "wash-settings-quiz-1",
+      "title": "Checkpoint 1: Wash settings",
+      "type": "quiz",
+      "questions": [
+        {
+          "question": "What settings would you use for a load of heavily soiled white cotton clothing?",
+          "type": "wash_panel",
+          "option-cycle": [
+            "Heavy Duty, Normal, Delicate, "
+          ],
+          "option-temp": [
+            "Cold, Warm, Hot"
+          ],
+          "option-spin": [
+            "Low,  Medium, High "
+          ],
+          "answer": {
+            "cycle": "Heavy Duty",
+            "temperature": "Hot",
+            "spin": "High"
+          }
+        }
+      ]
+    },
+    {
+      "id": "wash-settings-quiz-2",
+      "title": "Checkpoint 2: Wash Setting",
+      "type": "quiz",
+      "questions": [
+        {
+          "question": "What settings would you use for a load of jeans and pants?",
+          "type": "wash_panel",
+          "option-cycle": [
+            "Heavy Duty, Normal, Delicate, "
+          ],
+          "option-temp": [
+            "Cold, Warm, Hot"
+          ],
+          "option-spin": [
+            "Low,  Medium, High "
+          ],
+          "answer": {
+            "cycle": [
+              "Normal",
+              "Heavy Duty"
+            ],
+            "temperature": [
+              "Cold",
+              "Warm"
+            ],
+            "spin": [
+              "Medium",
+              "High"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "wash-settings-quiz-3",
+      "title": "Checkpoint 3: Wash Setting",
+      "type": "quiz",
+      "questions": [
+        {
+          "question": "What settings would you use for a load of delicate fabrics?",
+          "type": "wash_panel",
+          "option-cycle": [
+            "Heavy Duty, Normal, Delicate, "
+          ],
+          "option-temp": [
+            "Cold, Warm, Hot"
+          ],
+          "option-spin": [
+            "Low,  Medium, High "
+          ],
+          "answer": {
+            "cycle": "Delicate",
+            "temperature": "Cold",
+            "spin": "Low"
+          }
+        }
+      ]
+    },
+    {
+      "id": "sorting-temp-quiz",
+      "title": "temp quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "question": "",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "C"
+    },
+    {
+      "id": "sorting-color-quiz-dragdrop",
+      "title": "Checkpoint: Sorting by color",
+      "type": "quiz",
+      "questions": [
+        {
+          "question": "Sort these items by color into two bins.",
+          "type": "drag_and_drop",
+          "num_bins": 2,
+          "items": [
+            {
+              "id": "1",
+              "img": "imgs/quiz/sort-color-quiz/1.jpg",
+              "group": "1",
+              "text": "white t-shirt"
+            },
+            {
+              "id": "2",
+              "img": "imgs/quiz/sort-color-quiz/2.jpg",
+              "group": "2",
+              "text": "black jeans"
+            },
+            {
+              "id": "3",
+              "img": "imgs/quiz/sort-color-quiz/3.jpg",
+              "group": "2",
+              "text": "red t-shirt"
+            },
+            {
+              "id": "4",
+              "img": "imgs/quiz/sort-color-quiz/4.webp",
+              "group": "1",
+              "text": "white pants"
+            },
+            {
+              "id": "5",
+              "img": "imgs/quiz/sort-color-quiz/5.webp",
+              "group": "2",
+              "text": "blue t-shirt"
+            },
+            {
+              "id": "7",
+              "img": "imgs/quiz/sort-color-quiz/7.jpg",
+              "group": "2",
+              "text": "red flannel"
+            },
+            {
+              "id": "9",
+              "img": "imgs/quiz/sort-color-quiz/9.jpg",
+              "group": "2",
+              "text": "blue jeans"
+            }
+          ],
+          "answer": {
+            "bin0": [
+              "1",
+              "4"
+            ],
+            "bin1": [
+              "2",
+              "3",
+              "5",
+              "7",
+              "9"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "sorting-temp2-quiz",
+      "title": "Checkpoint: Sorting by fabric type",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "questions": [
+        {
+          "qid": "sorting-fabric-mcq",
+          "question": "Which of these are in a different category from the others?",
+          "options": [
+            "Silk",
+            "Cotton",
+            "Jeans",
+            "Towels"
+          ],
+          "answer": "Silk"
+        }
+      ]
+    },
+    {
+      "id": "wash-settings-temp-quiz",
+      "title": "temp quiz 3",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "question": "Temporary quiz question",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "label-quiz",
+      "title": "Checkpoint: Reading Label",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "img": "imgs/quiz/label-quiz/1.png",
+      "questions": [
+        {
+          "question": "How should you machine wash this?",
+          "options": [
+            "Cold, gentle cycle",
+            "Warm, gentle cycle",
+            "Hot, gentle cycle",
+            "Cold, normal cycle/perm press",
+            "Warm, normal cycle/perm press",
+            "Hot, normal cycle/perm press",
+            "Cold, any cycle",
+            "Warm, any cycle",
+            "Hot, any cycle"
+          ],
+          "answer": "Cold, any cycle"
+        },
+        {
+          "question": "What bleach should you use?",
+          "options": [
+            "No bleach",
+            "Non-chlorine bleach",
+            "Chlorine bleach"
+          ],
+          "answer": "Non-chlorine bleach"
+        },
+        {
+          "question": "How should you dry this item?",
+          "options": [
+            "Tumble dry low",
+            "Tumble dry medium",
+            "Tumble dry high",
+            "Line dry",
+            "Lay flat to dry",
+            "Do not tumble dry"
+          ],
+          "answer": "Tumble dry low"
+        },
+        {
+          "question": "How should you iron this item?",
+          "options": [
+            "Do not iron",
+            "Iron on low heat",
+            "Iron on medium heat",
+            "Iron on high heat"
+          ],
+          "answer": "Iron on low heat"
+        },
+        {
+          "question": "How should you dry clean this item?",
+          "options": [
+            "Do not dry clean",
+            "Dry clean with any solvent",
+            "Dry clean with any solvent except tetrachlorethylene",
+            "Dry clean with tetrachlorethylene only"
+          ],
+          "answer": "Do not dry clean"
+        }
+      ]
+    },
+    {
+      "id": "big-quiz",
+      "title": "Final quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "question": "Temporary quiz question",
+      "options": [
+        "A",
+        "B",
+        "C"
+      ],
+      "answer": "B"
+    },
+    {
+      "id": "sorting-color-final-quiz",
+      "title": "Sort by color quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "questions": [
+        {
+          "question": "Sort these items by color into two bins.",
+          "type": "drag_and_drop",
+          "num_bins": 2,
+          "items": [
+            {
+              "id": "1",
+              "img": "imgs/quiz/sort-color-quiz/1.jpg",
+              "text": "white cotton t-shirt",
+              "group": "1"
+            },
+            {
+              "id": "2",
+              "text": "black cotton t-shirt",
+              "img": "imgs/quiz/sort-color-quiz/f1.webp",
+              "group": "2"
+            },
+            {
+              "id": "3",
+              "text": "blue denim jeans",
+              "img": "imgs/quiz/sort-color-quiz/9.jpg",
+              "group": "2"
+            },
+            {
+              "id": "4",
+              "text": "dark green exercise pants",
+              "img": "imgs/quiz/sort-color-quiz/f2.avif",
+              "group": "2"
+            },
+            {
+              "id": "5",
+              "text": "pastel yellow silk shirt",
+              "img": "imgs/quiz/sort-color-quiz/f3.webp",
+              "group": "1"
+            },
+            {
+              "id": "6",
+              "text": "white linen pants",
+              "img": "imgs/quiz/sort-color-quiz/4.webp",
+              "group": "1"
+            },
+            {
+              "id": "7",
+              "text": "dark grey cargo shorts",
+              "img": "imgs/quiz/sort-color-quiz/f4.jpg",
+              "group": "2"
+            },
+            {
+              "id": "8",
+              "text": "red bedsheet",
+              "img": "imgs/quiz/sort-color-quiz/f5.jpg",
+              "group": "2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "sorting-fabric-final-quiz",
+      "title": "Sort by fabric type quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "questions": [
+        {
+          "question": "Sort these items by fabric type into three bins: delicates, cottons, and heavy-duty.",
+          "type": "drag_and_drop",
+          "num_bins": 3,
+          "items": [
+            {
+              "id": "1",
+              "img": "imgs/quiz/sort-color-quiz/1.jpg",
+              "text": "white cotton t-shirt",
+              "group": "1"
+            },
+            {
+              "id": "2",
+              "text": "black cotton t-shirt",
+              "img": "imgs/quiz/sort-color-quiz/f1.webp",
+              "group": "1"
+            },
+            {
+              "id": "3",
+              "text": "blue denim jeans",
+              "img": "imgs/quiz/sort-color-quiz/9.jpg",
+              "group": "2"
+            },
+            {
+              "id": "4",
+              "text": "dark green exercise pants",
+              "img": "imgs/quiz/sort-color-quiz/f2.avif",
+              "group": "3"
+            },
+            {
+              "id": "5",
+              "text": "pastel yellow silk shirt",
+              "img": "imgs/quiz/sort-color-quiz/f3.webp",
+              "group": "3"
+            },
+            {
+              "id": "6",
+              "text": "white linen pants",
+              "img": "imgs/quiz/sort-color-quiz/4.webp",
+              "group": "1"
+            },
+            {
+              "id": "7",
+              "text": "dark grey cargo shorts",
+              "img": "imgs/quiz/sort-color-quiz/f4.jpg",
+              "group": "2"
+            },
+            {
+              "id": "8",
+              "text": "red bedsheet",
+              "img": "imgs/quiz/sort-color-quiz/f5.jpg",
+              "group": "2"
+            }
+          ],
+          "answer": [
+            [
+              1,
+              2,
+              6
+            ],
+            [
+              4,
+              5
+            ],
+            [
+              3,
+              7,
+              8
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wash-settings-final-quiz",
+      "title": "Wash settings: review quiz",
+      "type": "quiz",
+      "questions": [
+        {
+          "question": "What settings would you use for a load of heavily soiled colored cotton clothing and jeans?",
+          "type": "wash_panel",
+          "option-cycle": [
+            "Heavy Duty, Normal, Delicate"
+          ],
+          "option-temp": [
+            "Cold, Warm, Hot"
+          ],
+          "option-spin": [
+            "Low,  Medium, High"
+          ],
+          "answer": {
+            "cycle": "Heavy Duty",
+            "temperature": "Warm",
+            "spin": "High"
+          }
+        }
+      ]
+    },
+    {
+      "id": "reading-labels-final-quiz",
+      "title": "Reading labels: quiz",
+      "type": "quiz",
+      "quiz-type": "multiple",
+      "img": "imgs/quiz/label-quiz/1.png",
+      "questions": [
+        {
+          "question": "How should you machine wash this?",
+          "options": [
+            "Cold, gentle cycle",
+            "Warm, gentle cycle",
+            "Hot, gentle cycle",
+            "Cold, normal cycle/perm press",
+            "Warm, normal cycle/perm press",
+            "Hot, normal cycle/perm press",
+            "Cold, any cycle",
+            "Warm, any cycle",
+            "Hot, any cycle"
+          ],
+          "answer": "Cold, any cycle"
+        },
+        {
+          "question": "What bleach should you use?",
+          "options": [
+            "No bleach",
+            "Non-chlorine bleach",
+            "Chlorine bleach"
+          ],
+          "answer": "Non-chlorine bleach"
+        },
+        {
+          "question": "How should you dry this item?",
+          "options": [
+            "Tumble dry low",
+            "Tumble dry medium",
+            "Tumble dry high",
+            "Line dry",
+            "Lay flat to dry",
+            "Do not tumble dry"
+          ],
+          "answer": "Tumble dry low"
+        },
+        {
+          "question": "How should you iron this item?",
+          "options": [
+            "Do not iron",
+            "Iron on low heat",
+            "Iron on medium heat",
+            "Iron on high heat"
+          ],
+          "answer": "Iron on low heat"
+        },
+        {
+          "question": "How should you dry clean this item?",
+          "options": [
+            "Do not dry clean",
+            "Dry clean with any solvent",
+            "Dry clean with any solvent except tetrachlorethylene",
+            "Dry clean with tetrachlorethylene only"
+          ],
+          "answer": "Do not dry clean"
+        }
+      ]
+    },
+    {
+      "id": "congratulations",
+      "title": "Congratulations!",
+      "type": "content",
+      "next_page": "mainpage5",
+      "description": "Congratulations on completing the course!",
+      "images": [
+        {
+          "src": "imgs/washing-machine.webp",
+          "alt": "an image of a washing machine"
+        }
+      ]
+    }
+  ]
 }
