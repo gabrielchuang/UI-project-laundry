@@ -2,27 +2,24 @@
 
 {% block content %}
 
-<div class="container text-center mt-5">
-    <div class="white-box p-5">
-        <h1 class="title">Welcome to the Five Star Laundromat!</h1>
+    <div class="container text-center mt-5">
+        <div class="white-box p-5">
+            <h1 class="title">Welcome to the Five Star Laundromat!</h1>
 
-        <p>
-            Welcome to the <b> laundry basics course!</b> This course is designed to help you learn the 
-            fundamentals of laundry care.
-        </p>
+            <p>
+                Welcome to the <b> laundry basics course!</b> This course is designed to help you learn the
+                fundamentals of laundry care.
+            </p>
 
-        <p> By the end of this course, you will be able to sort your laundry, choose the right wash settings,
-            and understand how to read clothing labels. 
-        </p>
-     
-
+            <p> By the end of this course, you will be able to sort your laundry, choose the right wash settings,
+                and understand how to read clothing labels.
+            </p>
             <!-- New flex layout: step-indicator + buttons side by side -->
 
             <div class="d-flex justify-content-center align-items-start gap-5" style="margin: 20px">
-
                 <!-- Step indicator on the left -->
                 <div class="step-indicator d-flex flex-column align-items-center mt-2">
-                    
+
                     {% for j in range(1, 5) %}
                         <div class="circle {% if j < iter %} done {% elif j == iter %} active {% endif %}"></div>
                     {% endfor %}
@@ -32,24 +29,26 @@
                 <div class="d-grid gap-4 button-column">
 
                     {% for i in chapters %}
-                        {% if loop.index < iter %} 
-                            <a href= "{{i.page}}"
-                                class="btn btn-light btn-lg shadow-sm px-5 done">{{ i['name'] }}</a> 
-                        {% elif loop.index == iter %} 
-                            <a href= "{{i.page}}"
-                            class="btn btn-light btn-lg shadow-sm px-5 suggested">{{ i['name'] }}</a> 
-                        {% else %} 
-                            <a class="btn btn-light btn-lg shadow-sm px-5 locked disabled ">{{ i['name'] }}</a> 
-                        {% endif %}  
+                        {% if loop.index < iter %}
+                            <a href="{{ i.page }}"
+                               class="btn btn-light btn-lg shadow-sm px-5 done">{{ i['name'] }}</a>
+                        {% elif loop.index == iter %}
+                            <a href="{{ i.page }}"
+                               class="btn btn-light btn-lg shadow-sm px-5 suggested">{{ i['name'] }}</a>
+                        {% else %}
+                            <a class="btn btn-light btn-lg shadow-sm px-5 locked disabled ">{{ i['name'] }}</a>
+                        {% endif %}
                     {% endfor %}
                 </div>
 
-                <img src="{{ url_for('static', filename='imgs/washing-machine.webp') }}" 
-                    alt="laundry" class="laundry-icon" \>
-                
+                <div style="text-align: center; margin: 20px 0;">
+                    <!-- Washing machine image with inline styles -->
+                    <img src="{{ url_for('static', filename='imgs/washing-machine.webp') }}"
+                         alt="Washing Machine"
+                         style="width: 250px; height: auto; border: 3px solid #0056b3;"/>
             </div>
         </div>
     </div>
-</div>
+    </div>
 
 {% endblock %}

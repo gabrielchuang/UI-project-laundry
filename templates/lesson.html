@@ -3,8 +3,28 @@
 {% block content %}
 
 <div class="layout row m-2 py-4">
-    <!-- Sidebar START -->
-    <div class="sidebar col-2">
+    <!-- Collapsible sidebar for mobile -->
+    <div class="d-lg-none w-100 mb-3">
+        <button class="btn btn-outline-primary w-100" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSidebar">
+            Show/Hide Lesson Progress
+        </button>
+        <div class="collapse mt-3" id="mobileSidebar">
+            <div class="sidebar">
+                <h4>Lesson Progress</h4>
+                <div id="sidebar-tracker-mobile">
+                    {% for slide in content %}
+                        <li data-slide-index="{{ loop.index0 }}" id="sidebar-mobile-item-{{ loop.index0 }}" class="d-flex align-items-center mb-1">
+                            <span class="font-13 px-2 py-1">{{ slide.title }}</span>
+                            <span class="sidebar-status"></span>
+                        </li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar for desktop -->
+    <div class="sidebar col-lg-3 col-xl-2 d-none d-lg-block">
         <h4>Lesson Progress</h4>
         <div id="sidebar-tracker">
             {% for slide in content %}
@@ -15,18 +35,19 @@
             {% endfor %}
         </div>
     </div>
-    <!-- Sidebar END -->
-    <div class="col-9">
+
+    <!-- Main content -->
+    <div class="col-lg-9 col-xl-10">
         <div class="lesson-back-button mb-3">
             <a href="javascript:history.back()" class="back-link">&larr; Back to Main Page</a>
-          </div>
-          
+        </div>
+
         <div class="header">
             {{ lesson.title }}
         </div>
 
         {% for slide in content %}
-        <div class="slide {% if loop.first %}active{% endif %}" 
+        <div class="slide {% if loop.first %}active{% endif %}"
             id="slide{{ loop.index }}" data-slide-id="{{ slide.id }}" data-slide-type="{{ slide.type }}">
             {% if slide.type == 'quiz' %}
                 <!-- Special handling for quiz slides -->
@@ -41,140 +62,139 @@
                         <img src="{{ url_for('static', filename=slide.img) }}" alt="Quiz image" class="img-fluid" style="max-height: 300px;">
                     </div>
                     {% endif %}
-            
 
-                        {% if slide.questions %}
-                            <!-- Progress indicator for embedded quiz -->
-                             {% if slide.questions|length > 1 %}
-                                <div class="progress-indicator">
-                                    <span class="current-quiz-question">1</span> of <span
-                                        class="total-quiz-questions">{{ slide.questions|length }}</span>
-                                </div>
-                            {% endif %}
-
-                            {% for question in slide.questions %}
-                            {% set qindex = loop.index0 %} 
-                                {% if question.type == 'wash_panel' %}
-                                <!-- Wash panel question type -->
-                                <div class="question-container wash-panel-question {% if loop.first %}active{% endif %}" data-answer='{{ question.answer | tojson }}' data-index='{{ loop.index0 }}'>
-
-                                    <h3>Question {{ loop.index }}</h3>
-                                    <p>{{ question.question }}</p>
-                                
-                                    <div class="wash-panel">
-                                        <div class="wash-row">
-                                            <div class="wash-label">Cycle</div>
-                                            <div class="wash-options" id="cycle-options-{{ loop.index0 }}">
-                                                {% for option in question["option-cycle"][0].split(",") %}
-                                                    {% if option.strip() %}
-                                                    <button type="button" class="wash-option" data-type="cycle" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                        <div class="wash-row">
-                                            <div class="wash-label">Spin Speed</div>
-                                            <div class="wash-options" id="spin-options-{{ loop.index0 }}">
-                                                {% for option in question["option-spin"][0].split(",") %}
-                                                    {% if option.strip() %}
-                                                    <button type="button" class="wash-option" data-type="spin" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                        <div class="wash-row">
-                                            <div class="wash-label">Temperature</div>
-                                            <div class="wash-options" id="temp-options-{{ loop.index0 }}">
-                                                {% for option in question["option-temp"][0].split(",") %}
-                                                    {% if option.strip() %}
-                                                    <button type="button" class="wash-option" data-type="temp" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
-                                                    {% endif %}
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                    </div>
-                                
-                                    <button type="button" class="btn check-btn check-wash-btn">Check Answer</button>
-                                    <div class="feedback" style="display:none;"></div>
-                                
-                                    <!-- Hidden inputs to store selected answers -->
-                                    <input type="hidden" name="selected-cycle-{{ qindex }}" id="selected-cycle-{{ qindex }}">
-                                    <input type="hidden" name="selected-spin-{{ qindex }}" id="selected-spin-{{ qindex }}">
-                                    <input type="hidden" name="selected-temp-{{ qindex }}" id="selected-temp-{{ qindex }}">    
-
-                                </div>
-                                {% elif question.type == 'drag_and_drop' %}
-                                <!-- Drag and Drop question type -->
-                                <div class="drag-drop-question">
-                                    <h3>Question {{ loop.index }}</h3>
-                                    <p>{{ question.question }}</p>
-                                    
-                                    <div class="drag-items">
-                                        {% for item in question["items"] %}
-                                            <div class="drag-item" draggable="true" id="item-{{ loop.index }}-{{ loop.index0 }}" data-group="{{ item.group }}", data-text="{{ item.text}}">
-                                                {% if item.img %}
-                                                    <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.text }}" class="drag-image">
-                                                {% endif %}
-                                                {% if item.text %}
-                                                    {{ item.text }}
-                                                {% endif %}
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                            
-                                    <div class="bins">
-                                        {% for bin_idx in range(question.num_bins) %}
-                                            <div class="bin" data-bin="bin{{ bin_idx }}">
-                                                Drop Here
-                                            </div>
-                                        {% endfor %}
-                                    </div>
-                                    
-                            
-                                    <!-- Hidden inputs to record where each item was dropped -->
-                                    <div class="drop-records">
-                                        {% for item in question["items"] %}
-                                        <input type="hidden" name="drag_result_{{ item.id }}" id="drag-result-item-{{ item.id }}">
-                                        {% endfor %}
-                                    </div>
-
-                                    <button type="button" class="check-drag-btn btn">Check Answer</button>
-                                    <div class="feedback" style="display:none;"></div>
-                                </div>
-                                {% else %}
-                                <!-- Default question type -->
-                                <div class="question-container-mcq {% if loop.first %}active{% endif %}"
-                                     id="quiz-{{ slide.id }}-question-{{ loop.index0 }}">
-                                    <div class="question-card p-4 mb-4 rounded shadow-sm">
-                                        <h3>Question {{ loop.index }}</h3>
-                                        <p>{{ question.question }}</p>
-                                        <div class="options-container" data-answer="{{ question.answer }}">
-                                            {% for option in question.options %}
-                                                <label class="form-check option py-2 px-3 mb-2 rounded" style="cursor: pointer;">
-                                                    <input type="radio" name="q0"
-                                                        id="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}"
-                                                        value="{{ option }}" class="me-2">
-                                                    {{ option }}
-                                                </label>
-                                            {% endfor %}
-                                            <div class="feedback-message mt-2 fw-bold"></div>
-                                        </div>
-
-
-                                        <div class="quiz-actions">
-                                            <button type="submit" class="btn btn-primary">Check answer</button>
-                                        </div>
-        
-                                        <div class="validation-message">
-                                            Please select an answer
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endif %}
-                            {% endfor %}
-                        {% else %}
-                            <div class="alert alert-warning">No questions available for this quiz.</div>
+                    {% if slide.questions %}
+                        <!-- Progress indicator for embedded quiz -->
+                        {% if slide.questions|length > 1 %}
+                            <div class="progress-indicator">
+                                <span class="current-quiz-question">1</span> of <span
+                                    class="total-quiz-questions">{{ slide.questions|length }}</span>
+                            </div>
                         {% endif %}
+
+                        {% for question in slide.questions %}
+                        {% set qindex = loop.index0 %}
+                            {% if question.type == 'wash_panel' %}
+                            <!-- Wash panel question type -->
+                            <div class="question-container wash-panel-question {% if loop.first %}active{% endif %}" data-answer='{{ question.answer | tojson }}' data-index='{{ loop.index0 }}'>
+
+                                <h3>Question {{ loop.index }}</h3>
+                                <p>{{ question.question }}</p>
+
+                                <div class="wash-panel">
+                                    <div class="wash-row">
+                                        <div class="wash-label">Cycle</div>
+                                        <div class="wash-options" id="cycle-options-{{ loop.index0 }}">
+                                            {% for option in question["option-cycle"][0].split(",") %}
+                                                {% if option.strip() %}
+                                                <button type="button" class="wash-option" data-type="cycle" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="wash-row">
+                                        <div class="wash-label">Spin Speed</div>
+                                        <div class="wash-options" id="spin-options-{{ loop.index0 }}">
+                                            {% for option in question["option-spin"][0].split(",") %}
+                                                {% if option.strip() %}
+                                                <button type="button" class="wash-option" data-type="spin" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    <div class="wash-row">
+                                        <div class="wash-label">Temperature</div>
+                                        <div class="wash-options" id="temp-options-{{ loop.index0 }}">
+                                            {% for option in question["option-temp"][0].split(",") %}
+                                                {% if option.strip() %}
+                                                <button type="button" class="wash-option" data-type="temp" data-value="{{ option.strip() }}">{{ option.strip() }}</button>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn check-btn check-wash-btn">Check Answer</button>
+                                <div class="feedback" style="display:none;"></div>
+
+                                <!-- Hidden inputs to store selected answers -->
+                                <input type="hidden" name="selected-cycle-{{ qindex }}" id="selected-cycle-{{ qindex }}">
+                                <input type="hidden" name="selected-spin-{{ qindex }}" id="selected-spin-{{ qindex }}">
+                                <input type="hidden" name="selected-temp-{{ qindex }}" id="selected-temp-{{ qindex }}">
+
+                            </div>
+                            {% elif question.type == 'drag_and_drop' %}
+                            <!-- Drag and Drop question type -->
+                            <div class="drag-drop-question">
+                                <h3>Question {{ loop.index }}</h3>
+                                <p>{{ question.question }}</p>
+
+                                <div class="drag-items">
+                                    {% for item in question["items"] %}
+                                        <div class="drag-item" draggable="true" id="item-{{ loop.index }}-{{ loop.index0 }}" data-group="{{ item.group }}", data-text="{{ item.text}}">
+                                            {% if item.img %}
+                                                <img src="{{ url_for('static', filename=item.img) }}" alt="{{ item.text }}" class="drag-image">
+                                            {% endif %}
+                                            {% if item.text %}
+                                                {{ item.text }}
+                                            {% endif %}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+                                <div class="bins">
+                                    {% for bin_idx in range(question.num_bins) %}
+                                        <div class="bin" data-bin="bin{{ bin_idx }}">
+                                            Drop Here
+                                        </div>
+                                    {% endfor %}
+                                </div>
+
+
+                                <!-- Hidden inputs to record where each item was dropped -->
+                                <div class="drop-records">
+                                    {% for item in question["items"] %}
+                                    <input type="hidden" name="drag_result_{{ item.id }}" id="drag-result-item-{{ item.id }}">
+                                    {% endfor %}
+                                </div>
+
+                                <button type="button" class="check-drag-btn btn">Check Answer</button>
+                                <div class="feedback" style="display:none;"></div>
+                            </div>
+                            {% else %}
+                            <!-- Default question type -->
+                            <div class="question-container-mcq {% if loop.first %}active{% endif %}"
+                                 id="quiz-{{ slide.id }}-question-{{ loop.index0 }}">
+                                <div class="question-card p-4 mb-4 rounded shadow-sm">
+                                    <h3>Question {{ loop.index }}</h3>
+                                    <p>{{ question.question }}</p>
+                                    <div class="options-container" data-answer="{{ question.answer }}">
+                                        {% for option in question.options %}
+                                            <label class="form-check option py-2 px-3 mb-2 rounded" style="cursor: pointer;">
+                                                <input type="radio" name="q0"
+                                                    id="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}"
+                                                    value="{{ option }}" class="me-2">
+                                                {{ option }}
+                                            </label>
+                                        {% endfor %}
+                                        <div class="feedback-message mt-2 fw-bold"></div>
+                                    </div>
+
+
+                                    <div class="quiz-actions">
+                                        <button type="submit" class="btn btn-primary">Check answer</button>
+                                    </div>
+
+                                    <div class="validation-message">
+                                        Please select an answer
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        <div class="alert alert-warning">No questions available for this quiz.</div>
+                    {% endif %}
                 </div>
             {% else %}
                 <!-- Regular content slide -->
@@ -196,8 +216,8 @@
         {% endfor %}
 
         <div class="controls">
-            <button id="prev-btn">Previous</button>
-            <button id="next-btn">Next</button>
+            <button id="prev-btn" class="btn-navigation">Previous</button>
+            <button id="next-btn" class="btn-navigation">Next</button>
         </div>
 
         <div class="progress_bar my-2">
@@ -207,9 +227,8 @@
         </div>
 
         <a id="continue-btn" href="{{ nextpage }}" class="btn btn-primary" style="display: none;">Continue</a>
-        
+
     </div>
 </div>
-
     
 {% endblock %}
