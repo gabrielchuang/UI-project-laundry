@@ -169,9 +169,11 @@
                                     <h3>Question {{ loop.index }}</h3>
                                     <p>{{ question.question }}</p>
                                     <div class="options-container" data-answer="{{ question.answer }}">
+                                        {% set outer_index = loop.index0 %}
+
                                         {% for option in question.options %}
                                             <label class="form-check option py-2 px-3 mb-2 rounded" style="cursor: pointer;">
-                                                <input type="radio" name="q0"
+                                                <input type="radio" name="q{{outer_index}}"
                                                     id="quiz-{{ slide.id }}-q{{ loop.index0 }}-opt{{ loop.index }}"
                                                     value="{{ option }}" class="me-2">
                                                 {{ option }}
