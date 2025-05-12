@@ -580,11 +580,6 @@ button:disabled {
     cursor: pointer;
 }
 
-#sidebar-tracker li:hover {
-    border-left-color: #0056b3; /* Base Color */
-    background-color: #f0f4f8;
-    transform: translateX(3px);
-}
 
 .sidebar-status {
     margin-left: 5px;
