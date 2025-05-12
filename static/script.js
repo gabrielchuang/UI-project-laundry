@@ -120,7 +120,7 @@ $(document).ready(function () {
 
 
     $(".leftbar-btn").on('click', function() {
-        const target = $(this).data("slide-index") - 1;
+        const target = $(this).data("slide-index");
         showSlide(target, true);
     });
 
