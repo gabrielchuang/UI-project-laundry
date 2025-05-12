@@ -1,7 +1,3 @@
-UI design final class project
-Nicole Ineza, Lamees Alwasil, Gervais Ishimwe, Gabriel Chuang
-----
-
 # 🧺 Five Star Laundromat
 
 A fun and simple website to help you learn how to do laundry.
@@ -35,3 +31,6 @@ A fun and simple website to help you learn how to do laundry.
 * HTML/CSS
 * Bootstrap
 * JavaScript (with jQuery)
+
+## Authors
+Nicole Ineza, Lamees Alwasil, Gervais Ishimwe, Gabriel Chuang
