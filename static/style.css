@@ -435,12 +435,10 @@ button:hover {
 }
 
 button:disabled {
-    background-color: #f8f9fa; /* Light Grey */
-    color: #555; /* Dark Grey */
     cursor: not-allowed;
     transform: none;
     box-shadow: none;
-    opacity: 0.7;
+    opacity: 0.3;
 }
 
 #continue-btn {
@@ -689,9 +687,6 @@ button:disabled {
 }
 
 #reset-progress-btn {
-    color: orange;
-    border: 1px solid orange;
-    background-color: white;
     transition: all 0.3s ease;
     padding: 8px 15px;
     border-radius: 6px;
@@ -700,8 +695,7 @@ button:disabled {
 
 #reset-progress-btn:hover {
     color: white;
-    background-color: #dc3545;
-    box-shadow: 0 2px 5px rgba(220, 53, 69, 0.3);
+    box-shadow: 0 2px 5px rgba(38, 32, 226, 0.3);
 }
 
 /* Wash Panel - Improved */
