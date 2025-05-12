@@ -577,7 +577,6 @@ button:disabled {
     border-radius: 8px;
     border-left: 3px solid #ddd;
     transition: all 0.3s ease;
-    cursor: pointer;
 }
 
 
