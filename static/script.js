@@ -386,7 +386,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Hide Next button and show Continue on last slide
         if (index === slides.length - 1) {
-            //nextBtn.style.display = "none";
+            nextBtn.disabled = true;
             continueBtn.style.display = "inline-block";
         } else {
             //nextBtn.style.display = "inline-block";
@@ -406,6 +406,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (currentSlide < slides.length - 1) {
             showSlide(currentSlide + 1);
         }
+        nextBtn.disabled = currentSlide >= slides.length - 1;
     };
 
     // Initialize
