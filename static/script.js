@@ -118,6 +118,13 @@ $(document).ready(function () {
         showSlide(target, true);
     });
 
+
+    $(".leftbar-btn").on('click', function() {
+        const target = $(this).data("slide-index") - 1;
+        showSlide(target, true);
+    });
+
+
     // Initialize first slide
     if (totalSlides > 0) {
         showSlide(0, true);
