@@ -728,11 +728,11 @@ button:disabled {
 .wash-label {
     width: 130px;
     font-weight: bold;
-    background-color: #0056b3; /* Base Color */
-    color: white;
+    background-color: white; /* Base Color */
+    color: black;
     padding: 10px;
     text-align: center;
-    border-radius: 8px;
+    border-radius: 0px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
@@ -743,7 +743,8 @@ button:disabled {
 }
 
 .wash-option {
-    background-color: white;
+  background: white;
+    background-color: #d9edff !important;
     border: 2px solid #ddd;
     padding: 10px 20px;
     border-radius: 8px;
