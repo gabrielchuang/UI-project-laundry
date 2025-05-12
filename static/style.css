@@ -1362,6 +1362,12 @@ button:disabled {
   font-size: 0.95rem;
 }
 
+.home--bg-img{
+    width: 400px; 
+    height: auto; 
+    /* border: 3px solid #0056b3; */
+}
+
 /* Responsive adjustments */
 @media (max-width: 992px) {
   .main-title {

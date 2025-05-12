@@ -2,8 +2,8 @@
 
 {% block content %}
 
-    <div class="container text-center mt-5">
-        <div class="white-box p-5">
+    <div class="text-center mt-5 row justify-content-center">
+        <div class="p-5 col-12 col-lg-8">
             <h1 class="title">Welcome to the Five Star Laundromat!</h1>
 
             <p>
@@ -16,39 +16,41 @@
             </p>
             <!-- New flex layout: step-indicator + buttons side by side -->
 
-            <div class="d-flex justify-content-center align-items-start gap-5" style="margin: 20px">
+            <div class="row mt-5">
                 <!-- Step indicator on the left -->
-                <div class="step-indicator d-flex flex-column align-items-center mt-2">
+                <div class="col-12 col-md-6 d-flex align-items-start gap-5">
+                    <div class="step-indicator d-flex flex-column align-items-center mt-2">
 
-                    {% for j in range(1, 5) %}
-                        <div class="circle {% if j < iter %} done {% elif j == iter %} active {% endif %}"></div>
-                    {% endfor %}
+                        {% for j in range(1, 5) %}
+                            <div class="circle {% if j < iter %} done {% elif j == iter %} active {% endif %}"></div>
+                        {% endfor %}
+                    </div>
+    
+                    <!-- Buttons on the right -->
+                    <div class="d-grid gap-4 button-column">
+    
+                        {% for i in chapters %}
+                            {% if loop.index < iter %}
+                                <a href="{{ i.page }}"
+                                   class="btn btn-light btn-lg shadow-sm px-5 done">{{ i['name'] }}</a>
+                            {% elif loop.index == iter %}
+                                <a href="{{ i.page }}"
+                                   class="btn btn-light btn-lg shadow-sm px-5 suggested">{{ i['name'] }}</a>
+                            {% else %}
+                                <a class="btn btn-light btn-lg shadow-sm px-5 locked disabled ">{{ i['name'] }}</a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
                 </div>
 
-                <!-- Buttons on the right -->
-                <div class="d-grid gap-4 button-column">
-
-                    {% for i in chapters %}
-                        {% if loop.index < iter %}
-                            <a href="{{ i.page }}"
-                               class="btn btn-light btn-lg shadow-sm px-5 done">{{ i['name'] }}</a>
-                        {% elif loop.index == iter %}
-                            <a href="{{ i.page }}"
-                               class="btn btn-light btn-lg shadow-sm px-5 suggested">{{ i['name'] }}</a>
-                        {% else %}
-                            <a class="btn btn-light btn-lg shadow-sm px-5 locked disabled ">{{ i['name'] }}</a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-
-                <div style="text-align: center; margin: 20px 0;">
+                <div class="col-12 col-md-6" style="text-align: center; margin: 20px 0;">
                     <!-- Washing machine image with inline styles -->
                     <img src="{{ url_for('static', filename='imgs/washing-machine.webp') }}"
                          alt="Washing Machine"
-                         style="width: 250px; height: auto; border: 3px solid #0056b3;"/>
+                         class="home--bg-img"
+                         />
             </div>
         </div>
-    </div>
     </div>
 
 {% endblock %}
