@@ -100,7 +100,7 @@
             "images": [
                 {
                     "src": "imgs/colors.png",
-                    "alt": "Sorting colors"
+                    "alt": "an image of colored clothes"
                 }
             ]
         },
@@ -108,11 +108,11 @@
             "id": "sorting-whites",
             "title": "Sorting by color: whites",
             "type": "content",
-            "description": "Sorting whites is all about keeping your light-colored clothes looking bright and fresh. By separating whites from colors, you’ll prevent dye transfer. Whites typically include white shirts, socks, undergarments, and white sheets. They can often be washed with pastels.",
+            "description": "Sorting whites is all about keeping your light-colored clothes looking bright and fresh. By separating whites from colors, you’ll prevent dye transfer. Whites typically include white shirts, socks, undergarments, and sheets. They can often be washed with pastels.",
             "images": [
                 {
                     "src": "imgs/whites.png",
-                    "alt": "Sorting whites"
+                    "alt": "an image of whites clothes"
                 }
             ]
         },
@@ -124,7 +124,7 @@
             "images": [
                 {
                     "src": "imgs/darks.png",
-                    "alt": "Sorting darks"
+                    "alt": "image of dark clothes"
                 }
             ]
         },
@@ -136,7 +136,7 @@
             "images": [
                 {
                     "src": "imgs/colors.png",
-                    "alt": "Sorting colors"
+                    "alt": "imahe of colored clothes"
                 }
             ]
         },
@@ -148,7 +148,7 @@
             "images": [
                 {
                     "src": "imgs/sort_fabric.png",
-                    "alt": "Sorting fabric"
+                    "alt": "image of washing machines with fabrics"
                 }
             ]
         },
@@ -160,7 +160,7 @@
             "images": [
                 {
                     "src": "imgs/delicates.png",
-                    "alt": "Sorting delicates"
+                    "alt": "image of lace, silk, chiffon, and athletic wear"
                 }
             ]
         },
@@ -172,7 +172,7 @@
             "images": [
                 {
                     "src": "imgs/cottons.png",
-                    "alt": "Sorting cotton"
+                    "alt": "an image of cotton, bed sheets, and towel"
                 }
             ]
         },
@@ -184,7 +184,7 @@
             "images": [
                 {
                     "src": "imgs/synthetics.png",
-                    "alt": "Sorting synthetics"
+                    "alt": "an image of polyester, nylon, and blends"
                 }
             ]
         },
@@ -196,7 +196,7 @@
             "images": [
                 {
                     "src": "imgs/blankets.jpg",
-                    "alt": "Sorting heavy items"
+                    "alt": "an image of heavy items like sheets, blankets, and pillows"
                 }
             ]
         },
@@ -209,7 +209,7 @@
             "images": [
                 {
                     "src": "imgs/soil.png",
-                    "alt": "Sorting by soil level"
+                    "alt": "an image of soil level of a washing machine"
                 }
             ]
         },
@@ -236,7 +236,7 @@
             "images": [
                 {
                     "src": "imgs/wash-cycle.png",
-                    "alt": "Wash cycle"
+                    "alt": "image of wash cycle with a red rectagle higlighing the delicate, perm press and  head duty cycles"
                 }
             ]
         },
@@ -248,7 +248,7 @@
             "images": [
                 {
                     "src": "imgs/water-temperature.png",
-                    "alt": "Water temperature"
+                    "alt": "image of wash temperatures with a red rectagle higlighing hot, warm , and cold temperatures"
                 }
             ]
         },
@@ -260,7 +260,7 @@
             "images": [
                 {
                     "src": "imgs/spin-speed.png",
-                    "alt": "Spin speed"
+                    "alt": "image of wash spin speed with a red rectagle higlighing low, medium, and high spin speeds"
                 }
             ]
         },
@@ -300,7 +300,7 @@
             "images": [
                 {
                     "src": "imgs/all-wash-label.png",
-                    "alt": "Reading labels"
+                    "alt": "an image with all Reading labels"
                 }
             ]
         },
@@ -312,7 +312,9 @@
             "images": [
                 {
                     "src": "imgs/wash-label.png",
-                    "alt": "Label symbols: Wash"
+                    "alt": "Laundry care symbols: Machine wash normal; Machine wash permanent press; Machine wash delicate; Wash at or below 30°C or 80°F; Wash at or below 40°C or 105°F; Wash at or below 50°C or 120°F; Wash at or below 60°C or 140°F; Wash at or below 70°C or 160°F; Wash at or below 95°C or 200°F; Do not wash; Hand wash normal; Do not wring."
+                      
+                      
                 }
             ]
         },
@@ -320,11 +322,12 @@
             "id": "label-bleach",
             "title": "Label symbols: Bleach",
             "type": "content",
-            "description": "The triangle symbol indicates whether bleach can be used. A triangle with a cross through it means no bleach. A triangle with a 'CL' inside means only non-chlorine bleach can be used. A triangle with no cross or letters means any bleach can be used.",
+            "description": "The triangle symbol indicates whether bleach can be used. A triangle with a cross through it means no bleach. A triangle with a 'CL' inside means only chlorine bleach can be used. A triangle with no cross or letters means any bleach can be used.",
             "images": [
                 {
                     "src": "imgs/bleach_label.png",
-                    "alt": "Label symbols: Bleach"
+                    "alt": "Bleaching symbols: A plain triangle means any bleach as needed. A triangle with diagonal lines means non-chlorine bleach only. A triangle with 'CL' inside indicates chlorine bleach. A triangle with an X means do not bleach. A filled triangle with an X also means do not bleach."
+                    
                 }
             ]
         },
@@ -336,7 +339,7 @@
             "images": [
                 {
                     "src": "imgs/dry-label.png",
-                    "alt": "Label symbols: Dry"
+                    "alt": "Drying symbols: A plain circle in a square means tumble dry. A square with one dot inside means dry normal, low heat. Two dots mean medium heat. Three dots mean high heat. A crossed-out circle in a square means do not tumble dry. A plain square means dry. A crossed-out square means do not dry."
                 }
             ]
         },
@@ -348,7 +351,7 @@
             "images": [
                 {
                     "src": "imgs/iron-label.png",
-                    "alt": "Label symbols: Iron"
+                    "alt": "Ironing symbols: A plain iron symbol means ironing is allowed. One dot means iron at low temperature. Two dots mean medium temperature. Three dots mean high temperature. A crossed-out iron means do not iron. An iron with a crossed-out steam symbol means do not steam."
                 }
             ]
         },
@@ -360,7 +363,7 @@
             "images": [
                 {
                     "src": "imgs/dryclean-label.png",
-                    "alt": "Label symbols: Dry clean"
+                     "alt": "Dry cleaning symbols: A plain circle means dry clean. A circle with 'A' means any solvent can be used. A circle with 'P' means any solvent except tetrachlorethylene. A circle with 'F' means petroleum solvent only. A circle with 'W' means wet cleaning. A crossed-out circle means do not dry clean."
                 }
             ]
         },
@@ -479,42 +482,49 @@
                         {
                             "id": "1",
                             "img": "imgs/quiz/sort-color-quiz/1.jpg",
+                            "alt": "white t-shirt",
                             "group": "1",
                             "text": "white t-shirt"
                         },
                         {
                             "id": "2",
                             "img": "imgs/quiz/sort-color-quiz/2.jpg",
+                            "alt": "black jeans",
                             "group": "2",
                             "text": "black jeans"
                         },
                         {
                             "id": "3",
                             "img": "imgs/quiz/sort-color-quiz/3.jpg",
+                            "alt": "red t-shirt",
                             "group": "2",
                             "text": "red t-shirt"
                         },
                         {
                             "id": "4",
                             "img": "imgs/quiz/sort-color-quiz/4.webp",
+                            "alt": "white pants",
                             "group": "1",
                             "text": "white pants"
                         },
                         {
                             "id": "5",
                             "img": "imgs/quiz/sort-color-quiz/5.webp",
+                            "alt": "blue t-shirt",
                             "group": "2",
                             "text": "blue t-shirt"
                         },
                         {
                             "id": "7",
                             "img": "imgs/quiz/sort-color-quiz/7.jpg",
+                            "alt": "green t-shirt",
                             "group": "2",
                             "text": "red flannel"
                         },
                         {
                             "id": "9",
                             "img": "imgs/quiz/sort-color-quiz/9.jpg",
+                            "alt": "blue jeans",
                             "group": "2",
                             "text": "blue jeans"
                         }
@@ -555,6 +565,7 @@
             "type": "quiz",
             "quiz-type": "multiple",
             "img": "imgs/quiz/label-quiz/2.png",
+            "alt": "a bucket like with a hand in it, a square with a circle inside and a cross through it, an iron with a cross through it, and a bow with a cross through it",
             "questions": [
                 {
                     "question": "How should you wash this in a machine?",
@@ -611,6 +622,7 @@
                         {
                             "id": "1",
                             "img": "imgs/quiz/sort-color-quiz/1.jpg",
+                            "alt": "white t-shirt",
                             "text": "white cotton t-shirt",
                             "group": "1"
                         },
@@ -618,42 +630,49 @@
                             "id": "2",
                             "text": "black cotton t-shirt",
                             "img": "imgs/quiz/sort-color-quiz/f1.webp",
+                            "alt": "black t-shirt",
                             "group": "2"
                         },
                         {
                             "id": "3",
                             "text": "blue denim jeans",
                             "img": "imgs/quiz/sort-color-quiz/9.jpg",
+                            "alt": "blue jeans",
                             "group": "2"
                         },
                         {
                             "id": "4",
                             "text": "dark green exercise pants",
                             "img": "imgs/quiz/sort-color-quiz/f2.avif",
+                            "alt": "green pants",
                             "group": "2"
                         },
                         {
                             "id": "5",
                             "text": "pastel yellow silk shirt",
                             "img": "imgs/quiz/sort-color-quiz/f3.webp",
+                            "alt": "yellow shirt",
                             "group": "1"
                         },
                         {
                             "id": "6",
                             "text": "white linen pants",
                             "img": "imgs/quiz/sort-color-quiz/4.webp",
+                            "alt": "white pants",
                             "group": "1"
                         },
                         {
                             "id": "7",
                             "text": "dark grey cargo shorts",
                             "img": "imgs/quiz/sort-color-quiz/f4.jpg",
+                            "alt": "grey shorts",
                             "group": "2"
                         },
                         {
                             "id": "8",
                             "text": "red bedsheet",
                             "img": "imgs/quiz/sort-color-quiz/f5.jpg",
+                            "alt": "red bedsheet",
                             "group": "2"
                         }
                     ]
@@ -674,6 +693,7 @@
                         {
                             "id": "1",
                             "img": "imgs/quiz/sort-color-quiz/1.jpg",
+                            "alt": "white t-shirt", 
                             "text": "white cotton t-shirt",
                             "group": "1"
                         },
@@ -681,42 +701,49 @@
                             "id": "2",
                             "text": "black cotton t-shirt",
                             "img": "imgs/quiz/sort-color-quiz/f1.webp",
+                            "alt": "black t-shirt",
                             "group": "1"
                         },
                         {
                             "id": "3",
                             "text": "blue denim jeans",
                             "img": "imgs/quiz/sort-color-quiz/9.jpg",
+                            "alt": "blue jeans",
                             "group": "2"
                         },
                         {
                             "id": "4",
                             "text": "dark green exercise pants",
                             "img": "imgs/quiz/sort-color-quiz/f2.avif",
+                            "alt": "green pants",
                             "group": "3"
                         },
                         {
                             "id": "5",
                             "text": "pastel yellow silk shirt",
                             "img": "imgs/quiz/sort-color-quiz/f3.webp",
+                            "alt": "yellow shirt",
                             "group": "3"
                         },
                         {
                             "id": "6",
                             "text": "white linen pants",
                             "img": "imgs/quiz/sort-color-quiz/4.webp",
+                            "alt": "white pants",
                             "group": "1"
                         },
                         {
                             "id": "7",
                             "text": "dark grey cargo shorts",
                             "img": "imgs/quiz/sort-color-quiz/f4.jpg",
+                            "alt": "grey shorts",
                             "group": "2"
                         },
                         {
                             "id": "8",
                             "text": "red bedsheet",
                             "img": "imgs/quiz/sort-color-quiz/f5.jpg",
+                            "alt": "red bedsheet",
                             "group": "2"
                         }
                     ],
@@ -753,21 +780,17 @@
             "type": "quiz",
             "quiz-type": "multiple",
             "img": "imgs/quiz/label-quiz/1.png",
+            "alt": "a bucket with a dot, a triange with three lines in it, a square with a circle inside and one dot inside, an iron with one dot nd a circle with with a cross through it",
             "questions": [
                 {
                     "question": "How should you wash this in a machine?",
                     "options": [
-                        "Cold, gentle cycle",
-                        "Warm, gentle cycle",
-                        "Hot, gentle cycle",
-                        "Cold, normal cycle/perm press",
-                        "Warm, normal cycle/perm press",
-                        "Hot, normal cycle/perm press",
-                        "Cold, any cycle",
-                        "Warm, any cycle",
-                        "Hot, any cycle"
+                        "Don't wash",
+                        "Machine Wash perm press",
+                        "wash or at or below 30°C or 80°F",
+                        "Machine Wash delicate"
                     ],
-                    "answer": "Cold, any cycle"
+                    "answer": "wash or at or below 30°C or 80°F"
                 },
                 {
                     "question": "What bleach should you use?",
@@ -784,8 +807,6 @@
                         "Tumble dry low",
                         "Tumble dry medium",
                         "Tumble dry high",
-                        "Line dry",
-                        "Lay flat to dry",
                         "Do not tumble dry"
                     ],
                     "answer": "Tumble dry low"
@@ -817,7 +838,7 @@
             "title": "Congratulations!",
             "type": "content",
             "next_page": "mainpage5",
-            "description": "Congratulations on completing the course!",
+            "description": "You are a Laundry Legend!",
             "images": [
                 {
                     "src": "imgs/washing-machine.webp",
