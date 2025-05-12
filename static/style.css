@@ -24,6 +24,7 @@ body {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font-family: 'Palatino', serif;
 }
 
 .divider {
@@ -304,6 +305,7 @@ body {
     padding: 20px;
     text-align: center;
     font-size: 24px;
+    font-family: Palatino, serif;
     border-radius: 8px 8px 0 0;
     margin-bottom: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -808,7 +810,7 @@ button:disabled {
     font-size: 1.5rem;
     color: #0056b3; /* Base Color */
     margin-left: 20px;
-    font-family: 'Georgia', serif;
+    font-family: Palatino, serif;
     font-weight: bold;
 }
 
